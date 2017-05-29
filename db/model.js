@@ -18,15 +18,18 @@ const Tutor = db.define('tutor', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     img: Sequelize.STRING(1234),
     name: Sequelize.STRING,
+    email: Sequelize.STRING,
+    password: Sequelize.STRING,
     description: Sequelize.STRING(1234)
 });
 
 const MiniCourse = db.define('minicourse', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
-    nooflessons: Sequelize.STRING,
-    password: Sequelize.STRING,
-    description: Sequelize.STRING
+    noOfLessons: Sequelize.STRING,
+    password: Sequelize.STRING,             //why so?
+    description: Sequelize.STRING,
+    level: Sequelize.STRING
 });
 
 const Lesson = db.define('lesson', {
@@ -59,28 +62,28 @@ const Upvote = db.define('upvote', {
 
 const Review = db.define('review', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    rating: Sequelize.STRING,
+    rating: Sequelize.INTEGER,      //discuss
     description: Sequelize.STRING
 });
 
 const Class = db.define('class', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
+    className: Sequelize.STRING,
 });
 
 const Subject = db.define('subject', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
+    subjectName: Sequelize.STRING,
 });
 
 const Category = db.define('category', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
+    categoryName: Sequelize.STRING,
 });
 
 const Course = db.define('course', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
+    courseName: Sequelize.STRING,
 });
 
 const Tag = db.define('tag', {
