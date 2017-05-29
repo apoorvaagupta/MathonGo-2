@@ -14,6 +14,13 @@ const Student = db.define('student', {
     contact: Sequelize.BIGINT,
 });
 
+const Tutor = db.define('tutor', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+    img: Sequelize.STRING(1234),
+    name: Sequelize.STRING,
+    description: Sequelize.STRING(1234)
+});
+
 const MiniCourse = db.define('minicourse', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
@@ -29,18 +36,11 @@ const Lesson = db.define('lesson', {
     level: Sequelize.STRING,
 });
 
-const Tutor = db.define('tutor', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    img: Sequelize.STRING(1234),
-    name: Sequelize.STRING,
-    description: Sequelize.STRING(1234)
-});
-
 const Bookmark = db.define('bookmark', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
-const MyCourse = db.define('mycourse', {
+const Enrollment = db.define('enrollment', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
@@ -83,11 +83,79 @@ const Course = db.define('course', {
     name: Sequelize.STRING,
 });
 
+const Tag = db.define('tag', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+});
+
+
+MiniCourse.belongsTo(Tutor);
+Tutor.hasMany(MiniCourse);
+
+Lesson.belongsTo(MiniCourse);
+MiniCourse.hasMany(Lesson);
+
+Bookmark.belongsTo(Student);
+Bookmark.belongsTo(Lesson);
+Student.hasMany(Bookmark);
+Lesson.hasMany(Bookmark);
+
+Enrollment.belongsTo(Student);
+Enrollment.belongsTo(MiniCourse);
+Student.hasMany(Enrollment);
+MiniCourse.hasMany(Enrollment);
+
+Report.belongsTo(Student);
+Report.belongsTo(Lesson);
+Student.hasMany(Report);
+Lesson.hasMany(Report);
+
+Follow.belongsTo(Student);
+Follow.belongsTo(Tutor);
+Student.hasMany(Follow);
+Tutor.hasMany(Follow);
+
+Upvote.belongsTo(Student);
+Upvote.belongsTo(Lesson);
+Student.hasMany(Upvote);
+Lesson.hasMany(Upvote);
+
+Review.belongsTo(Student);
+Review.belongsTo(MiniCourse);
+Student.hasMany(Review);
+MiniCourse.hasMany(Review);
+
+Tag.belongsTo(Class);
+Tag.belongsTo(Subject);
+Tag.belongsTo(Category);
+Tag.belongsTo(Course);
+Tag.belongsTo(MiniCourse);
+Class.hasMany(Tag);
+Subject.hasMany(Tag);
+Category.hasMany(Tag);
+Course.hasMany(Tag);
+MiniCourse.hasMany(Tag);
+
 
 db.sync({}).then(() => {
     console.log('Database configured')
 });
 
 module.exports = {
-    models: {Student, Company, Application, Job}
+    models: {
+        Student,
+        Tutor,
+        MiniCourse,
+        Lesson,
+        Bookmark,
+        Enrollment,
+        Report,
+        Follow,
+        Upvote,
+        Review,
+        Class,
+        Subject,
+        Category,
+        Course,
+        Tag
+    }
 };
