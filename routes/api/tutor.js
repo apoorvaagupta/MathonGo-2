@@ -65,29 +65,27 @@ router.post('/:id/edit', function (req, res) {
     // });
 });
 
-router.post('/:id/minicourses', function (req, res) {
-    // let studentId = parseInt(req.params.id);
-    // models.Application.findAll({
-    //     where: {studentId: studentId},
-    //     include: models.Job
-    // }).then(function (applications) {
-    //     res.send(applications);
-    // }).catch(function (error) {
-    //     console.log(error);
-    // })
+router.get('/:id/myMinicourses', function (req,res) {
+   //tutor gets all his minicourses,
 });
 
-router.post('/:id/bookmarks', function (req, res) {
-    // let studentId = parseInt(req.params.id);
-    // models.Application.findAll({
-    //     where: {studentId: studentId},
-    //     include: models.Job
-    // }).then(function (applications) {
-    //     res.send(applications);
-    // }).catch(function (error) {
-    //     console.log(error);
-    // })
+router.get('/:id/:minicourses', function (req,res) {
+    //tutor sees a minicourse with review on it
 });
+
+router.get('/:id/:minicourse/:lesson', function (req,res) {
+    //tutor sees a lesson with all its reports and no of upvotes
+});
+
+
+router.post('/:id/addMinicourse', function (req,res) {
+    //will have to decide how to add tags to a minicourse
+});
+
+router.post('/:id/:minicourseId/addLesson', function (req,res) {
+
+});
+
 
 
 module.exports = router;
