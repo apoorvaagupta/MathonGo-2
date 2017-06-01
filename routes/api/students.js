@@ -4,36 +4,41 @@ const password = require('./../../utils/password');
 
 
 router.post('/add', function (req, res) {
-    // if (req.body.firstname === "" || req.body.lastname === "" || req.body.email === "" || req.body.password === "") {
-    //     res.send("Insufficient Details");
-    // }
-    // password.pass2hash(req.body.password).then(function (hash) {
-    //     models.Student.create({
-    //         firstname: req.body.firstname,
-    //         lastname: req.body.lastname,
-    //         email: req.body.email,
-    //         password: hash
-    //     }).then(function (student) {
-    //         res.send(student);
-    //     })
-    // })
+    if (req.body.firstname === "" || req.body.lastname === "" || req.body.email === "" || req.body.password === "") {
+        res.send("Insufficient Details");
+    }
+    password.pass2hash(req.body.password).then(function (hash) {
+        models.Student.create({
+            name: req.body.name,
+            email: req.body.email,
+            password: hash
+        }).then(function (student) {
+            res.send(student);
+        }).catch(function (err) {
+            console.log(err);
+            res.send("Could not create the user");
+        })
+    }).catch(function (err) {
+        console.log(err);
+        res.send("Could not create the user");
+    })
 });
 
 
 //will have to think about the method being get or post
-router.get('/login', function (req,res) {
+router.get('/login', function (req, res) {
 
 });
 
 router.get('/:id', function (req, res) {
-    // models.Student.findOne({
-    //     where: {id: req.params.id}
-    // }).then(function (student) {
-    //     res.send(student);
-    // }).catch(function (err) {
-    //     console.log(err);
-    //     res.send('Unknown Student');
-    // })
+    models.Student.findOne({
+        where: {id: req.params.id}
+    }).then(function (student) {
+        res.send(student);
+    }).catch(function (err) {
+        console.log(err);
+        res.send('Unknown Student');
+    })
 });
 
 router.post('/:id/edit', function (req, res) {
