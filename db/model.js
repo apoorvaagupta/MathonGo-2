@@ -27,7 +27,6 @@ const MiniCourse = db.define('minicourse', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
     noOfLessons: Sequelize.STRING,
-    password: Sequelize.STRING,             //why so?
     description: Sequelize.STRING,
     level: Sequelize.STRING
 });
