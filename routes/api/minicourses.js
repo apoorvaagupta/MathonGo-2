@@ -32,7 +32,7 @@ router.post('/:id/enrol', function (req, res) {
     //Ask
 });
 //Ask
-router.review('/:minicourse/review', function (req, res) {
+router.post('/:minicourse/review', function (req, res) {
     //review this minicourse
 });
 
