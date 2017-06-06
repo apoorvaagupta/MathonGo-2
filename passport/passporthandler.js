@@ -2,9 +2,6 @@ const passport = require('passport');
 
 const localStrategy = require('./strategies/local');
 
-const models = require('../db/models').models;
-
-const config = require('../config');
 
 passport.use(localStrategy);
 

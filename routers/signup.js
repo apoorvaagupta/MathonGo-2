@@ -13,7 +13,8 @@ router.post('/', function (req, res) {
             email: req.body.email,
             password: hash
         }).then(function (student) {
-            res.redirect('/login');
+            console.log("student created");
+            res.redirect('http://localhost:4000/login');
         })
     }).catch(function (err) {
         console.log(err);

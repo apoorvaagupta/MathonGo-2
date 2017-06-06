@@ -1,9 +1,14 @@
 const router = require('express').Router();
-const passport = require('../../passport/passporthandler');
+const passport = require('../passport/passporthandler');
 
-app.post('/login',
-    passport.authenticate('local', { successRedirect: '/minicourses',
-        failureRedirect: '/login'})
+router.get('/',
+    passport.authenticate('local')
+    // , function (req,res) {
+    //     console.log("login router");
+    //     console.log(req.User);
+    //     console.log(res);
+    //     console.log(req);
+    // }
 );
 
 module.exports = router;

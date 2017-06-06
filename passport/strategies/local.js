@@ -1,9 +1,8 @@
 const LocalStrategy = require('passport-local').Strategy;
-const models = require('../../../db/models').models;
+const models = require('../../db/models').models;
 
-const secrets = require('../../../secrets.json');
-const config = require('../../../config');
-const password = require('../../../utils/password');
+const secrets = require('../../secrets.json');
+const password = require('../../utils/password');
 
 
 /**
