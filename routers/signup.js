@@ -14,7 +14,7 @@ router.post('/', function (req, res) {
             password: hash
         }).then(function (student) {
             console.log("student created");
-            res.redirect('http://localhost:4000/login');
+            res.redirect('/login');
         })
     }).catch(function (err) {
         console.log(err);
