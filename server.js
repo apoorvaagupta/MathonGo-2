@@ -8,43 +8,31 @@ const express = require('express')
 const app = express();
 
 const secrets = require('./secrets.json')
-    , config = require('./config')
-    , loginrouter = require('./routers/login')
-    , connectrouter = require('./routers/connect')
-    , logoutrouter = require('./routers/logoutrouter')
-    , signuprouter = require('./routers/signup')
-    , apirouter = require('./routers/api')
-    , oauthrouter = require('./routers/oauthrouter')
-    , pagerouter = require('./routers/pagerouter');
+     , loginrouter = require('./routers/login')
+     , logoutrouter = require('./routers/logout')
+     , signuprouter = require('./routers/signup')
+     , apirouter = require('./routers/api');
 
 
 app.use(express.static(path.join(__dirname, 'public_html')));
-app.use(cookieParser(secrets.EXPRESS_SESSION_SECRET));
+app.use(cookieParser(secrets.EXPRESS_SESSIONS_SECRET));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(session({
     secret: secrets.EXPRESS_SESSION_SECRET,
     resave: false,
-    saveUninitialized: true,
-    name: 'oneauth'
+    saveUninitialized: false,
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(redirectToHome);
-app.use('/login', loginrouter);
-app.use('/connect', connectrouter);
-app.use('/logout', logoutrouter);
 app.use('/signup', signuprouter);
+app.use('/login', loginrouter);
+app.use('/logout', logoutrouter);
 app.use('/api', apirouter);
-app.use('/oauth', oauthrouter);
-app.use('/', pagerouter);
-
+app.use('/library', express.static(path.join(__dirname, 'public_html/allMinicourses')));
+app.use('/lesson', express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/student', express.static(path.join(__dirname, 'public_html/student')));
 
 app.listen(4000, function () {
     console.log("Listening on 4000");
 });
-
-
-
-
-
