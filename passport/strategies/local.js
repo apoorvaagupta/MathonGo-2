@@ -3,7 +3,7 @@ const models = require('../../../db/models').models;
 
 const secrets = require('../../../secrets.json');
 const config = require('../../../config');
-const passutils = require('../../../utils/password');
+const password = require('../../../utils/password');
 
 
 /**
@@ -11,25 +11,26 @@ const passutils = require('../../../utils/password');
  * via a simple post request
  */
 
-module.exports = new LocalStrategy(function (username, password, cb) {
+module.exports = new LocalStrategy(function (email, password, done) {
 
-    models.UserLocal.findOne({
-        include: [{model: models.User, where: {username: username}}],
-    }).then(function(userLocal) {
-        if (!userLocal) {
-            return cb(null, false);
+    models.Student.findOne({
+        email: email
+    }).then(function(student) {
+        if (!student) {
+            return done(null, false, {message: 'Incorrect Email'});
         }
 
-        passutils.compare2hash(password, userLocal.password)
+        password.compare2hash(password, student.password)
             .then(function(match) {
                 if (match) {
-                    return cb(null, userLocal.user.get());
+                    return done(null, student.get());
                 } else {
-                    return cb(null, false);
+                    return done(null, false, {message: 'Incorrect password'});
                 }
             })
             .catch(function (err) {
-                console.trace(err.message);
+                console.log(err);
+                // console.trace(err.message);
                 return cb(err, false, {message: err})
             });
 
