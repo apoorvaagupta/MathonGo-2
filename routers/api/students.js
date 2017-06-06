@@ -2,6 +2,9 @@ const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 
+router.get('/', function (req,res) {
+
+});
 
 router.post('/add', function (req, res) {
     if (req.body.firstname === "" || req.body.lastname === "" || req.body.email === "" || req.body.password === "") {
@@ -22,12 +25,6 @@ router.post('/add', function (req, res) {
         console.log(err);
         res.send("Could not create the user");
     })
-});
-
-
-//will have to think about the method being get or post
-router.get('/login', function (req, res) {
-
 });
 
 router.get('/:id', function (req, res) {
