@@ -1,3 +1,12 @@
-/**
- * Created by apoorvaa_gupta on 2/6/17.
- */
+console.log("heyyyyyyyyyyy");
+
+
+
+//
+// $('#logout').click(function () {
+//     console.log("logout button click");
+//     $.get("http://localhost:4000/logout", function (student) {
+//         console.log(student);
+//         window.location.replace(student);
+//     });
+// });
