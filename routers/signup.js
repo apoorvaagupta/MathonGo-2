@@ -13,6 +13,7 @@ router.post('/', function (req, res) {
             email: req.body.email,
             password: hash
         }).then(function (student) {
+            console.log(student);
             console.log("student created");
             res.redirect('/login');
         })
