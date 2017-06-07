@@ -40,7 +40,8 @@ $(document).ready(function () {
     });
 
     $('#loginButton').click(function () {
-        $.post("https://localhost:4000/student/login", {
+        console.log($('#loginEmail').val(),$('#loginPassword').val());
+        $.post("http://localhost:4000/login", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
         }, function (student) {

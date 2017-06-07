@@ -2,7 +2,7 @@ const LocalStrategy = require('passport-local').Strategy;
 const models = require('../../db/models').models;
 
 const secrets = require('../../secrets.json');
-const password = require('../../utils/password');
+const passutils = require('../../utils/password');
 
 
 /**
@@ -10,21 +10,24 @@ const password = require('../../utils/password');
  * via a simple post request
  */
 
-module.exports = new LocalStrategy(function (email, password, done) {
+module.exports = new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password'
+}, function (email, password, done) {
 
     models.Student.findOne({
         email: email
-    }).then(function(student) {
-        if (!student) {
-            return done(null, false, {message: 'Incorrect Email'});
-        }
+    }).then(function (student) {
 
-        password.compare2hash(password, student.password)
-            .then(function(match) {
-                if (match) {
-                    return done(null, student.get());
-                } else {
+
+        passutils.compare2hash(password, student.password)
+            .then(function (match) {
+                console.log(match);
+                if (!match) {
                     return done(null, false, {message: 'Incorrect password'});
+                } else {
+                    return done(null, student.get());
+
                 }
             })
             .catch(function (err) {

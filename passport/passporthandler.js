@@ -5,16 +5,16 @@ const localStrategy = require('./strategies/local');
 
 passport.use(localStrategy);
 
-// passport.serializeUser(function (user, cb) {
+ passport.serializeUser(function (user, cb) {
 //     if (config.DEBUG) {
 //         console.log("Serialize =  = = = ");
 //         console.log(user);
 //     }
 //
-//     cb(null, user.id);
-// });
+     cb(null, user.id);
+ });
 //
-// passport.deserializeUser(function (userid, cb) {
+ passport.deserializeUser(function (userid, cb) {
 //     if (config.DEBUG) {
 //         console.log("Deserialize =  = = = ");
 //         console.log(userid);
@@ -22,9 +22,9 @@ passport.use(localStrategy);
 //     models.User.findOne({
 //         where: {id: userid}
 //     }).then(function(user) {
-//         return cb(null, user)
+        return cb(null, user);
 //     })
-// });
+});
 
 module.exports = passport;
 
