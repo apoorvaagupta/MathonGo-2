@@ -8,6 +8,7 @@ html,body{
 .container-fluid{
     height: 100%;  !important;
     padding: 0;
+    margin: 0;
 }
 
 .row{
@@ -19,38 +20,8 @@ html,body{
 .header-bar{
     height:60px;
     background-color: white;
-    box-shadow: 0 1px 20px 0 rgba(111,111,111,0.59);
     padding: 10px;
     z-index: 10;
-}
-
-.side-bar-contents{
-    margin-left: 10px;
-    margin-right: 10px;
-    padding-top: 30px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid #ccc ;
-    color: #333;
-}
-
-.a-style:hover{
-    text-decoration: none;
-    cursor: pointer;
-
-}
-
-.h4-hover-style{
-    margin-bottom: 0;
-    color: #555;
-}
-
-.h4-hover-style:hover{
-    color: #00C2FA;
-}
-
-.hey li{
-    float: left;
-
 }
 
 .list-inline {

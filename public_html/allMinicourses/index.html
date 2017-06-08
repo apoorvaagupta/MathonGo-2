@@ -14,117 +14,58 @@
     <script src="./../js/bootstrap.js"></script>
 
     <script src="index.js"></script>
-    <script >
+    <script>
         let logoutfn = function () {
 
             $.get('http://localhost:4000/logout', function (student) {
                 console.log(student);
                 window.location.replace(student);
-            });}
+            });
+        }
     </script>
 </head>
 <body>
 
 
 <div class="container-fluid">
-    <div class="row no-gutters" style="height: 60px">
-        <div class="col-sm-12 header-bar">
-            <div class="row align-content-center">
-                <div class="col-sm-2">
-                    <img src="./../images/logo.png" style="height: 40px; padding-left: 30px">
+    <div class="row no-gutters align-content-center" id="headerbar" style="height: 60px; padding-top: 10px; padding-bottom: 10px">
+        <div class="col-sm-2">
+            <img src="./../images/logo.png" style="height: 40px; padding-left: 30px">
+        </div>
+        <div class="col-sm-2 offset-2">
+            <!--empty for search text box later-->
+        </div>
+        <div class="col-sm-1 align-middle"></div>
+                <div class="col-sm-1 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a class="align-middle" style="text-align: center" href="#"><span class="glyphicon glyphicon-home"
+                                                     aria-hidden="true"></span> Library</a></div>
+                <div class="col-sm-1 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a class="align-middle" style="text-align: center" href="#"><span class="glyphicon glyphicon-info-sign"
+                                                   aria-hidden="true"></span>Events</a></div>
+                <div class="col-sm-1 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a class="align-middle" style="text-align: center" href="#"><i class=""></i>Teachers</a></div>
+
+
+                <div class="dropdown col-sm-2 align-middle" style=" padding-top: 5px; padding-bottom: 5px">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
+                       role="button" aria-haspopup="true" aria-expanded="false"><img src="./../images/boy.png" style="height: 30px; border-radius: 50%" class="img-circle">
+                        &nbsp;&nbsp;John Doe <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">My Courses</a></li>
+                        <li><a href="#">My Bookmarks</a></li>
+                        <li><a onclick="logoutfn()">logout</a></li>
+                    </ul>
                 </div>
+            <!--<div class="col-sm-6 text-right">-->
 
-                <div class="col-sm-6 text-right">
+                <!--<span id="userName" class="align-middle text-uppercase"></span>-->
+                <!--<a id="logout" onclick="logoutfn()"><i data-toggle="tooltip" title="Logout" data-placement="bottom"-->
+                                                       <!--style="color: #555"-->
+                                                       <!--class="fa fa-sign-out fa-2x align-middle"></i></a>-->
+            <!--</div>-->
 
-                    <span id="userName" class="align-middle text-uppercase"></span>
-                    <a id="logout" onclick="logoutfn()"><i data-toggle="tooltip" title="Logout" data-placement="bottom" style="color: #555"
-                                      class="fa fa-sign-out fa-2x align-middle"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="row no-gutters" style="min-height: 100%">
-        <div class="col-md-3 col-sm-12 col-12"
-             style="min-height:100%;background-color: #FBFBFB; box-shadow: 0 0 30px 5px rgba(111,111,111,0.59);z-index: 5">
-            <div class="row justify-content-center">
-                <ul style="list-style-type: none;padding-top:40px;padding-left: 20px;padding-right: 20px"
-                    class="col-md-10 col-sm-12 col-12 text-center">
-                    <li class="side-bar-contents align-content-center">
-                        <a class="a-style" href="/student/myCourses/">
-                            <h4 class="h4-hover-style">My Courses
-                            </h4>
-                        </a>
-                    </li>
-                    <li class="side-bar-contents align-content-center">
-                        <a class="a-style" href="/student/">
-                            <h4 class="h4-hover-style">All Courses
-                            </h4>
-                        </a>
-                    </li>
-
-                </ul>
-            </div>
         </div>
 
-        <div class="col-md-9 col-sm-12 col-12" style="min-height:100%;background-color: #EFEFEF"><br>
-            <div id="allCoursesDiv" class="row ">
-                <ul class="list-inline hey text-center col-sm-12" id="courses-list">
-                    <!--<li class="li-card col-md-4 col-sm-12">-->
-                    <!--<div class="card">-->
-                    <!--<img class="card-img-top card-img-top img-fluid" src="/images/default_img.png" alt="Card image cap">-->
-                    <!--<div class="card-block">-->
-                    <!--<h4 class="card-title" style="color: #00C2FA">Card title</h4>-->
 
-                    <!--<a href="#" class="btn btn-primary" style="background-color: #F69F1B">Go somewhere</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</li>-->
-                    <!--<li class="li-card col-md-4 col-sm-12">-->
-                    <!--<div class="card">-->
-                    <!--<img class="card-img-top card-img-top img-fluid" src="/images/default_img.png" alt="Card image cap">-->
-                    <!--<div class="card-block">-->
-                    <!--<h4 class="card-title">Card title</h4>-->
-
-                    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</li>-->
-                    <!--<li class="li-card col-md-4 col-sm-12">-->
-                    <!--<div class="card">-->
-                    <!--<img class="card-img-top card-img-top img-fluid" src="/images/default_img.png" alt="Card image cap">-->
-                    <!--<div class="card-block">-->
-                    <!--<h4 class="card-title">Card title</h4>-->
-
-                    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</li>-->
-                    <!--<li class="li-card col-md-4 col-sm-12">-->
-                    <!--<div class="card">-->
-                    <!--<img class="card-img-top card-img-top img-fluid" src="/images/default_img.png" alt="Card image cap">-->
-                    <!--<div class="card-block">-->
-                    <!--<h4 class="card-title">Card title</h4>-->
-
-                    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</li>-->
-                    <!--<li class="li-card col-md-4 col-sm-12">-->
-                    <!--<div class="card">-->
-                    <!--<img class="card-img-top img-fluid" src="/images/default_img.png" alt="Card image cap">-->
-                    <!--<div class="card-block">-->
-                    <!--<h4 class="card-title">Card title</h4>-->
-
-                    <!--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <!--</li>-->
-                </ul>
-
-            </div>
-        </div>
-
+    <div class="row no-gutters" style="min-height: 100%; background-color: #EEE">
 
     </div>
 
