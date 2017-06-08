@@ -13,7 +13,15 @@
     <script src="./../js/tether.js"></script>
     <script src="./../js/bootstrap.js"></script>
 
-    <script src="index.js"></script>
+    <script src="./index.js"></script>
+    <script >
+        let logoutfn = function () {
+
+            $.get('http://localhost:4000/logout', function (student) {
+                console.log(student);
+                window.location.replace(student);
+            });}
+    </script>
 </head>
 <body>
 
@@ -29,7 +37,7 @@
                 <div class="col-sm-6 text-right">
 
                     <span id="userName" class="align-middle text-uppercase"></span>
-                    <a id="logout"><i data-toggle="tooltip" title="Logout" data-placement="bottom" style="color: #555"
+                    <a id="logout" onclick="logoutfn()"><i data-toggle="tooltip" title="Logout" data-placement="bottom" style="color: #555"
                                       class="fa fa-sign-out fa-2x align-middle"></i></a>
                 </div>
             </div>

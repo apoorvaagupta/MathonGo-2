@@ -4,7 +4,7 @@ router.get('/', function (req, res){
     req.user = null;
     req.logout();
     req.session.destroy(function (err) {
-        res.redirect('/');
+        res.send('http://localhost:4000');
     });
 });
 

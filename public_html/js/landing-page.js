@@ -78,17 +78,18 @@ $(document).ready(function () {
             password: $('#loginPassword').val()
         }, function (student) {
             console.log(1);
-            if (student.isSuccess === "true") {
-                let url = student.url;
-                console.log(url);
+            // if (student.isSuccess === "true") {
+            //     let url = student.url;
+            //     console.log(url);
                 console.log(student);
-                localStorage.setItem("studentId", student.row.id);
-                localStorage.setItem("studentName", student.row.name);
-                //console.log(localStorage.getItem("studentId"));
-                window.location.replace(url);
-            } else {
-                $('#errorLogin').text("Wrong Credentials");
-            }
+                //console.log(res.user);
+            //     localStorage.setItem("studentId", student.row.id);
+            //     localStorage.setItem("studentName", student.row.name);
+            //     //console.log(localStorage.getItem("studentId"));
+                window.location.replace(student);
+            // } else {
+            //     $('#errorLogin').text("Wrong Credentials");
+            // }
         });
     })
 });
