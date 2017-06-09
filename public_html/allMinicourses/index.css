@@ -6,22 +6,29 @@ html,body{
 }
 
 .container-fluid{
-    height: 100%;  !important;
+    /*height: 100%;  !important;*/
     padding: 0;
     margin: 0;
 }
 
 .row{
-    min-width: 100%;
+    /*min-width: 100%;*/
     margin: 0;
 
 }
 
 .header-bar{
-    height:60px;
+    /*height:60px;*/
     background-color: white;
     padding: 10px;
     z-index: 10;
+}
+
+.header-links:hover{
+    text-decoration: none;
+}
+.header-links:focus{
+    text-decoration: none;
 }
 
 .list-inline {
