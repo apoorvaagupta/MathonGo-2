@@ -1,5 +1,6 @@
 
 html,body{
+    background-color: #EEE;
     height: 100%; !important;
     /*width: 100%;*/
     /*min-height:100%;!important;*/
@@ -17,18 +18,23 @@ html,body{
 
 }
 
-.header-bar{
+.headerbar{
     /*height:60px;*/
     background-color: white;
-    padding: 10px;
+
     z-index: 10;
 }
 
 .header-links:hover{
     text-decoration: none;
+    cursor: pointer;
 }
 .header-links:focus{
     text-decoration: none;
+}
+
+.jumbotron{
+    border-radius: 0;
 }
 
 .list-inline {

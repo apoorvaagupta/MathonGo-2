@@ -14,7 +14,7 @@
     <script src="./../js/bootstrap.js"></script>
 
     <script src="./index.js"></script>
-    <script >
+    <script>
 
         let logoutfn = function () {
 
@@ -27,41 +27,52 @@
 </head>
 <body>
 
-
 <div class="container-fluid">
-    <div class="row no-gutters align-content-center" id="headerbar" style="height: auto; padding-top: 10px; padding-bottom: 10px">
+
+    <div class="row no-gutters align-content-center headerbar" id="headerbar"
+         style="height: auto; padding-top: 10px; padding-bottom: 10px">
         <div class="col-sm-2 col-12">
             <img src="./../images/logo.png" style="height: 40px; padding-left: 30px">
         </div>
-        <div class="col-sm-3 offset-2 col-12" >
+        <div class="col-sm-3 offset-2 col-12">
             <!--empty for search text box later-->
         </div>
-                <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a class="header-links align-middle" style="text-align: center; color: #666" href="#">Library</a></div>
-                <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a class="align-middle header-links" style="text-align: center; color: #666" href="#">Events</a></div>
-                <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a class="align-middle header-links" style="text-align: center; color: #666" href="#">Teachers</a></div>
+        <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
+                class="header-links align-middle" style="text-align: center; color: #666" href="#">Library</a></div>
+        <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
+                class="align-middle header-links" style="text-align: center; color: #666" href="#">Events</a></div>
+        <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
+                class="align-middle header-links" style="text-align: center; color: #666" href="#">Teachers</a></div>
 
 
-                <div class="dropdown col-sm-2 col-12 align-middle" style=" padding-top: 5px; padding-bottom: 5px">
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<!-- <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;-->
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links " data-toggle="dropdown"
-                       role="button" aria-haspopup="true" aria-expanded="false"><img src="./../images/boy.png" style="height: 30px; border-radius: 50%" class="img-circle">
-                        &nbsp;&nbsp;John Doe <span class="caret"></span></a>
-                    <ul class="dropdown-menu" style="padding: 0; margin-top:10px; border: none; border-radius: 0;border-bottom-right-radius: .125rem;border-bottom-left-radius: .125rem;background-color: #FFF">
-                        <li style="padding: 10px"><a href="#">My Courses</a></li>
-                        <li style="padding: 10px;"><a href="#">My Bookmarks</a></li>
-                        <li style="padding: 10px;padding-left: 20px"><a onclick="logoutfn()"><i class="fa fa-sign-out"></i>&nbsp;&nbsp;logout</a></li>
-                    </ul>
-                </div>
-            <!--<div class="col-sm-6 text-right">-->
-
-                <!--<span id="userName" class="align-middle text-uppercase"></span>-->
-                <!--<a id="logout" onclick="logoutfn()"><i data-toggle="tooltip" title="Logout" data-placement="bottom"-->
-                                                       <!--style="color: #555"-->
-                                                       <!--class="fa fa-sign-out fa-2x align-middle"></i></a>-->
-            <!--</div>-->
-
+        <div class="dropdown col-sm-2 col-12 align-middle" style=" padding-top: 5px; padding-bottom: 5px">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;-->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links "
+                                             data-toggle="dropdown"
+                                             role="button" aria-haspopup="true" aria-expanded="false"><img
+                src="./../images/boy.png" style="height: 30px; border-radius: 50%; border: solid 1px gray"
+                class="img-circle">
+            &nbsp;&nbsp;John Doe <span class="caret"></span></a>
+            <ul class="dropdown-menu"
+                style="padding: 0; margin-top:10px; border: none; border-radius: 0;border-bottom-right-radius: .25rem;border-bottom-left-radius: .25rem;background-color: #FFF">
+                <li style="padding: 10px ; border-bottom: solid 1px #DDD"><a style="color: #666" href="#"
+                                                                             class="header-links">My Courses</a></li>
+                <li style="padding: 10px; border-bottom: solid 1px #DDD"><a style="color: #666" href="#"
+                                                                            class="header-links">My Bookmarks</a></li>
+                <li style="padding: 10px;"><a onclick="logoutfn()" style="color: #666" class="header-links">Logout</a>
+                </li>
+            </ul>
         </div>
+        <!--<div class="col-sm-6 text-right">-->
 
+        <!--<span id="userName" class="align-middle text-uppercase"></span>-->
+        <!--<a id="logout" onclick="logoutfn()"><i data-toggle="tooltip" title="Logout" data-placement="bottom"-->
+        <!--style="color: #555"-->
+        <!--class="fa fa-sign-out fa-2x align-middle"></i></a>-->
+        <!--</div>-->
+
+    </div>
     <header class="jumbotron" style=" margin-bottom: 0; background-image: url(./../images/bg.jpg)">
 
         <!-- Main component for a primary marketing message or call to action -->
@@ -70,18 +81,21 @@
             <div class="row row-header">
                 <div class="col-xs-12 col-sm-6 offset-3 text-center">
                     <h1 style="color: floralwhite">Library</h1>
-<br>
-                    <p style="color: floralwhite; font-size: x-large">Browse our collection of courses created by the best teachers of India</p>
+                    <br>
+                    <p style="color: floralwhite; font-size: x-large">Browse our collection of courses created by the
+                        best teachers of India</p>
 
                 </div>
             </div>
         </div>
     </header>
 
-    <div class="row no-gutters" style=" background-color: #DDD">
+</div>
+<div class="container">
 
-    </div>
+
 
 </div>
+
 </body>
 </html>
