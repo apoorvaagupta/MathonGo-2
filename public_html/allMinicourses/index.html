@@ -38,11 +38,11 @@
             <!--empty for search text box later-->
         </div>
         <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
-                class="header-links align-middle" style="text-align: center; color: #666" href="#">Library</a></div>
+                class="header-links align-middle" style="text-align: center; color: #999" href="#">Library</a></div>
         <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
-                class="align-middle header-links" style="text-align: center; color: #666" href="#">Events</a></div>
+                class="align-middle header-links" style="text-align: center; color: #999" href="#">Events</a></div>
         <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
-                class="align-middle header-links" style="text-align: center; color: #666" href="#">Teachers</a></div>
+                class="align-middle header-links" style="text-align: center; color: #999" href="#">Teachers</a></div>
 
 
         <div class="dropdown col-sm-2 col-12 align-middle" style=" padding-top: 5px; padding-bottom: 5px">
@@ -56,11 +56,16 @@
             &nbsp;&nbsp;John Doe <span class="caret"></span></a>
             <ul class="dropdown-menu"
                 style="padding: 0; margin-top:10px; border: none; border-radius: 0;border-bottom-right-radius: .25rem;border-bottom-left-radius: .25rem;background-color: #FFF">
-                <li style="padding: 10px ;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="#"
-                                                                             class="header-links">My Courses</a></li>
-                <li style="padding: 10px;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="#"
-                                                                            class="header-links">My Bookmarks</a></li>
-                <li style="padding: 10px;padding-left: 20px;"><a onclick="logoutfn()" style="color: #666" class="header-links">Logout</a>
+                <li style="padding: 10px ;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666"
+                                                                                                href="#"
+                                                                                                class="header-links">My
+                    Courses</a></li>
+                <li style="padding: 10px;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666"
+                                                                                               href="#"
+                                                                                               class="header-links">My
+                    Bookmarks</a></li>
+                <li style="padding: 10px;padding-left: 20px;"><a onclick="logoutfn()" style="color: #666"
+                                                                 class="header-links">Logout</a>
                 </li>
             </ul>
         </div>
@@ -95,15 +100,54 @@
 
     <div class="row">
         <div class="col-sm-3">
-            <div class="row" style="background-color: whitesmoke;height: 400px;box-shadow: #DDD 0 0px 20px 1px ; border-radius: .125rem">
+            <div class="row"
+                 style="padding: 20px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
+                EXAMINATION
+                <label class="">
+                    <input type="checkbox"> JEE Mains<br>
+                </label>
+<br>
+                <label class="">
+                    <input type="checkbox"> JEE Advanced<br>
+                </label>
+<br>
+                <label class="">
+                    <input type="checkbox"> CBSE<br>
+                </label>
 
             </div>
         </div>
         <div class="col-sm-9">
-            <div class="row" style="background-color: whitesmoke;height: 60px; box-shadow: #DDD 0 0px 20px 1px ; border-radius: .125rem;margin-bottom: 30px">
+            <div class="row"
+                 style="height: auto;background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem;margin-bottom: 30px; padding: 15px">
+                <div class="col-sm-1" style="color: #BBB; padding: 0; padding-left: 15px; align-self: center">
+                    <b>FILTERS</b></div>
+                <div class="col-sm-11" style="padding: 0">
 
+                    <ul style="list-style-type: none; margin: 0">
+
+                        <li style="float:left; margin: 5px; height:auto;"><span
+                                style="width: 100%; height: 100%; background-color:#0164FF; color: white; padding: 5px; border-radius: .125rem; padding-left: 8px; padding-right: 8px">Physics</span>
+                        </li>
+                        <li style="float:left; margin: 5px; height:auto;"><span
+                                style="width: 100%; height: 100%; background-color:#0164FF; color: white; padding: 5px; border-radius: .125rem; padding-left: 8px; padding-right: 8px">JEE Mains</span>
+                        </li>
+                        <li style="float:left; margin: 5px; height:auto;"><span
+                                style="width: 100%; height: 100%; background-color:#0164FF; color: white; padding: 5px; border-radius: .125rem; padding-left: 8px; padding-right: 8px">Class 12th</span>
+                        </li>
+                        <li style="float:left; margin: 5px; height:auto;"><span
+                                style="width: 100%; height: 100%; background-color:#0164FF; color: white; padding: 5px; border-radius: .125rem; padding-left: 8px; padding-right: 8px">Advanced</span>
+                        </li>
+                        <li style="float:left; margin: 5px; height:auto;"><span
+                                style="width: 100%; height: 100%; background-color:#0164FF; color: white; padding: 5px; border-radius: .125rem; padding-left: 8px; padding-right: 8px">Motion in 1D</span>
+                        </li>
+
+
+                    </ul>
+                </div>
             </div>
-            <div class="row" style="background-color: whitesmoke; height: 750px;box-shadow: #DDD 0 0px 20px 1px ; border-radius: .125rem">
+            <div class="row"
+                 style="background-color: white; height: 750px;box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem">
 
             </div>
         </div>

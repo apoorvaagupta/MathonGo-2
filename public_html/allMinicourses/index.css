@@ -1,6 +1,6 @@
 
 html,body{
-    background-color: #EEE;
+    background-color: whitesmoke;
     height: 100%; !important;
     /*width: 100%;*/
     /*min-height:100%;!important;*/
@@ -31,6 +31,10 @@ html,body{
 }
 .header-links:focus{
     text-decoration: none;
+}
+
+.dropdown-menu{
+    left:10%; !important;
 }
 
 .jumbotron{
