@@ -45,6 +45,10 @@ html,body{
     border-radius: 0;
 }
 
+.label-style{
+    color: #888;
+}
+
 .list-inline {
     padding-left: 20px;
     list-style: none;
