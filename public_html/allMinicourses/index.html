@@ -64,8 +64,8 @@
                                                                                                href="#"
                                                                                                class="header-links">My
                     Bookmarks</a></li>
-                <li style="padding: 10px;padding-left: 20px;"><a onclick="logoutfn()" style="color: #666"
-                                                                 class="header-links">Logout</a>
+                <li style="padding: 10px;padding-left: 20px;">
+                    <a onclick="logoutfn()" style="color: #666" class="header-links">Logout</a>
                 </li>
             </ul>
         </div>
@@ -104,31 +104,44 @@
                  style="padding: 0px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
                 <div style="width: 100%;height: auto;border-bottom: solid 2px #EEE;">
                     <div style="padding: 20px; width: 100%"><b>EXAMINATION</b></div>
-                    <div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">
-                        <label style="color: #999">
-                            <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Mains<br/>
-                        </label>
-                        <label style="color: #999">
-                            <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Advanced<br/>
+                    <!--<div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">-->
+                        <!--<label style="color: #999">-->
+                            <!--<input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Mains<br/>-->
+                        <!--</label>-->
+                        <!--<label style="color: #999">-->
+                            <!--<input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Advanced<br/>-->
+                        <!--</label>-->
+                        <!--<label style="color: #999">-->
+                            <!--<input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;CBSE<br>-->
+                        <!--</label>-->
+                    <!--</div>-->
+                    <div class="form-check">
+                        <label class="form-check-label" style="color: #999">
+                            <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Mains
                         </label>
                         <br>
-                        <label style="color: #999">
-                            <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;CBSE<br>
+                        <label class="form-check-label" style="color: #999">
+                            <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Advanced
+                        </label>
+                        <br>
+
+                        <label class="form-check-label" style="color: #999">
+                            <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;CBSE
                         </label>
                     </div>
                 </div>
                 <div style="width: 100%;height: auto;border-bottom: solid 2px #EEE;">
-                    <div style="padding: 20px; width: 100%"><b>SUBJECT</b></div>
+                    <div style="padding: 20px; width: 100%; color: black"><b>SUBJECT</b></div>
                     <div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Mathematics<br/>
                         </label>
                         <br>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Physics<br>
                         </label>
                         <br>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Chemistry<br>
                         </label>
                     </div>
@@ -136,29 +149,29 @@
                 <div style="width: 100%;height: auto;border-bottom: solid 2px #EEE;">
                     <div style="padding: 20px; width: 100%"><b>CLASS</b></div>
                     <div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;XI<br/>
                         </label>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;XII<br>
                         </label>
                         <br>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;XII +<br>
                         </label>
                     </div>
                 </div>
-                <div style="width: 100%;height: auto;border-bottom: solid 2px #EEE;">
+                <div style="width: 100%;height: auto;border-bottom: solid 2px #AAA;">
                     <div style="padding: 20px; width: 100%"><b>DIFFICULTY</b></div>
                     <div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Beginner<br/>
                         </label>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Intermediate<br>
                         </label>
                         <br>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Advanced<br>
                         </label>
                     </div>
@@ -166,14 +179,14 @@
                 <div style="width: 100%;height: auto;border-bottom: solid 2px #EEE;">
                     <div style="padding: 20px; width: 100%"><b>DURATION</b></div>
                     <div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Mains<br/>
                         </label>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;JEE Advanced<br>
                         </label>
                         <br>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;CBSE<br>
                         </label>
                     </div>
@@ -181,10 +194,10 @@
                 <div style="width: 100%;height: auto;border-bottom: solid 2px #EEE;">
                     <div style="padding: 20px; width: 100%"><b>MEDIUM</b></div>
                     <div style="padding-left: 20px;padding-right: 20px;padding-bottom: 20px">
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;English<br/>
                         </label>
-                        <label style="color: #999">
+                        <label class="label-style">
                             <input type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Hindi<br>
                         </label>
 

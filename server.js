@@ -29,6 +29,7 @@ app.use('/signup', signuprouter);
 app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
 app.use('/api',passport.authenticate('local'), apirouter);
+app.use('/library/:id',express.static(path.join(__dirname,'public_html/minicourse')));
 app.use('/library', express.static(path.join(__dirname, 'public_html/allMinicourses')));
 app.use('/lesson', express.static(path.join(__dirname, 'public_html/lesson')));
 app.use('/student', express.static(path.join(__dirname, 'public_html/student')));
