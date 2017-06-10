@@ -67,22 +67,22 @@ const Review = db.define('review', {
 
 const Class = db.define('class', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    className: Sequelize.STRING,
+    className: Sequelize.STRING
 });
 
 const Subject = db.define('subject', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    subjectName: Sequelize.STRING,
+    subjectName: Sequelize.STRING
 });
 
 const Category = db.define('category', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    categoryName: Sequelize.STRING,
+    categoryName: Sequelize.STRING
 });
 
 const Course = db.define('course', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    courseName: Sequelize.STRING,
+    courseName: Sequelize.STRING
 });
 
 const Tag = db.define('tag', {
