@@ -5,8 +5,9 @@ router.post('/', passport.authenticate('local'), function (req,res) {
 
     console.log("login router");
     console.log(req.user);
-    res.redirect('/library');
-    console.log("no redirection");
+    console.log("final step");
+   return  res.send('http://localhost:4000/library');
+
 
 });
 

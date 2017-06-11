@@ -16,15 +16,18 @@ module.exports = new LocalStrategy({
     passwordField: 'password'
 }, function (email, password, done) {
     console.log(11111);
+    console.log(email);
+    console.log(password);
     models.Student.findOne({
-        email: email
+       where: {email: email}
     }).then(function (student) {
-        console.log(student.get())
+        console.log(student.get());
         console.log(student.password);
         console.log(password);
         passutils.compare2hash(password, student.password).then(function (match) {
             console.log(match);
             if (match) {
+                console.log("returning");
                 return done(null, student.get());
             } else {
                 return done(null, false, {message: 'Incorrect password'});

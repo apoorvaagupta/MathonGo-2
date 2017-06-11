@@ -86,7 +86,7 @@ $(document).ready(function () {
             //     localStorage.setItem("studentId", student.row.id);
             //     localStorage.setItem("studentName", student.row.name);
             //     //console.log(localStorage.getItem("studentId"));
-                window.location.replace(student);
+                //window.location.replace(student);
             // } else {
             //     $('#errorLogin').text("Wrong Credentials");
             // }
