@@ -37,6 +37,15 @@ html,body{
     text-decoration: none;
 }
 
+.enrol-style:hover{
+    text-decoration: none;
+    cursor: pointer;
+}
+.enrol-style:focus{
+    text-decoration: none;
+}
+
+
 .dropdown-menu{
     left:10%; !important;
 }

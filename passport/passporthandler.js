@@ -11,8 +11,8 @@ passport.serializeUser(function (user, cb) {
     //     console.log("Serialize =  = = = ");
     //     console.log(user);
     // }
-
-    cb(null, user);
+    //console.log(user);
+     return cb(null,user);
 });
 //
 passport.deserializeUser(function (userid, cb) {
@@ -25,7 +25,9 @@ passport.deserializeUser(function (userid, cb) {
     // // }).then(function(user) {
     // //     return cb(null, user)
     // // })
-    cb(null,userid);
+
+   // console.log(userid);
+     return cb( userid);
 });
 
 module.exports = passport;
