@@ -79,7 +79,8 @@ router.post('/:id/minicourses', function (req, res) {
     // })
 });
 
-router.post('/:id/bookmarks', function (req, res) {
+router.get('/:id/bookmarks', function (req, res) {
+    console.log("reached");
     // let studentId = parseInt(req.params.id);
     // models.Application.findAll({
     //     where: {studentId: studentId},

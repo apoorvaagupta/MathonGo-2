@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MiniCourse</title>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+
+    <link rel="stylesheet" href="./index.css">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script src="/js/tether.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    <script src="./index.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+
+    <div class="row no-gutters align-content-center header-bar" id="headerbar"
+         style="height: auto; padding-top: 10px; padding-bottom: 10px">
+        <div class="col-sm-2 col-12">
+            <img src="/images/logo.png" style="height: 40px; padding-left: 30px">
+        </div>
+        <div class="col-sm-3 offset-2 col-12">
+            <!--empty for search text box later-->
+        </div>
+        <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
+                class="header-links align-middle" style="text-align: center; color: #999" href="#">Library</a></div>
+        <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
+                class="align-middle header-links" style="text-align: center; color: #999" href="#">Events</a></div>
+        <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
+                class="align-middle header-links" style="text-align: center; color: #999" href="#">Teachers</a></div>
+
+
+        <div class="dropdown col-sm-2 col-12 align-middle" style=" padding-top: 5px; padding-bottom: 5px">
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <!-- <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;-->
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links "
+                                             data-toggle="dropdown"
+                                             role="button" aria-haspopup="true" aria-expanded="false"><img
+                src="/images/boy.png" style="height: 30px; border-radius: 50%; border: solid 1px gray"
+                class="img-circle">
+            &nbsp;&nbsp;John Doe <span class="caret"></span></a>
+            <ul class="dropdown-menu"
+                style="padding: 0; margin-top:10px; border: none; border-radius: 0;border-bottom-right-radius: .25rem;border-bottom-left-radius: .25rem;background-color: #FFF">
+                <li style="padding: 10px ;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666"
+                                                                                                href="#"
+                                                                                                class="header-links">My
+                    Courses</a></li>
+                <li style="padding: 10px;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666"
+                                                                                               href="#"
+                                                                                               class="header-links">My
+                    Bookmarks</a></li>
+                <li style="padding: 10px;padding-left: 20px;"><a onclick="logoutfn()" style="color: #666"
+                                                                 class="header-links">Logout</a>
+                </li>
+            </ul>
+        </div>
+        <!--<div class="col-sm-6 text-right">-->
+
+        <!--<span id="userName" class="align-middle text-uppercase"></span>-->
+        <!--<a id="logout" onclick="logoutfn()"><i data-toggle="tooltip" title="Logout" data-placement="bottom"-->
+        <!--style="color: #555"-->
+        <!--class="fa fa-sign-out fa-2x align-middle"></i></a>-->
+        <!--</div>-->
+
+    </div>
+    <header class="jumbotron" style=" margin-bottom: 0; background-image: url(/images/bg.jpg)">
+
+        <!-- Main component for a primary marketing message or call to action -->
+
+        <div class="container">
+            <div class="row row-header">
+                <div class="col-xs-12 col-sm-6 offset-3 text-center">
+                    <h1 style="color: floralwhite" id="miniCourseName">My Bookmarks</h1>
+                    <br>
+                    <p id="miniCourseDescription" style="color: floralwhite; font-size: x-large">Browse all the lessons that you bookmarked</p>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+</div>
+
+<div class="container" style="margin-top: 30px">
+
+
+
+    <div class="row" style="margin-top: 35px;">
+        <div class="col-sm-10 offset-1">
+            <p><b>Lectures</b></p>
+            <div>
+                <div id="lectures" class="row"
+                     style="background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem; margin-bottom: 30px">
+                    <div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">
+                    <div class="row" style="margin-bottom: 0px">
+                    <div class="col-sm-1" style="padding-left: 0px">
+                    <img src="/images/icons/movie.png">
+                    </div>
+                    <div class="col-sm-10">
+                    <h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">1. Introduction<br></h5>
+                    <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
+                    <img src="/images/icons/timer.png">&nbsp;<span
+                    style="margin-top: 5px; font-weight: 500">3 min</span>&nbsp;&nbsp;
+                    <img src="/images/icons/eye.png">&nbsp;<span id="lessonViews"
+                    style="margin-top: 5px; font-weight: 500">12K</span>
+                    </p>
+                    </div>
+                    <div class="col-sm-1">
+                    <img src="/images/icons/arrow-right-drop-circle-green.png">
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">
+                    <div class="row" style="margin-bottom: 0px">
+                    <div class="col-sm-1" style="padding-left: 0px">
+                    <img src="/images/icons/movie.png">
+                    </div>
+                    <div class="col-sm-10">
+                    <h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">1. Introduction<br></h5>
+                    <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
+                    <img src="/images/icons/timer.png">&nbsp;<span
+                    style="margin-top: 5px; font-weight: 500">3 min</span>&nbsp;&nbsp;
+                    <img src="/images/icons/eye.png">&nbsp;<span
+                    style="margin-top: 5px; font-weight: 500">12K</span>
+                    </p>
+                    </div>
+                    <div class="col-sm-1">
+                    <img src="/images/icons/arrow-right-drop-circle-green.png">
+                    </div>
+                    </div>
+                    </div>
+                    <div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">
+                    <div class="row" style="margin-bottom: 0px">
+                    <div class="col-sm-1" style="padding-left: 0px">
+                    <img src="/images/icons/movie.png">
+                    </div>
+                    <div class="col-sm-10">
+                    <h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">1. Introduction<br></h5>
+                    <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
+                    <img src="/images/icons/timer.png">&nbsp;<span
+                    style="margin-top: 5px; font-weight: 500">3 min</span>&nbsp;&nbsp;
+                    <img src="/images/icons/eye.png">&nbsp;<span
+                    style="margin-top: 5px; font-weight: 500">12K</span>
+                    </p>
+                    </div>
+                    <div class="col-sm-1">
+                    <img src="/images/icons/arrow-right-drop-circle-green.png">
+                    </div>
+                    </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--<p><b>Materials</b></p>-->
+            <!--<div class="row"-->
+            <!--style="height: auto;background-color: white;box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem;margin-bottom: 30px; padding: 15px">-->
+
+            <!--</div>-->
+        </div>
+
+    </div>
+
+</div>
+
+<!--<script src="./../js/jquery-3.2.1.js"></script>-->
+
+<!--<script src="./../js/bootstrap.js"></script>-->
+<!--<script src="./index.js"></script>-->
+</body>
+
+</html>
