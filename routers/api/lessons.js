@@ -6,7 +6,9 @@ router.get('/:id', function (req, res) {
     //get the lecture of this id
     let lessonId = req.params.id;
     models.Lesson.findOne({
-        where:{id:lessonId}
+        where: {
+            id: lessonId
+        },
     }).then(function (lesson) {
         res.send(lesson);
     }).catch(function (err) {

@@ -116,22 +116,23 @@ router.post('/:id/:miniCourseId/addLesson', function (req, res) {
     //     res.send("Could not add the lesson right now");
     // });
     console.log(req.body);
-    let bulkInsertArray=[];
-    for(let i=0;i<req.body.lessons.length;i++){
-        let tempObject={
-            name:req.body.lessons[i].name,
-            videoUrl:req.body.lessons[i].videoUrl,
-            level:req.body.lessons[i].level,
-            duration:req.body.lessons[i].duration,
-            minicourseId:miniCourseId
+    let bulkInsertArray = [];
+    for (let i = 0; i < req.body.lessons.length; i++) {
+        let tempObject = {
+            name: req.body.lessons[i].name,
+            videoUrl: req.body.lessons[i].videoUrl,
+            level: req.body.lessons[i].level,
+            duration: req.body.lessons[i].duration,
+            description: req.body.lessons[i].description,
+            minicourseId: miniCourseId
         };
         bulkInsertArray.push(tempObject);
     }
 
     models.Lesson.bulkCreate(bulkInsertArray).then(function () {
         return models.Lesson.findAll({
-            where:{
-                minicourseId:miniCourseId
+            where: {
+                minicourseId: miniCourseId
             }
         })
     }).then(function (lessons) {

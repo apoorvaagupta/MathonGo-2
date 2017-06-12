@@ -32,7 +32,7 @@ app.use('/logout', logoutrouter);
 app.use('/api', apirouter);
 app.use('/library/:id',express.static(path.join(__dirname,'public_html/minicourse')));
 app.use('/library', express.static(path.join(__dirname, 'public_html/library')));
-app.use('/lesson/:id', express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
 app.use('/student', express.static(path.join(__dirname, 'public_html/student')));
 
 app.listen(4000, function () {
