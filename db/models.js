@@ -28,14 +28,17 @@ const MiniCourse = db.define('minicourse', {
     name: Sequelize.STRING,
     noOfLessons: Sequelize.STRING,
     description: Sequelize.STRING,
-    level: Sequelize.STRING
+    level: Sequelize.STRING,
+    medium:Sequelize.STRING,
+    duration:Sequelize.STRING
 });
 
 const Lesson = db.define('lesson', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
-    videourl: Sequelize.STRING(1234),
+    videoUrl: Sequelize.STRING(1234),
     level: Sequelize.STRING,
+    duration:Sequelize.STRING
 });
 
 const Bookmark = db.define('bookmark', {
