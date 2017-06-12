@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>MiniCourse</title>
-    <link rel="stylesheet" href="./../css/bootstrap.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 
-    <link rel="stylesheet" href="index.css">
-    <link href="./../font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <script src="./../js/jquery-3.2.1.js"></script>
-    <script src="./../js/tether.js"></script>
-    <script src="./../js/bootstrap.js"></script>
+    <link rel="stylesheet" href="./index.css">
+    <link href="/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script src="/js/tether.js"></script>
+    <script src="/js/bootstrap.js"></script>
 
-    <script src="index.js"></script>
+    <script src="./index.js"></script>
 </head>
 <body>
 <div class="container-fluid">
@@ -19,7 +19,7 @@
     <div class="row no-gutters align-content-center headerbar" id="headerbar"
          style="height: auto; padding-top: 10px; padding-bottom: 10px">
         <div class="col-sm-2 col-12">
-            <img src="./../images/logo.png" style="height: 40px; padding-left: 30px">
+            <img src="/images/logo.png" style="height: 40px; padding-left: 30px">
         </div>
         <div class="col-sm-3 offset-2 col-12">
             <!--empty for search text box later-->
@@ -38,7 +38,7 @@
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links "
                                              data-toggle="dropdown"
                                              role="button" aria-haspopup="true" aria-expanded="false"><img
-                src="./../images/boy.png" style="height: 30px; border-radius: 50%; border: solid 1px gray"
+                src="/images/boy.png" style="height: 30px; border-radius: 50%; border: solid 1px gray"
                 class="img-circle">
             &nbsp;&nbsp;John Doe <span class="caret"></span></a>
             <ul class="dropdown-menu"
@@ -65,14 +65,14 @@
         <!--</div>-->
 
     </div>
-    <header class="jumbotron" style=" margin-bottom: 0; background-image: url(./../images/bg.jpg)">
+    <header class="jumbotron" style=" margin-bottom: 0; background-image: url(/images/bg.jpg)">
 
         <!-- Main component for a primary marketing message or call to action -->
 
         <div class="container">
             <div class="row row-header">
                 <div class="col-xs-12 col-sm-6 offset-3 text-center">
-                    <h1 style="color: floralwhite">Library</h1>
+                    <h1 style="color: floralwhite" id="miniCourseName">Library</h1>
                     <br>
                     <p style="color: floralwhite; font-size: x-large">Browse our collection of courses created by the
                         best teachers of India</p>
@@ -88,36 +88,42 @@
 
     <div class="row" style="margin-bottom: 0px;">
         <div class="col-sm-12">
-            <div class="row" style="padding: 20px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
+            <div class="row"
+                 style="padding: 20px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
                 <div class="col text-center">
                     <p><b>TEACHER</b></p>
-                    <span>Anup Sir</span>
+                    <span id="teacherName"></span>
                 </div>
                 <div class="col text-center">
                     <p><b>RATINGS</b></p>
-                    <span id="ratings">Anup Sir</span>
+                    <span id="ratings"></span>
                 </div>
                 <div class="col text-center">
                     <p><b>REVIEWS</b></p>
-                    <span id="noOfReviews">Anup Sir</span>
+                    <span id="noOfReviews"></span>
                 </div>
                 <div class="col text-center">
                     <p><b>DURATION</b></p>
-                    <span id="miniCourseDuration">Anup Sir</span>
+                    <span id="miniCourseDuration"></span>
                 </div>
                 <div class="col text-center">
                     <p><b>DIFFICULTY</b></p>
-                    <span id="difficulty">Anup Sir</span>
+                    <span id="difficulty"></span>
+                </div>
+                <div class="col text-center">
+                    <p><b>MEDIUM</b></p>
+                    <span id="medium"></span>
                 </div>
                 <div class="col text-center">
                     <p><b>RELEVANCE</b></p>
-                    <span id="relevance">Anup Sir</span>
+                    <span id="relevance"></span>
                 </div>
                 <div class="col text-center" style="padding-top: 20px">
                     <p>|</p>
                 </div>
                 <div class="col-sm-2 text-center" style="padding-top: 13px">
-                    <button class="btn btn-success" style="cursor: pointer;">Enroll</button>
+                    <a id="enrollOrEnrolled" class="btn btn-success text-uppercase"
+                       style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight: 700;cursor: pointer;width: auto;border-radius: 100px">Enroll</a>
                 </div>
             </div>
         </div>
@@ -126,29 +132,94 @@
     <div class="row">
         <div class="col-sm-9">
             <p><b>Lectures</b></p>
-            <div class="row" style="height: auto;background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem;margin-bottom: 30px; padding: 15px">
+            <div>
+                <div id="lectures" class="row"
+                     style="background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem; margin-bottom: 30px">
+                    <!--<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">-->
+                        <!--<div class="row" style="margin-bottom: 0px">-->
+                            <!--<div class="col-sm-1" style="padding-left: 0px">-->
+                                <!--<img src="/images/icons/movie.png">-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">1. Introduction<br></h5>-->
+                                <!--<p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">-->
+                                    <!--<img src="/images/icons/timer.png">&nbsp;<span-->
+                                        <!--style="margin-top: 5px; font-weight: 500">3 min</span>&nbsp;&nbsp;-->
+                                    <!--<img src="/images/icons/eye.png">&nbsp;<span id="lessonViews"-->
+                                                                                 <!--style="margin-top: 5px; font-weight: 500">12K</span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-1">-->
+                                <!--<img src="/images/icons/arrow-right-drop-circle-green.png">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">-->
+                        <!--<div class="row" style="margin-bottom: 0px">-->
+                            <!--<div class="col-sm-1" style="padding-left: 0px">-->
+                                <!--<img src="/images/icons/movie.png">-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">1. Introduction<br></h5>-->
+                                <!--<p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">-->
+                                    <!--<img src="/images/icons/timer.png">&nbsp;<span-->
+                                        <!--style="margin-top: 5px; font-weight: 500">3 min</span>&nbsp;&nbsp;-->
+                                    <!--<img src="/images/icons/eye.png">&nbsp;<span-->
+                                        <!--style="margin-top: 5px; font-weight: 500">12K</span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-1">-->
+                                <!--<img src="/images/icons/arrow-right-drop-circle-green.png">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">-->
+                        <!--<div class="row" style="margin-bottom: 0px">-->
+                            <!--<div class="col-sm-1" style="padding-left: 0px">-->
+                                <!--<img src="/images/icons/movie.png">-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-10">-->
+                                <!--<h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">1. Introduction<br></h5>-->
+                                <!--<p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">-->
+                                    <!--<img src="/images/icons/timer.png">&nbsp;<span-->
+                                        <!--style="margin-top: 5px; font-weight: 500">3 min</span>&nbsp;&nbsp;-->
+                                    <!--<img src="/images/icons/eye.png">&nbsp;<span-->
+                                        <!--style="margin-top: 5px; font-weight: 500">12K</span>-->
+                                <!--</p>-->
+                            <!--</div>-->
+                            <!--<div class="col-sm-1">-->
+                                <!--<img src="/images/icons/arrow-right-drop-circle-green.png">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
 
             </div>
-            <p><b>Materials</b></p>
-            <div class="row" style="height: auto;background-color: white;box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem;margin-bottom: 30px; padding: 15px">
+            <!--<p><b>Materials</b></p>-->
+            <!--<div class="row"-->
+                 <!--style="height: auto;background-color: white;box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem;margin-bottom: 30px; padding: 15px">-->
 
-            </div>
+            <!--</div>-->
         </div>
         <div class="col-sm-3">
             <p><b>Teacher</b></p>
-            <div class="row"
-                 style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
+            <div class="row" style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
+                <div class="col-sm-12 text-center">
+                    <img id="teacherImage" alt="Tutor Image" src="/images/icons/tutor.png">
+                    <p style="color: #848589" id="nameOfTheTeacher"></p>
+                    <p style="color: #848589;" id="teacherDescription"></p>
+                </div>
             </div>
 
-            <p><b>Reviews</b></p>
-            <div class="row"
-                 style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
-            </div>
+            <!--<p><b>Reviews</b></p>-->
+            <!--<div class="row"-->
+                 <!--style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">-->
+            <!--</div>-->
 
-            <p><b>Doubts</b></p>
-            <div class="row"
-                 style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">
-            </div>
+            <!--<p><b>Doubts</b></p>-->
+            <!--<div class="row"-->
+                 <!--style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem">-->
+            <!--</div>-->
         </div>
     </div>
 

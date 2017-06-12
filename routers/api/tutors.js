@@ -4,13 +4,12 @@ const password = require('./../../utils/password');
 
 
 router.post('/add', function (req, res) {
-    if (req.body.firstname === "" || req.body.lastname === "" || req.body.email === "" || req.body.password === "") {
+    if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
         res.send("Insufficient Details");
     }
     password.pass2hash(req.body.password).then(function (hash) {
         models.Tutor.create({
-            firstname: req.body.firstname,
-            lastname: req.body.lastname,
+            name: req.body.name,
             email: req.body.email,
             password: hash
         }).then(function (student) {
@@ -58,9 +57,21 @@ router.post('/:id/edit', function (req, res) {
 
 router.get('/:id/myMinicourses', function (req, res) {
     //tutor gets all his minicourses,
+    const tutorId = parseInt(req.params.id);
+    models.MiniCourse.findAll({
+        where: {
+            tutorId: tutorId
+        }
+    }).then(function (miniCourses) {
+        res.send(miniCourses);
+    }).catch(function (err) {
+        console.log(err);
+        res.send("Could not get the minicourses now");
+    })
+
 });
 
-router.get('/:id/:minicourses', function (req, res) {
+router.get('/:id/:minicourse', function (req, res) {
     //tutor sees a minicourse with review on it
 });
 
@@ -69,11 +80,41 @@ router.get('/:id/:minicourse/:lesson', function (req, res) {
 });
 
 
-router.post('/:id/addMinicourse', function (req, res) {
+router.post('/:id/addMiniCourse', function (req, res) {
     //will have to decide how to add tags to a minicourse
+    const tutorId = parseInt(req.params.id);
+    models.MiniCourse.create({
+        name: req.body.name,
+        noOfLessons: req.body.noOfLessons,
+        description: req.body.description,
+        level: req.body.level,
+        duration: req.body.duration,
+        medium: req.body.duration,
+        tutorId: tutorId
+    }).then(function (miniCourse) {
+        res.send(miniCourse);
+    }).catch(function (err) {
+        console.log(err);
+        res.send("Could not add the minicourse right now");
+    })
+
 });
 
-router.post('/:id/:minicourseId/addLesson', function (req, res) {
+router.post('/:id/:miniCourseId/addLesson', function (req, res) {
+    const tutorId = parseInt(req.params.id);
+    const miniCourseId = parseInt(req.params.miniCourseId);
+    models.Lesson.create({
+        name:req.body.name,
+        videoUrl:req.body.videoUrl,
+        level:req.body.level,
+        duration:req.body.duration,
+        minicourseId:miniCourseId
+    }).then(function (lesson) {
+        res.send(lesson);
+    }).catch(function (err) {
+        console.log(err);
+        res.send("Could not add the lesson right now");
+    })
 
 });
 

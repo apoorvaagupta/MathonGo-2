@@ -17,8 +17,9 @@ router.get('/:id', function (req, res) {
     let miniCourseId = parseInt(req.params.id);
     models.MiniCourse.findOne({
         where: {id: miniCourseId},
-        include: models.Lesson
+        include: [models.Lesson,models.Tutor,models.Tag]
     }).then(function (miniCourse) {
+        //Write for enrollment
         res.send(miniCourse);
     }).catch(function (err) {
         console.log(err);
