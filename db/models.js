@@ -38,7 +38,8 @@ const Lesson = db.define('lesson', {
     name: Sequelize.STRING,
     videoUrl: Sequelize.STRING(1234),
     level: Sequelize.STRING,
-    duration:Sequelize.STRING
+    duration:Sequelize.STRING,
+    description:Sequelize.STRING
 });
 
 const Bookmark = db.define('bookmark', {

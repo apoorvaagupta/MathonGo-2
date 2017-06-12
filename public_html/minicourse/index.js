@@ -19,9 +19,10 @@ $(document).ready(function () {
         }
         $('#nameOfTheTeacher').text(miniCourse.tutor.name);
         $('#teacherDescription').text(miniCourse.tutor.description);
+
         const lectures = $('#lectures');
         for (let i = 0; i < miniCourse.lessons.length; i++) {
-            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lesson/`+ miniCourse.lessons[i].id +`'">
+            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lessons/`+ miniCourse.lessons[i].id +`'">
                         <div class="row" style="margin-bottom: 0px">
                             <div class="col-sm-1" style="padding-left: 0px">
                                 <img src="/images/icons/movie.png">
@@ -31,8 +32,7 @@ $(document).ready(function () {
                                 <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
                                     <img src="/images/icons/timer.png">&nbsp;<span
                                         style="margin-top: 5px; font-weight: 500">` + miniCourse.lessons[i].duration + `</span>&nbsp;&nbsp;
-                                    <img src="/images/icons/eye.png">&nbsp;<span id="lessonViews"
-                                                                                 style="margin-top: 5px; font-weight: 500"></span>
+                                    <img src="/images/icons/eye.png">&nbsp;<span style="margin-top: 5px; font-weight: 500"></span>
                                 </p>
                             </div>
                             <div class="col-sm-1">
