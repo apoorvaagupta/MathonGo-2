@@ -3,6 +3,9 @@ $(document).ready(function () {
     const miniCourseId = window.location.pathname.split('/library/')[1].split('/')[0];
 
     $.get("http://localhost:4000/api/minicourses/" + miniCourseId, function (miniCourse) {
+        $('#miniCourseName').text(miniCourse.name);
+        $('#miniCourseDescription').text(miniCourse.description);
+
         $('#teacherName').text(miniCourse.tutor.name);
         $('#ratings').text("");
         $('#noOfReviews').text("");
