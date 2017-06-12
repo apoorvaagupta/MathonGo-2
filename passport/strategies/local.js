@@ -35,11 +35,12 @@ module.exports = new LocalStrategy({
         }).catch(function (err) {
             console.log(err);
             // console.trace(err.message);
-            return cb(err, false, {message: err})
+            return done(err, false, {message: err})
         });
 
     }).catch(function (err) {
         console.log(err);
+        return done(err,false,{message: 'invalid user'});
     });
 
 });
