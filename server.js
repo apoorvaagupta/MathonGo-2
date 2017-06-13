@@ -30,10 +30,11 @@ app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
 
 app.use('/api', apirouter);
-app.use('/library/:id',express.static(path.join(__dirname,'public_html/minicourse')));
+app.use('/course/:id',express.static(path.join(__dirname,'public_html/minicourse')));
 app.use('/library', express.static(path.join(__dirname, 'public_html/library')));
-app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
-app.use('/student', express.static(path.join(__dirname, 'public_html/student')));
+app.use('/lesson/:id', express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/student/:id/mycourses', express.static(path.join(__dirname, 'public_html/student/mycourses')));
+app.use('/student/:id/mybookmarks', express.static(path.join(__dirname, 'public_html/student/mybookmarks')));
 
 app.listen(4000, function () {
     console.log("Listening on 4000");
