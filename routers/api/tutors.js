@@ -81,7 +81,6 @@ router.get('/:id/:minicourse/:lesson', function (req, res) {
 
 
 router.post('/:id/addMiniCourse', function (req, res) {
-    //will have to decide how to add tags to a minicourse
     const tutorId = parseInt(req.params.id);
     models.MiniCourse.create({
         name: req.body.name,

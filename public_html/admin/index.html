@@ -3,10 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Page - MathonGo</title>
+    <script src="./../js/jquery-3.2.1.js"></script>
+    <script src="index.js"></script>
 </head>
 <body>
 
+<h1>
+Add a Minicourse
+</h1>
 
+<form>
+    <label>
+        Name of the minicourse: <input type="text" id="minicourse-name">
+    </label>
+    <br><br>
+    <label>
+        No. of lessons: <input type="text" id="minicourse-lessonNo">
+    </label>
+    <br><br>
+    <label>
+        Description: <input type="text" id="minicourse-description">
+    </label>
+    <br><br>
+    <label>
+        Duration of the minicourse: <input type="text" id="minicourse-duration">
+    </label>
+    <br><br>
+    <label>
+        Course name: <input type="text" id="minicourse-course">
+    </label>
+    <br><br>
+    <label>
+        Level:
+        <label><input type="radio" name="level" value="beginner"> Beginner</label>
+        <label><input type="radio" name="level" value="intermediate"> Intermediate</label>
+        <label><input type="radio" name="level" value="advance"> Advance</label>
+    </label>
+    <br><br>
+    <label>
+        Medium:
+        <label><input type="radio" name="medium" value="english"> English</label>
+        <label><input type="radio" name="medium" value="hindi"> Hindi</label>
+    </label>
+    <br><br>
+    <label>
+        Class:
+        <label><input type="radio" name="class" value="XI"> XI</label>
+        <label><input type="radio" name="class" value="XII"> XII</label>
+        <label><input type="radio" name="class" value="XII+"> XII+</label>
+    </label>
+    <br><br>
+    <label>
+        Subject:
+        <label><input type="radio" name="subject" value="maths"> Maths</label>
+        <label><input type="radio" name="subject" value="physics"> Physics</label>
+        <label><input type="radio" name="subject" value="chemistry"> Chemistry</label>
+    </label>
+    <br><br>
+    <label>
+        Category:
+        <label><input type="radio" name="category" value="JEE Mains"> JEE Mains</label>
+        <label><input type="radio" name="category" value="JEE Advance"> JEE Advance</label>
+        <label><input type="radio" name="category" value="CBSE"> CBSE</label>
+    </label>
+    <br><br>
+
+
+    <h3>Add Lessons To The Minicourse</h3>
+
+    <button id="add-lesson-btn">Add a lesson to this minicourse</button>
+
+    <ul id="lessons-add">
+
+    </ul>
+
+
+
+
+    <input type="submit" value="Create the Minicourse with lessons">
+
+</form>
 
 </body>
 </html>
