@@ -12,7 +12,7 @@ $(document).ready(function () {
         $('#miniCourseDuration').text(miniCourse.duration);
         $('#difficulty').text(miniCourse.level);
         $('#medium').text(miniCourse.medium);
-        $('#relevance').text(miniCourse.tags);
+        $('#relevance').text(miniCourse.tags[0].category.categoryName);
 
         if (miniCourse.tutor.image != null) {
             $('#teacherImage').attr('src', miniCourse.tutor.img);

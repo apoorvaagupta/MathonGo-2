@@ -274,7 +274,7 @@ html, body {
     font-weight: 700;
 }
 
-.enrol-style:hover {
+.enrol-style:hover, .enrol-style:visited {
     text-decoration: none;
     color: white;
     cursor: pointer;
@@ -283,6 +283,8 @@ html, body {
 .enrol-style:focus {
     text-decoration: none;
 }
+
+
 
 .dropdown-menu {
     left: 10%;
