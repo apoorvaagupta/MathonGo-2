@@ -2,6 +2,7 @@ $('document').ready(function () {
 
     $.get("http://localhost:4000/api/minicourses", function (minicourses) {
        const ul = $('minicourses-list');
+       console.log(minicourses)
        for(let i=0;i<minicourses.length;i++){
            ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/cover.jpg" class="minicourse-img"></div>'+
                '<div class="col-sm-8 minicourse-content">'+

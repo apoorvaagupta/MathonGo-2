@@ -4,7 +4,9 @@ const password = require('./../../utils/password');
 
 router.get('/', function (req, res) {
     //get all the minicourses
-    models.MiniCourse.findAll().then(function (miniCourses) {
+    models.MiniCourse.findAll({
+        include:[models.Tutor,models.Tag]
+    }).then(function (miniCourses) {
         res.send(miniCourses);
     }).catch(function (err) {
         console.log(err);

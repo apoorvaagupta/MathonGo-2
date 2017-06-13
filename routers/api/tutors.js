@@ -55,7 +55,7 @@ router.post('/:id/edit', function (req, res) {
     });
 });
 
-router.get('/:id/myMinicourses', function (req, res) {
+router.get('/:id/myMiniCourses', function (req, res) {
     //tutor gets all his minicourses,
     const tutorId = parseInt(req.params.id);
     models.MiniCourse.findAll({
@@ -71,7 +71,7 @@ router.get('/:id/myMinicourses', function (req, res) {
 
 });
 
-router.get('/:id/:minicourse', function (req, res) {
+router.get('/:id/:miniCourse', function (req, res) {
     //tutor sees a minicourse with review on it
 });
 
@@ -92,7 +92,60 @@ router.post('/:id/addMiniCourse', function (req, res) {
         medium: req.body.duration,
         tutorId: tutorId
     }).then(function (miniCourse) {
-        res.send(miniCourse);
+        //Ask if allowed here
+        models.Class.findOne({
+            where: {
+                className: req.body.className
+            }
+        }).then(function (classObject) {
+            models.Subject.findOne({
+                where: {
+                    subjectName: req.body.subjectName
+                }
+            }).then(function (subjectObject) {
+                models.Category.findOne({
+                    where: {
+                        categoryName: req.body.categoryName
+                    }
+                }).then(function (categoryObject) {
+                    models.Course.findOne({
+                        where: {
+                            courseName: req.body.courseName
+                        }
+                    }).then(function (courseObject) {
+                        models.Tag.create({
+                            classId: classObject.id,
+                            subjectId: subjectObject.id,
+                            categoryId: categoryObject.id,
+                            courseId: courseObject.id,
+                            minicourseId: miniCourse.id
+                        }).then(function (tagRow) {
+                            models.MiniCourse.findOne({
+                                where: {id: miniCourse.id},
+                                include: [models.Tag]
+                            }).then(function (miniCourseFinal) {
+                                res.send(miniCourseFinal);
+                            }).catch("Could not find the MiniCourse right now");
+                        }).catch(function (err) {
+                            console.log(err);
+                            res.send("Could not add the tags right now");
+                        })
+                    }).catch(function (err) {
+                        console.log(err);
+                        res.send("Could not add the course right now");
+                    })
+                }).catch(function (err) {
+                    console.log(err);
+                    res.send("Could not add the category right now");
+                })
+            }).catch(function (err) {
+                console.log(err);
+                res.send("Could not add the subject right now");
+            })
+        }).catch(function (err) {
+            console.log(err);
+            res.send("Could not add the class right now");
+        })
     }).catch(function (err) {
         console.log(err);
         res.send("Could not add the minicourse right now");
@@ -144,5 +197,10 @@ router.post('/:id/:miniCourseId/addLesson', function (req, res) {
 
 });
 
+
+//Write
+router.post('/:id/:miniCourseId/edit', function (req, res) {
+
+});
 
 module.exports = router;
