@@ -93,15 +93,16 @@ router.get('/:id/minicourses', function (req, res) {
 
 router.get('/:id/bookmarks', function (req, res) {
     //console.log("reached");
-     let studentId = parseInt(req.params.id);
-    // models.Application.findAll({
-    //     where: {studentId: studentId},
-    //     include: models.Job
-    // }).then(function (applications) {
-    //     res.send(applications);
-    // }).catch(function (error) {
-    //     console.log(error);
-    // })
+    let studentId = parseInt(req.params.id);
+    models.Bookmark.findAll({
+        where: {studentId: studentId},
+             include: models.Lesson
+
+    }).then(function (bookmarks) {
+        res.send(bookmarks);
+    }).catch(function (error) {
+        console.log(error);
+    })
 });
 
 
