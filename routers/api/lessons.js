@@ -19,13 +19,16 @@ router.get('/:id', function (req, res) {
 
 router.post('/:lessonId/bookmark', function (req, res) {
     //bookmark this lesson
+    //Tomorrow
 });
 
 router.post('/:lessonId/report', function (req, res) {
     //report this lesson
+    //PHASE 2
 });
 
 router.post('/:lessonId/upvote', function (req, res) {
+    //PHASE 2
     //upvote this lesson
 });
 

@@ -73,10 +73,12 @@ router.get('/:id/myMiniCourses', function (req, res) {
 
 router.get('/:id/:miniCourse', function (req, res) {
     //tutor sees a minicourse with review on it
+    //PHASE 2
 });
 
 router.get('/:id/:minicourse/:lesson', function (req, res) {
     //tutor sees a lesson with all its reports and no of upvotes
+    //PHASE 2
 });
 
 

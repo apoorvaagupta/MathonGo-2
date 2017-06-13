@@ -7,8 +7,8 @@ $(document).ready(function () {
         $('#miniCourseDescription').text(miniCourse.description);
 
         $('#teacherName').text(miniCourse.tutor.name);
-        $('#ratings').text("");
-        $('#noOfReviews').text("");
+        $('#subject').text(miniCourse.tags[0].subject.subjectName);
+        $('#className').text(miniCourse.tags[0].subject.subjectName);
         $('#miniCourseDuration').text(miniCourse.duration);
         $('#difficulty').text(miniCourse.level);
         $('#medium').text(miniCourse.medium);

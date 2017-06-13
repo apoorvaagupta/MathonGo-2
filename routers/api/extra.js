@@ -45,5 +45,17 @@ router.post('/addCourse', function (req, res) {
     });
 });
 
-
+router.get('/filters', function (req, res) {
+    models.Class.findAll().then(function (classObject) {
+        models.Subject.findAll().then(function (subjectObject) {
+            models.Category.findAll().then(function (categoryObject) {
+                res.send({
+                    classObject: classObject,
+                    subjectObject: subjectObject,
+                    categoryObject: categoryObject
+                })
+            })
+        })
+    })
+});
 module.exports = router;
