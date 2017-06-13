@@ -67,21 +67,33 @@ router.post('/:id/edit', function (req, res) {
     // });
 });
 
-router.post('/:id/minicourses', function (req, res) {
-    // let studentId = parseInt(req.params.id);
-    // models.Application.findAll({
-    //     where: {studentId: studentId},
-    //     include: models.Job
-    // }).then(function (applications) {
-    //     res.send(applications);
-    // }).catch(function (error) {
-    //     console.log(error);
-    // })
+router.get('/:id/minicourses', function (req, res) {
+    let studentId = parseInt(req.params.id);
+    models.Enrollment.findAll({
+        where: {studentId: studentId},
+        include: [
+            {
+                model: models.MiniCourse,
+                include: [{
+                    model: models.Tutor
+                },
+                    {
+                        model: models.Tag,
+                        include: [models.Class, models.Category, models.Course, models.Subject]
+                    }
+                ]
+            }
+        ]
+    }).then(function (enrollments) {
+        res.send(enrollments);
+    }).catch(function (error) {
+        console.log(error);
+    })
 });
 
 router.get('/:id/bookmarks', function (req, res) {
-    console.log("reached");
-    // let studentId = parseInt(req.params.id);
+    //console.log("reached");
+     let studentId = parseInt(req.params.id);
     // models.Application.findAll({
     //     where: {studentId: studentId},
     //     include: models.Job

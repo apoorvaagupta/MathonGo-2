@@ -9,7 +9,7 @@ $('document').ready(function () {
         for(let i=0;i<minicourses.length;i++){
             ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/cover.jpg" class="minicourse-img"></div>'+
                 '<div class="col-sm-8 minicourse-content">'+
-                '<div class="row minicourse-chps"><span>'+minicourses[i].Subject.subjectName+'</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>'+minicourses[i].courseName+'</span></div>'+
+                '<div class="row minicourse-chps"><span>'+minicourses[i].tags.subject.subjectName+'</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>'+minicourses[i].tags.course.courseName+'</span></div>'+
                 '<div class="row minicourse-title"><span>'+minicourses[i].name+'</span></div>'+
                 '<div class="row"><p class="minicourse-description">'+minicourses[i].description+'</p></div>'+
                 '<div class="row align-items-center"><a href="#" class="enrol-style">ENROLL</a></div>'+
