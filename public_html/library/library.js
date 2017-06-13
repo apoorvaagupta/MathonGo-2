@@ -23,7 +23,8 @@ $('document').ready(function () {
                 '</div> <div class="minicourse-tag"> <div class="row tag-title">RELEVANCE</div>' +
                 '<div class="row tag-content"><span>' + minicourses[i].tags[0].category.categoryName + '</span></div> </div> <div class="minicourse-tag">' +
                 '<div class="row tag-title">MEDIUM</div>' +
-                '<div class="row tag-content"><span>' + minicourses[i].medium + '</span></div> </div> </div> </div> </li>')
+                '<div class="row tag-content"><span>' + minicourses[i].medium + '</span></div> </div> </div> </div> </li>'
+            )
         }
     });
 

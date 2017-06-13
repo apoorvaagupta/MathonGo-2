@@ -47,5 +47,8 @@ $(document).ready(function () {
 
     })
 
+    $('#enrollOrEnrolled').click(function () {
+        //DO AFTERWORDS
+    })
 });
 

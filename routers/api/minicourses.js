@@ -53,6 +53,7 @@ router.get('/:id', function (req, res) {
 router.post('/:id/enrol', function (req, res) {
     //enrol in a minicourse
     let miniCourseId = parseInt(req.params.id);
+    //DO AFTERWARDS
     //Ask
 });
 //Ask
