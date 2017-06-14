@@ -3,7 +3,7 @@ const passport = require('passport');
 const localStrategy = require('./strategies/local');
 
 
-passport.use(localStrategy);
+
 
 
 passport.serializeUser(function (user, cb) {
@@ -27,8 +27,10 @@ passport.deserializeUser(function (userid, cb) {
     // // })
 
    // console.log(userid);
-     return cb( userid);
+     return cb(null,userid);
 });
+
+passport.use(localStrategy);
 
 module.exports = passport;
 

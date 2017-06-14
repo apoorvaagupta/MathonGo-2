@@ -90,7 +90,7 @@ router.post('/:id/addMiniCourse', function (req, res) {
         description: req.body.description,
         level: req.body.level,
         duration: req.body.duration,
-        medium: req.body.duration,
+        medium: req.body.medium,
         tutorId: tutorId
     }).then(function (miniCourse) {
         //Ask if allowed here

@@ -21,11 +21,7 @@ module.exports = new LocalStrategy({
     models.Student.findOne({
        where: {email: email}
     }).then(function (student) {
-        console.log(student.get());
-        console.log(student.password);
-        console.log(password);
         passutils.compare2hash(password, student.password).then(function (match) {
-            console.log(match);
             if (match) {
                 console.log("returning");
                 return done(null, student.get());
@@ -34,7 +30,6 @@ module.exports = new LocalStrategy({
             }
         }).catch(function (err) {
             console.log(err);
-            // console.trace(err.message);
             return done(err, false, {message: err})
         });
 

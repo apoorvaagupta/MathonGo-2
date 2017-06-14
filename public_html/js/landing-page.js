@@ -82,7 +82,7 @@ $(document).ready(function () {
             //     let url = student.url;
             //     console.log(url);
                 console.log(url);
-                window.location.replace(url);
+                //window.location.replace(url);
                 //console.log(res.user);
             //     localStorage.setItem("studentId", student.row.id);
             //     localStorage.setItem("studentName", student.row.name);

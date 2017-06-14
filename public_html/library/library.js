@@ -130,7 +130,6 @@ $('document').ready(function () {
             }
 
             const filter = {
-                a:'a',  //Just so that filter is never empty
                 classObject: classArray,
                 subjectObject: subjectArray,
                 categoryObject: categoryArray,
@@ -152,7 +151,7 @@ function addMiniCourses(minicourses) {
     console.log(minicourses);
     const ul = $('#minicourses-list');
     ul.empty();
-    for (let i = 0; i < 2; i++) {
+    for (let i = 0; i < minicourses.length; i++) {
         ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/cover.jpg" class="minicourse-img"></div>' +
             '<div class="col-sm-8 minicourse-content">' +
             '<div class="row minicourse-chps"><span>' + minicourses[i].tags[0].subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + minicourses[i].tags[0].course.courseName + '</span></div>' +
