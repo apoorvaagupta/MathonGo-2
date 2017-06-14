@@ -2,13 +2,16 @@
 /**
  * Created by apoorvaa_gupta on 12/6/17.
  */
-$('document').ready(function () {
+$(document).ready(function () {
 
     counter = 0;
+    console.log("js");
 
     $('#add-lesson-btn').click(function () {
        let lessonlist = $('#lessons-add');
        counter++;
+       console.log(lessonlist);
+       console.log("appending");
 
        lessonlist.append(`<li>
             <label>

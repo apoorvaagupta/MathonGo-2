@@ -29,7 +29,12 @@ app.use('/signup', signuprouter);
 app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
 
-app.use('/api', apirouter);
+
+app.get('/library', function (req,res) {
+
+});
+
+app.use('/api', passport.authenticate('session'), apirouter);
 app.use('/courses/:id',express.static(path.join(__dirname,'public_html/minicourse')));
 // app.use('/library', (req, res) => {
 //         console.log(req)
