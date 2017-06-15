@@ -12,6 +12,16 @@
     <script src="/js/bootstrap.js"></script>
 
     <script src="./index.js"></script>
+    <script>
+
+        let logoutfn = function () {
+
+            $.get('http://localhost:4000/logout', function (student) {
+                console.log(student);
+                window.location.replace(student.url);
+            });
+        }
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -35,12 +45,12 @@
         <div class="dropdown col-sm-2 col-12 align-middle" style=" padding-top: 5px; padding-bottom: 5px">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;-->
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links "
+            &nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links "
                                              data-toggle="dropdown"
                                              role="button" aria-haspopup="true" aria-expanded="false"><img
                 src="/images/boy.png" style="height: 30px; border-radius: 50%; border: solid 1px gray"
                 class="img-circle">
-            &nbsp;&nbsp;John Doe <span class="caret"></span></a>
+            <span id="name"></span> <span class="caret"></span></a>
             <ul class="dropdown-menu"
                 style="padding: 0; margin-top:10px; border: none; border-radius: 0;border-bottom-right-radius: .25rem;border-bottom-left-radius: .25rem;background-color: #FFF">
                 <li style="padding: 10px ;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="http://localhost:4000/student/mycourses" class="header-links">My

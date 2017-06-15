@@ -33,6 +33,8 @@ $(document).ready(function () {
                     password: userPassword
                 }, function (data) {
                     if (data.success === 'true') {
+                        console.log(data.name);
+                        window.localStorage.name =  data.name;
                         window.location.replace(data.url)
                     }
                 }).fail(function (err) {
@@ -51,6 +53,7 @@ $(document).ready(function () {
             password: $('#loginPassword').val()
         }, function (data) {
             if (data.success === 'true') {
+                localStorage.setItem('name', data.name);
                 window.location.replace(data.url)
             }
         }).fail(function (err) {

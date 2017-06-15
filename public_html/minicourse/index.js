@@ -1,5 +1,5 @@
 $(document).ready(function () {
-
+    $('#name').text(localStorage.getItem('name'));
     const miniCourseId = window.location.pathname.split('/courses/')[1].split('/')[0];
 
     $.get("http://localhost:4000/api/minicourses/" + miniCourseId, function (miniCourse) {

@@ -47,11 +47,11 @@
         <div class="dropdown col-sm-2 col-12 align-middle header-dropdown">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;-->
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links"
+            &nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links"
                                              data-toggle="dropdown"
                                              role="button" aria-haspopup="true" aria-expanded="false">
             <img src="./../images/boy.png" class="img-circle header-profile-img">
-            &nbsp;&nbsp;<span>John Doe</span> <span class="caret"></span></a>
+            <span id="name"></span> <span class="caret"></span></a>
             <ul class="dropdown-menu header-dropdown-menu">
                 <li class="header-dropdown-menu-li"><a href="http://localhost:4000/student/mycourses"
                                                        class="header-links">My Courses</a></li>
@@ -178,7 +178,7 @@
 
                     </ul>
                 </div>
-                <div class="col-sm-2 text-right filter-bar-clearall">CLEAR ALL</div>
+                <div class="col-sm-2 text-right filter-bar-clearall" onclick="window.location.replace('http://localhost:4000/library')">CLEAR ALL</div>
             </div>
             <div class="row minicourses">
 

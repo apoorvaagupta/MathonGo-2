@@ -1,3 +1,4 @@
+
 function ensureLogin() {
 
     return function (req, res, next) {
