@@ -18,8 +18,20 @@ router.get('/:id', function (req, res) {
 });
 
 router.post('/:lessonId/bookmark', function (req, res) {
-    //bookmark this lesson
-    //Tomorrow
+    let lessonId = parseInt(req.params.id);
+    models.Bookmark.create({
+        lessonId: lessonId,
+        studentId: req.user.id
+    }).then(function (bookmark) {
+        if (bookmark) {
+            res.send({success: 'true'})
+        } else {
+            res.send({success: 'false'})
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'error'})
+    });
 });
 
 router.post('/:lessonId/report', function (req, res) {

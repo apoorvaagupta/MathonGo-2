@@ -90,13 +90,10 @@ router.get('/mycourses', function (req, res) {
     })
 });
 
-router.get('/:id/bookmarks', function (req, res) {
-    //console.log("reached");
-    let studentId = parseInt(req.params.id);
+router.get('/bookmarks', function (req, res) {
     models.Bookmark.findAll({
-        where: {studentId: studentId},
+        where: {studentId: req.user.id},
              include: models.Lesson
-
     }).then(function (bookmarks) {
         res.send(bookmarks);
     }).catch(function (error) {

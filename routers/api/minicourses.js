@@ -142,7 +142,7 @@ router.post('/:id/enroll', function (req, res) {
     }).catch(function (err) {
         console.log(err);
         res.send({success: 'error'})
-    })
+    });
     //DO AFTERWARDS
     //Ask
 });
