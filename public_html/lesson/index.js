@@ -23,7 +23,9 @@ $(document).ready(function () {
             $('#nameOfTheTeacher').text(miniCourse.tutor.name);
             $('#teacherDescription').text(miniCourse.tutor.description);
 
-
+            $('#bookmark').click(function () {
+                $.
+            });
 
             const lessons = $('#lessons');
             for (let i = 0; i < miniCourse.lessons.length; i++) {
