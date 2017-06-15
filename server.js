@@ -30,16 +30,9 @@ app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
 
 
-app.get('/library', function (req,res) {
-
-});
-
 app.use('/api', passport.authenticate('session'), apirouter);
 app.use('/courses/:id',express.static(path.join(__dirname,'public_html/minicourse')));
-// app.use('/library', (req, res) => {
-//         console.log(req)
-//     },
-//     express.static(path.join(__dirname, 'public_html/library')));
+app.use('/library', express.static(path.join(__dirname, 'public_html/library')));
 app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
 app.use('/student/:id/mycourses', express.static(path.join(__dirname, 'public_html/student/mycourses')));
 app.use('/student/:id/mybookmarks', express.static(path.join(__dirname, 'public_html/student/mybookmarks')));

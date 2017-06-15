@@ -5,7 +5,6 @@
 $(document).ready(function () {
 
     counter = 0;
-    console.log("js");
 
     $('#add-lesson-btn').click(function () {
        let lessonlist = $('#lessons-add');
