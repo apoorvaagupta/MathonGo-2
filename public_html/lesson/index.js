@@ -31,7 +31,7 @@ $(document).ready(function () {
                     <h5 style="font-size: 18px;margin-bottom: 7px;font-weight: 500;color: #A4A5A9">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `<br></h5>
                 </div>`)
                 } else {
-                    lessons.append(`<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;background-color: #00C2FA">
+                    lessons.append(`<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;background-color: #DDDDDD">
                     <h5 style="font-size: 18px;margin-bottom: 7px;font-weight: 500;color: #A4A5A9">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `<br></h5>
                 </div>`)
                 }
