@@ -1,12 +1,8 @@
 const router = require('express').Router();
 const passport = require('./../passport/passporthandler');
 
-router.post('/', passport.authenticate('local', {
-        failureRedirect: 'http://localhost:4000/lesson/',
-
-    }), function (req, res) {
-        console.log(req.user);
-        res.redirect('/library/');
+router.post('/student', passport.authenticate('local-student'), function (req, res) {
+        res.send({url: 'http://localhost:4000/library/'});
     }
 );
 

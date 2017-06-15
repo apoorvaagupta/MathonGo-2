@@ -41,56 +41,16 @@ $(document).ready(function () {
 
     $('#loginButton').click(function () {
 
-        // $.ajax({
-        //     url: "http://localhost:4000/login",
-        //     type: "POST",
-        //     dataType: "json",
-        //     data: {'email': $('#loginEmail').val(),
-        //               'password': $('#loginPassword').val()},
-        //     success: function (data) {
-        //         console.log("hiiiiiii");
-        //     }
-        // });
-
-
-        // $.ajax({
-        //     type: "POST",
-        //     url: "http://localhost:4000/login",
-        //     data: JSON.stringify({email: $('#loginEmail').val(),
-        //         password: $('#loginPassword').val()}),
-        //     contentType: "application/json; charset=utf-8",
-        //     dataType: "json",
-        //     cache: true,
-        //     success: function (msg) {
-        //         console.log(1);
-        //         console.log(msg);
-        //     },
-        //     error: function (errormessage) {
-        //         console.log(11);
-        //         console.log(errormessage)
-        //         //do something else
-        //     }
-        // });
-
-        // console.log($('#loginEmail').val(),$('#loginPassword').val());
-        $.post("http://localhost:4000/login", {
+        $.post("http://localhost:4000/login/student", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
-        }, function (url) {
-            console.log("reched the frontend back");
-            // if (student.isSuccess === "true") {
-            //     let url = student.url;
-            //     console.log(url);
-                console.log(url);
-                //window.location.replace(url);
-                //console.log(res.user);
-            //     localStorage.setItem("studentId", student.row.id);
-            //     localStorage.setItem("studentName", student.row.name);
-            //     //console.log(localStorage.getItem("studentId"));
-                //window.location.replace(student);
-            // } else {
-            //     $('#errorLogin').text("Wrong Credentials");
-            // }
+        }, function (err) {
+            console.log("reached the frontend back");
+            console.log(err.message);
+        }).fail(function (err) {
+            $('#error').text("Wrong Credentials");
+            console.log("fail");
+            console.log(err);
         });
     })
 });

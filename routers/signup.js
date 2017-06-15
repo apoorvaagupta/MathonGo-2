@@ -2,7 +2,7 @@ const router = require('express').Router();
 const models = require('../db/models').models;
 const password = require('../utils/password');
 const passport = require('./../passport/passporthandler');
-router.post('/', function (req, res) {
+router.post('/student', function (req, res) {
 
     if (req.body.firstname === "" || req.body.lastname === "" || req.body.email === "" || req.body.password === "") {
         res.send("Insufficient Details");
@@ -13,18 +13,15 @@ router.post('/', function (req, res) {
             email: req.body.email,
             password: hash
         }).then(function (student) {
-
-            //passport.authenticate('local');
-            //console.log(student);
-            console.log("student created");
-           // console.log(req);
-            //console.log("*********************************");
-            //console.log(req.User);
-            res.redirect('/library');
+            if (student) {
+                res.send({success: 'true'});
+            } else {
+                res.send({success: 'false'});
+            }
         })
     }).catch(function (err) {
         console.log(err);
-        res.send("Could not create the user");
+        res.send({success: 'error'});
     })
 });
 
