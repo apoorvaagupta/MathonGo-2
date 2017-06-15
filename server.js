@@ -39,8 +39,8 @@ app.use('/api', ensure.ensureLogin(), apirouter);
 app.use('/courses/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/minicourse')));
 app.use('/library', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/allMiniCourses')));
 app.use('/lessons/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/lesson')));
-app.use('/student/mycourses', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/student/mycourses')));
-app.use('/student/mybookmarks', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/student/mybookmarks')));
+app.use('/student/mycourses', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/students/mycourses')));
+app.use('/student/mybookmarks', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/students/mybookmarks')));
 
 app.listen(4000, function () {
     console.log("Listening on 4000");

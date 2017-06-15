@@ -3,6 +3,7 @@
  */
 
 $('document').ready(function () {
+    $('#name').text(localStorage.getItem('name'));
     const studentId = window.location.pathname.split('/student/')[1].split('/')[0];
     $.get("http://localhost:4000/api/students/mycourses", function (enrollments) {
         console.log(enrollments);

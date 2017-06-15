@@ -2,6 +2,7 @@
  * Created by apoorvaa_gupta on 2/6/17.
  */
 $(document).ready(function () {
+    $('#name').text(localStorage.getItem('name'));
 
     const lessonId = window.location.pathname.split('/lessons/')[1].split('/')[0];
 

@@ -5,6 +5,8 @@
 
 $('document').ready(function () {
 
+    $('#name').text(localStorage.getItem('name'));
+
     $.get("http://localhost:4000/api/minicourses", addMiniCourses);
 
     $.get("http://localhost:4000/api/extra/filters", function (filters) {

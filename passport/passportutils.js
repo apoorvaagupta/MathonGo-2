@@ -6,7 +6,7 @@ function ensureLogin() {
         if (!req.user) {
             res.redirect('http://localhost:4000/');
         } else {
-            res.redirect(fallbackPath)
+            next();
         }
     }
 }
