@@ -1,10 +1,8 @@
 const passport = require('passport');
 
-const localStrategy = require('./strategies/local');
-
-
-
-
+const localStudentStrategy = require('./strategies/local/student');
+const localTutorStrategy = require('./strategies/local/tutor');
+const localAdminStrategy = require('./strategies/local/admin');
 
 passport.serializeUser(function (user, cb) {
     // if (config.DEBUG) {
@@ -30,7 +28,11 @@ passport.deserializeUser(function (userid, cb) {
      return cb(null,userid);
 });
 
-passport.use(localStrategy);
+
+
+passport.use('student', localStudentStrategy);
+passport.use('tutor', localTutorStrategy);
+passport.use('admin', localAdminStrategy);
 
 module.exports = passport;
 
