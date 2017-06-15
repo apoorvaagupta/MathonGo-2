@@ -15,9 +15,6 @@ module.exports = new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password'
 }, function (email, password, done) {
-    console.log(11111);
-    console.log(email);
-    console.log(password);
     models.Student.findOne({
        where: {email: email}
     }).then(function (student) {

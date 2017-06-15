@@ -12,6 +12,13 @@ const Student = db.define('student', {
     password: Sequelize.STRING,
     class: Sequelize.INTEGER,
     contact: Sequelize.BIGINT,
+    role: {type: Sequelize.STRING, defaultValue: 'Student'}
+});
+
+const StudentLocal = db.define('studentlocal', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+    email: Sequelize.STRING,
+    password: Sequelize.STRING
 });
 
 const Tutor = db.define('tutor', {
@@ -20,7 +27,22 @@ const Tutor = db.define('tutor', {
     name: Sequelize.STRING,
     email: Sequelize.STRING,
     password: Sequelize.STRING,
-    description: Sequelize.STRING(1234)
+    description: Sequelize.STRING(1234),
+    role: {type: Sequelize.STRING, defaultValue: 'Tutor'}
+});
+
+const TutorLocal = db.define('tutorlocal', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+    email: Sequelize.STRING,
+    password: Sequelize.STRING
+});
+
+const Admin = db.define('admin', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+    email: Sequelize.STRING,
+    password: Sequelize.STRING,
+    name: Sequelize.STRING,
+    role: {type: Sequelize.STRING, defaultValue: 'Admin'}
 });
 
 const MiniCourse = db.define('minicourse', {
@@ -29,17 +51,18 @@ const MiniCourse = db.define('minicourse', {
     noOfLessons: Sequelize.STRING,
     description: Sequelize.STRING,
     level: Sequelize.STRING,
-    medium:Sequelize.STRING,
-    duration:Sequelize.STRING
+    medium: Sequelize.STRING,
+    duration: Sequelize.STRING
 });
+
 
 const Lesson = db.define('lesson', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
     videoUrl: Sequelize.STRING(1234),
     level: Sequelize.STRING,
-    duration:Sequelize.STRING,
-    description:Sequelize.STRING
+    duration: Sequelize.STRING,
+    description: Sequelize.STRING
 });
 
 const Bookmark = db.define('bookmark', {
@@ -93,6 +116,42 @@ const Tag = db.define('tag', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
+const AuthStudent = db.define('authstudent', {
+    token: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    }
+});
+
+const AuthTutor = db.define('authtutor', {
+    token: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    }
+});
+
+const AuthAdmin = db.define('authadmin', {
+    token: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    }
+});
+
+
+StudentLocal.belongsTo(Student);
+Student.hasOne(StudentLocal);
+
+TutorLocal.belongsTo(Tutor);
+Tutor.hasOne(TutorLocal);
+
+AuthStudent.belongsTo(Student);
+Student.hasMany(AuthStudent);
+
+AuthTutor.belongsTo(Tutor);
+Tutor.hasMany(AuthTutor);
+
+AuthAdmin.belongsTo(Admin);
+Admin.hasMany(AuthAdmin);
 
 MiniCourse.belongsTo(Tutor);
 Tutor.hasMany(MiniCourse);
@@ -149,7 +208,13 @@ db.sync({}).then(() => {
 module.exports = {
     models: {
         Student,
+        StudentLocal,
         Tutor,
+        TutorLocal,
+        Admin,
+        AuthStudent,
+        AuthTutor,
+        AuthAdmin,
         MiniCourse,
         Lesson,
         Bookmark,

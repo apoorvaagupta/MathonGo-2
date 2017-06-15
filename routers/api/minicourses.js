@@ -60,6 +60,7 @@ router.post('/withFilters', function (req, res) {
         })
     } else {
         console.log(req.body.filter);
+        console.log(req.body.filter.classObject.map(Number));
         // let classArray = req.body.filter.hasOwnProperty('classObject') ? req.body.filter.classObject.map(parseInt) : [0],
         //     subjectArray = req.body.filter.hasOwnProperty('subjectObject') ? req.body.filter.subjectObject.map(parseInt) : [0],
         //     categoryArray = req.body.filter.hasOwnProperty('categoryObject') ? req.body.filter.categoryObject.map(parseInt) : [0],
@@ -79,15 +80,15 @@ router.post('/withFilters', function (req, res) {
 
         let options = {};
         if (req.body.filter.hasOwnProperty('classObject')) {
-            options['$tags.classId$'] = {$in: req.body.filter.classObject.map(parseInt)};
+            options['$tags.classId$'] = {$in: req.body.filter.classObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('subjectObject')) {
-            options['$tags.subjectId$'] = {$in: req.body.filter.subjectObject.map(parseInt)};
+            options['$tags.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('categoryObject')) {
-            options['$tags.categoryId$'] = {$in: req.body.filter.categoryObject.map(parseInt)};
+            options['$tags.categoryId$'] = {$in: req.body.filter.categoryObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('mediumObject')) {
