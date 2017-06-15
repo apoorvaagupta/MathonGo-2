@@ -1,11 +1,11 @@
-function ensureLogin(fallbackPath) {
+function ensureStudent(fallbackPath) {
 
     return function (req, res, next) {
 
-        if (!req.user) {
-            res.redirect(fallbackPath);
+        if (req.user && req.user.role === 'Student') {
+            next()
         } else {
-            next();
+            res.redirect(fallbackPath)
         }
     }
 }
@@ -36,7 +36,7 @@ function ensureAdmin(fallbackPath) {
 
 
 module.exports = {
-    ensureLogin,
+    ensureStudent,
     ensureAdmin,
     ensureTutor
 };
