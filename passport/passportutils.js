@@ -3,7 +3,7 @@ function ensureLogin() {
     return function (req, res, next) {
 
         if (!req.user) {
-            res.send({success:'false',url:'http://localhost:4000/',message:"Please Login"});
+            res.redirect('http://localhost:4000/');
         } else {
             next();
         }

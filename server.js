@@ -8,10 +8,13 @@ const express = require('express')
 const app = express();
 
 const secrets = require('./secrets.json')
-     , loginrouter = require('./routers/login')
-     , logoutrouter = require('./routers/logout')
-     , signuprouter = require('./routers/signup')
-     , apirouter = require('./routers/api');
+    , loginrouter = require('./routers/login')
+    , logoutrouter = require('./routers/logout')
+    , signuprouter = require('./routers/signup')
+    , authorizerouter = require('./routers/authorize')
+    , apirouter = require('./routers/api');
+
+const ensure = require('./passport/passportutils');
 
 app.use('/', express.static(path.join(__dirname, 'public_html')));
 app.use(cookieParser(secrets.EXPRESS_SESSIONS_SECRET));
@@ -29,14 +32,15 @@ app.use(passport.session());
 app.use('/signup', signuprouter);
 app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
+app.use('/authorize', authorizerouter);
 
-
-app.use('/api', passport.authenticate('session'), apirouter);
-app.use('/courses/:id',express.static(path.join(__dirname,'public_html/minicourse')));
-app.use('/library', express.static(path.join(__dirname, 'public_html/library')));
-app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
-app.use('/student/:id/mycourses', express.static(path.join(__dirname, 'public_html/student/mycourses')));
-app.use('/student/:id/mybookmarks', express.static(path.join(__dirname, 'public_html/student/mybookmarks')));
+//TODO passport.authenticate(['session', 'bearer-student'])
+app.use('/api', ensure.ensureLogin(), apirouter);
+app.use('/courses/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/minicourse')));
+app.use('/library', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/allMiniCourses')));
+app.use('/lessons/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/student/mycourses', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/student/mycourses')));
+app.use('/student/mybookmarks', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/student/mybookmarks')));
 
 app.listen(4000, function () {
     console.log("Listening on 4000");

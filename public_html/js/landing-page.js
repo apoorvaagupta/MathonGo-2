@@ -18,24 +18,29 @@ $(document).ready(function () {
             return;
         }
 
-        $.post("http://localhost:4000/signup", {
+        $.post("http://localhost:4000/signup/student", {
             name: userName,
             email: userEmail,
             password: userPassword,
             contact: userContact,
             class: userClass
         }, function (student) {
-            // if (student.isSuccess === "true") {
-            //     let url = student.url;
-            //     console.log(url);
-            //     console.log(student);
-            //     localStorage.setItem("studentId", student.row.id);
-            //     localStorage.setItem("studentName", student.row.name);
-            //     //console.log(localStorage.getItem("studentId"));
-            //     window.location.replace(url);
-            // } if(student.isSuccess==="Email Already Exists") {
-            //     $('#errorRegister').text("Email Already Exists");
-            // }
+            console.log(student);
+            if (student.success === 'true') {
+                console.log("yo");
+                $.post("http://localhost:4000/login/student", {
+                    email: userEmail,
+                    password: userPassword
+                }, function (data) {
+                    if (data.success === 'true') {
+                        window.location.replace(data.url)
+                    }
+                }).fail(function (err) {
+                    $('#error').text("Wrong Credentials");
+                    console.log("fail");
+                    console.log(err);
+                });
+            }
         });
     });
 
@@ -44,9 +49,10 @@ $(document).ready(function () {
         $.post("http://localhost:4000/login/student", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
-        }, function (err) {
-            console.log("reached the frontend back");
-            console.log(err.message);
+        }, function (data) {
+            if (data.success === 'true') {
+                window.location.replace(data.url)
+            }
         }).fail(function (err) {
             $('#error').text("Wrong Credentials");
             console.log("fail");

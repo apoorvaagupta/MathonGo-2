@@ -9,7 +9,6 @@ const Student = db.define('student', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
     email: Sequelize.STRING,
-    password: Sequelize.STRING,
     class: Sequelize.INTEGER,
     contact: Sequelize.BIGINT,
     role: {type: Sequelize.STRING, defaultValue: 'Student'}
@@ -26,7 +25,6 @@ const Tutor = db.define('tutor', {
     img: Sequelize.STRING(1234),
     name: Sequelize.STRING,
     email: Sequelize.STRING,
-    password: Sequelize.STRING,
     description: Sequelize.STRING(1234),
     role: {type: Sequelize.STRING, defaultValue: 'Tutor'}
 });

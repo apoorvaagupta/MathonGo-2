@@ -22,7 +22,7 @@ $(document).ready(function () {
 
         const lectures = $('#lectures');
         for (let i = 0; i < miniCourse.lessons.length; i++) {
-            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lessons/`+ miniCourse.lessons[i].id +`'">
+            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lessons/` + miniCourse.lessons[i].id + `'">
                         <div class="row" style="margin-bottom: 0px">
                             <div class="col-sm-1" style="padding-left: 0px">
                                 <img src="/images/icons/movie.png">
@@ -47,8 +47,15 @@ $(document).ready(function () {
 
     })
 
-    $('#enrollOrEnrolled').click(function () {
-        //DO AFTERWORDS
+    $('#enroll').click(function () {
+        $.post("http://localhost:4000/api/minicourses/" + miniCourseId + "/enroll", function (data) {
+            console.log("enrol fn");
+            if (data.success === 'true') {
+                $('#enroll').text("Enrolled");
+            } else {
+                alert("Please Try Again");
+            }
+        })
     })
 });
 
