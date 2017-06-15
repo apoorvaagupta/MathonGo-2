@@ -8,12 +8,19 @@ router.post('/add', function (req, res) {
         res.send("Insufficient Details");
     }
     password.pass2hash(req.body.password).then(function (hash) {
-        models.Tutor.create({
-            name: req.body.name,
+        models.TutorLocal.create({
             email: req.body.email,
-            password: hash
-        }).then(function (student) {
-            res.send(student);
+            password: hash,
+            tutor: {
+                name: req.body.name,
+                email: req.body.email,
+                description: req.body.description,
+                img: req.body.img
+            }
+        }, {
+            include: models.Tutor
+        }).then(function (tutorLocal) {
+            res.send(tutorLocal.tutor);
         })
     })
 });

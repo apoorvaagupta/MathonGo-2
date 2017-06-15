@@ -60,7 +60,6 @@ router.post('/withFilters', function (req, res) {
         })
     } else {
         console.log(req.body.filter);
-        console.log(req.body.filter.classObject.map(Number));
         // let classArray = req.body.filter.hasOwnProperty('classObject') ? req.body.filter.classObject.map(parseInt) : [0],
         //     subjectArray = req.body.filter.hasOwnProperty('subjectObject') ? req.body.filter.subjectObject.map(parseInt) : [0],
         //     categoryArray = req.body.filter.hasOwnProperty('categoryObject') ? req.body.filter.categoryObject.map(parseInt) : [0],
@@ -99,7 +98,8 @@ router.post('/withFilters', function (req, res) {
             options['level'] = {$in: difficultyArray};
         }
 
-
+        console.log("###############");
+    console.log(options);
         models.MiniCourse.findAll({
             where: options
             // '$tags.classId$': classArray.indexOf(0) === 0 ? {$notIn: [0]} : {$in: classArray},
@@ -118,6 +118,7 @@ router.post('/withFilters', function (req, res) {
                 }
             ]
         }).then(function (miniCourses) {
+            console.log("************")
             res.send(miniCourses);
         }).catch(function (err) {
             console.log(err);
@@ -126,9 +127,22 @@ router.post('/withFilters', function (req, res) {
     }
 });
 
-router.post('/:id/enrol', function (req, res) {
+router.post('/:id/enroll', function (req, res) {
     //enrol in a minicourse
     let miniCourseId = parseInt(req.params.id);
+    models.Enrollment.create({
+        minicourseId: miniCourseId,
+        studentId: req.user.id
+    }).then(function (enroll) {
+        if (enroll) {
+            res.send({success: 'true'})
+        } else {
+            res.send({success: 'false'})
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'error'})
+    })
     //DO AFTERWARDS
     //Ask
 });

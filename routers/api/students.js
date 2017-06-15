@@ -26,17 +26,17 @@ router.post('/add', function (req, res) {
         res.send("Could not create the user");
     })
 });
-
-router.get('/:id', function (req, res) {
-    models.Student.findOne({
-        where: {id: req.params.id}
-    }).then(function (student) {
-        res.send(student);
-    }).catch(function (err) {
-        console.log(err);
-        res.send('Unknown Student');
-    })
-});
+//
+// router.get('/:id', function (req, res) {
+//     models.Student.findOne({
+//         where: {id: req.params.id}
+//     }).then(function (student) {
+//         res.send(student);
+//     }).catch(function (err) {
+//         console.log(err);
+//         res.send('Unknown Student');
+//     })
+// });
 
 router.post('/:id/edit', function (req, res) {
     // let studentId = parseInt(req.params.id);
@@ -67,10 +67,9 @@ router.post('/:id/edit', function (req, res) {
     // });
 });
 
-router.get('/:id/minicourses', function (req, res) {
-    let studentId = parseInt(req.params.id);
+router.get('/mycourses', function (req, res) {
     models.Enrollment.findAll({
-        where: {studentId: studentId},
+        where: {studentId: req.user.id},
         include: [
             {
                 model: models.MiniCourse,

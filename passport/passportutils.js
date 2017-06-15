@@ -1,9 +1,10 @@
-function ensureStudent(fallbackPath) {
+
+function ensureLogin() {
 
     return function (req, res, next) {
 
-        if (req.user && req.user.role === 'Student') {
-            next()
+        if (!req.user) {
+            res.redirect('http://localhost:4000/');
         } else {
             res.redirect(fallbackPath)
         }
@@ -11,32 +12,32 @@ function ensureStudent(fallbackPath) {
 }
 
 
-function ensureTutor(fallbackPath) {
+function ensureTutor() {
 
     return function (req, res, next) {
 
         if (req.user && req.user.role === 'Tutor') {
             next()
         } else {
-            res.redirect(fallbackPath)
+            res.send({success:'false',url:'http://localhost:4000/',message:"Tutors Only"});
         }
     }
 }
 
-function ensureAdmin(fallbackPath) {
+function ensureAdmin() {
     return function (req, res, next) {
 
         if (req.user && req.user.role === 'Admin') {
             next();
         } else {
-            res.redirect(fallbackPath)
+            res.send({success:'false',url:'http://localhost:4000/',message:"Admin Only"});
         }
     }
 }
 
 
 module.exports = {
-    ensureStudent,
+    ensureLogin,
     ensureAdmin,
     ensureTutor
 };

@@ -10,64 +10,67 @@ $('document').ready(function () {
     $.get("http://localhost:4000/api/extra/filters", function (filters) {
 
         const allFilter = $('#allFilters');
-        let categoryString = `<div class="filter-column-divs">
+        if (filters.categoryObject && filters.categoryObject.length > 1) {
+            let categoryString = `<div class="filter-column-divs">
                     <div class="filter-column-divs-heading"><b>CATEGORY</b></div>
                     <div class="filter-column-divs-content">`;
-        for (let i = 0; i < filters.categoryObject.length; i++) {
-            categoryString += `
+            for (let i = 0; i < filters.categoryObject.length; i++) {
+                categoryString += `
                         <label class="label-style">
-                            <input name="category" value="` + filters.categoryObject[i].id + `" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;` + filters.categoryObject[i].categoryName + `<br/>
+                            <input class="checkbox-style" name="category" value="` + filters.categoryObject[i].id + `" type="checkbox">` + filters.categoryObject[i].categoryName + `<br/>
                         </label>
                         <br>
                     `;
+            }
+            categoryString += `</div></div>`;
+            allFilter.append(categoryString);
+
         }
-        categoryString += `</div></div>`;
-        allFilter.append(categoryString);
-
-
-        let subjectString = `<div class="filter-column-divs">
+        if (filters.subjectObject && filters.subjectObject.length > 1) {
+            let subjectString = `<div class="filter-column-divs">
                     <div class="filter-column-divs-heading"><b>SUBJECT</b></div>
                     <div class="filter-column-divs-content">`;
-        for (let i = 0; i < filters.subjectObject.length; i++) {
-            subjectString += `
+            for (let i = 0; i < filters.subjectObject.length; i++) {
+                subjectString += `
                         <label class="label-style">
-                            <input name="subject" value="` + filters.subjectObject[i].id + `" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;` + filters.subjectObject[i].subjectName + `<br/>
+                            <input class="checkbox-style" name="subject" value="` + filters.subjectObject[i].id + `" type="checkbox">` + filters.subjectObject[i].subjectName + `<br/>
                         </label>
                         <br>
                     `;
+            }
+            subjectString += `</div></div>`;
+            allFilter.append(subjectString);
+
         }
-        subjectString += `</div></div>`;
-        allFilter.append(subjectString);
-
-
-        let classString = `<div class="filter-column-divs">
+        if (filters.classObject && filters.classObject.length > 1) {
+            let classString = `<div class="filter-column-divs">
                     <div class="filter-column-divs-heading"><b>CLASS</b></div>
                     <div class="filter-column-divs-content">`;
-        for (let i = 0; i < filters.classObject.length; i++) {
-            classString += `
+            for (let i = 0; i < filters.classObject.length; i++) {
+                classString += `
                         <label class="label-style">
-                            <input name="class" value="` + filters.classObject[i].id + `" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;` + filters.classObject[i].className + `<br/>
+                            <input class="checkbox-style" name="class" value="` + filters.classObject[i].id + `" type="checkbox">` + filters.classObject[i].className + `<br/>
                         </label>
                         <br>
                     `;
+            }
+            classString += `</div></div>`;
+            allFilter.append(classString);
+
         }
-        classString += `</div></div>`;
-        allFilter.append(classString);
-
-
         allFilter.append(`<div class="filter-column-divs">
                     <div class="filter-column-divs-heading"><b>DIFFICULTY</b></div>
                     <div class="filter-column-divs-content">
                         <label class="label-style">
-                            <input name="difficulty" value="1" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Beginner<br/>
+                            <input class="checkbox-style" name="difficulty" value="1" type="checkbox">Beginner<br/>
                         </label>
                         <br>
                         <label class="label-style">
-                            <input name="difficulty" value="2" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Intermediate<br>
+                            <input class="checkbox-style" name="difficulty" value="2" type="checkbox">Intermediate<br>
                         </label>
                         <br>
                         <label class="label-style">
-                            <input name="difficulty" value="3" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Advanced<br>
+                            <input class="checkbox-style" name="difficulty" value="3" type="checkbox">Advanced<br>
                         </label>
                     </div>
                 </div>
@@ -75,11 +78,11 @@ $('document').ready(function () {
                     <div class="filter-column-divs-heading"><b>MEDIUM</b></div>
                     <div class="filter-column-divs-content">
                         <label class="label-style">
-                            <input name="medium" value="1" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;English<br/>
+                            <input class="checkbox-style" name="medium" value="1" type="checkbox">English<br/>
                         </label>
                         <br>
                         <label class="label-style">
-                            <input name="medium" value="2" type="checkbox">&nbsp;&nbsp;&nbsp;&nbsp;Hindi<br>
+                            <input class="checkbox-style" name="medium" value="2" type="checkbox">Hindi<br>
                         </label>
 
                     </div>
@@ -91,8 +94,10 @@ $('document').ready(function () {
             let classArray = [];
             let difficultyArray = [];
             let mediumArray = [];
+            let count = 0;
 
-
+            const filterTabs = $('#filterTabs');
+            filterTabs.text("");
             const categoryFilters = $('input[name="category"]');
             const subjectFilters = $('input[name="subject"]');
             const classFilters = $('input[name="class"]');
@@ -102,30 +107,45 @@ $('document').ready(function () {
             for (let i = 0; i < categoryFilters.length; i++) {
                 if (categoryFilters[i].checked) {
                     categoryArray.push(categoryFilters[i].value);
+                    count++;
+                    filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + categoryFilters[i].parentElement.innerText + `</span>
+                        </li>`)
                 }
             }
 
             for (let i = 0; i < subjectFilters.length; i++) {
                 if (subjectFilters[i].checked) {
                     subjectArray.push(subjectFilters[i].value);
+                    count++;
+                    filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + subjectFilters[i].parentElement.innerText + `</span>
+                        </li>`)
                 }
             }
 
             for (let i = 0; i < classFilters.length; i++) {
                 if (classFilters[i].checked) {
                     classArray.push(classFilters[i].value);
+                    count++;
+                    filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + classFilters[i].parentElement.innerText + `</span>
+                        </li>`)
                 }
             }
 
             for (let i = 0; i < difficultyFilters.length; i++) {
                 if (difficultyFilters[i].checked) {
                     difficultyArray.push(difficultyFilters[i].value);
+                    count++;
+                    filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + difficultyFilters[i].parentElement.innerText + `</span>
+                        </li>`)
                 }
             }
 
             for (let i = 0; i < mediumFilters.length; i++) {
                 if (mediumFilters[i].checked) {
                     mediumArray.push(mediumFilters[i].value);
+                    count++;
+                    filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + mediumFilters[i].parentElement.innerText + `</span>
+                        </li>`)
                 }
             }
 
@@ -136,10 +156,14 @@ $('document').ready(function () {
                 difficultyObject: difficultyArray,
                 mediumObject: mediumArray
             };
+            if (count === 0) {
+                $.get("http://localhost:4000/api/minicourses", addMiniCourses);
 
-            $.post("http://localhost:4000/api/minicourses/withFilters", {
-                filter: filter
-            }, addMiniCourses);
+            } else {
+                $.post("http://localhost:4000/api/minicourses/withFilters", {
+                    filter: filter
+                }, addMiniCourses);
+            }
         });
 
     });

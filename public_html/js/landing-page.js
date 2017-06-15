@@ -18,79 +18,45 @@ $(document).ready(function () {
             return;
         }
 
-        $.post("http://localhost:4000/signup", {
+        $.post("http://localhost:4000/signup/student", {
             name: userName,
             email: userEmail,
             password: userPassword,
             contact: userContact,
             class: userClass
         }, function (student) {
-            // if (student.isSuccess === "true") {
-            //     let url = student.url;
-            //     console.log(url);
-            //     console.log(student);
-            //     localStorage.setItem("studentId", student.row.id);
-            //     localStorage.setItem("studentName", student.row.name);
-            //     //console.log(localStorage.getItem("studentId"));
-            //     window.location.replace(url);
-            // } if(student.isSuccess==="Email Already Exists") {
-            //     $('#errorRegister').text("Email Already Exists");
-            // }
+            console.log(student);
+            if (student.success === 'true') {
+                console.log("yo");
+                $.post("http://localhost:4000/login/student", {
+                    email: userEmail,
+                    password: userPassword
+                }, function (data) {
+                    if (data.success === 'true') {
+                        window.location.replace(data.url)
+                    }
+                }).fail(function (err) {
+                    $('#error').text("Wrong Credentials");
+                    console.log("fail");
+                    console.log(err);
+                });
+            }
         });
     });
 
     $('#loginButton').click(function () {
 
-        // $.ajax({
-        //     url: "http://localhost:4000/login",
-        //     type: "POST",
-        //     dataType: "json",
-        //     data: {'email': $('#loginEmail').val(),
-        //               'password': $('#loginPassword').val()},
-        //     success: function (data) {
-        //         console.log("hiiiiiii");
-        //     }
-        // });
-
-
-        // $.ajax({
-        //     type: "POST",
-        //     url: "http://localhost:4000/login",
-        //     data: JSON.stringify({email: $('#loginEmail').val(),
-        //         password: $('#loginPassword').val()}),
-        //     contentType: "application/json; charset=utf-8",
-        //     dataType: "json",
-        //     cache: true,
-        //     success: function (msg) {
-        //         console.log(1);
-        //         console.log(msg);
-        //     },
-        //     error: function (errormessage) {
-        //         console.log(11);
-        //         console.log(errormessage)
-        //         //do something else
-        //     }
-        // });
-
-        // console.log($('#loginEmail').val(),$('#loginPassword').val());
-        $.post("http://localhost:4000/login", {
+        $.post("http://localhost:4000/login/student", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
-        }, function (url) {
-            console.log("reched the frontend back");
-            // if (student.isSuccess === "true") {
-            //     let url = student.url;
-            //     console.log(url);
-                console.log(url);
-                //window.location.replace(url);
-                //console.log(res.user);
-            //     localStorage.setItem("studentId", student.row.id);
-            //     localStorage.setItem("studentName", student.row.name);
-            //     //console.log(localStorage.getItem("studentId"));
-                //window.location.replace(student);
-            // } else {
-            //     $('#errorLogin').text("Wrong Credentials");
-            // }
+        }, function (data) {
+            if (data.success === 'true') {
+                window.location.replace(data.url)
+            }
+        }).fail(function (err) {
+            $('#error').text("Wrong Credentials");
+            console.log("fail");
+            console.log(err);
         });
     })
 });

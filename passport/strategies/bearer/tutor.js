@@ -1,5 +1,5 @@
 const BearerStrategy = require('passport-http-bearer').Strategy;
-const models = require('./../../db/models').models;
+const models = require('./../../../db/models').models;
 
 module.exports = new BearerStrategy(function (token, done) {
     models.AuthTutor.findOne({
