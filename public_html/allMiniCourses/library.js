@@ -94,6 +94,7 @@ $('document').ready(function () {
             let classArray = [];
             let difficultyArray = [];
             let mediumArray = [];
+            let count = 0;
 
             const filterTabs = $('#filterTabs');
             filterTabs.text("");
@@ -106,6 +107,7 @@ $('document').ready(function () {
             for (let i = 0; i < categoryFilters.length; i++) {
                 if (categoryFilters[i].checked) {
                     categoryArray.push(categoryFilters[i].value);
+                    count++;
                     filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + categoryFilters[i].parentElement.innerText + `</span>
                         </li>`)
                 }
@@ -114,6 +116,7 @@ $('document').ready(function () {
             for (let i = 0; i < subjectFilters.length; i++) {
                 if (subjectFilters[i].checked) {
                     subjectArray.push(subjectFilters[i].value);
+                    count++;
                     filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + subjectFilters[i].parentElement.innerText + `</span>
                         </li>`)
                 }
@@ -122,6 +125,7 @@ $('document').ready(function () {
             for (let i = 0; i < classFilters.length; i++) {
                 if (classFilters[i].checked) {
                     classArray.push(classFilters[i].value);
+                    count++;
                     filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + classFilters[i].parentElement.innerText + `</span>
                         </li>`)
                 }
@@ -130,6 +134,7 @@ $('document').ready(function () {
             for (let i = 0; i < difficultyFilters.length; i++) {
                 if (difficultyFilters[i].checked) {
                     difficultyArray.push(difficultyFilters[i].value);
+                    count++;
                     filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + difficultyFilters[i].parentElement.innerText + `</span>
                         </li>`)
                 }
@@ -138,6 +143,7 @@ $('document').ready(function () {
             for (let i = 0; i < mediumFilters.length; i++) {
                 if (mediumFilters[i].checked) {
                     mediumArray.push(mediumFilters[i].value);
+                    count++;
                     filterTabs.append(`<li class="filter-bar-ul-li"><span class="filter-bar-ul-li-filter">` + mediumFilters[i].parentElement.innerText + `</span>
                         </li>`)
                 }
@@ -150,10 +156,14 @@ $('document').ready(function () {
                 difficultyObject: difficultyArray,
                 mediumObject: mediumArray
             };
+            if (count === 0) {
+                $.get("http://localhost:4000/api/minicourses", addMiniCourses);
 
-            $.post("http://localhost:4000/api/minicourses/withFilters", {
-                filter: filter
-            }, addMiniCourses);
+            } else {
+                $.post("http://localhost:4000/api/minicourses/withFilters", {
+                    filter: filter
+                }, addMiniCourses);
+            }
         });
 
     });
