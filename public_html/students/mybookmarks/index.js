@@ -14,10 +14,10 @@ $('document').ready(function () {
                                 <img src="/images/icons/movie.png">
                             </div>
                             <div class="col-sm-10">
-                                <h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">` + (i + 1) + `. ` + bookmarks[i].lessons.name + `<br></h5>
+                                <h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">` + (i + 1) + `. ` + bookmarks[i].lesson.name + `<br></h5>
                                 <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
                                     <img src="/images/icons/timer.png">&nbsp;<span
-                                        style="margin-top: 5px; font-weight: 500">` + bookmarks[i].lessons.duration + `</span>&nbsp;&nbsp;
+                                        style="margin-top: 5px; font-weight: 500">` + bookmarks[i].lesson.duration + `</span>&nbsp;&nbsp;
                                                                     </p>
                             </div>
                             <div class="col-sm-1">

@@ -4,10 +4,8 @@ $(document).ready(function () {
     const miniCourseId = window.location.pathname.split('/courses/')[1].split('/')[0];
 
     $.get("http://localhost:4000/api/minicourses/" + miniCourseId, function (miniCourse) {
-        console.log(miniCourse);
         $('#miniCourseName').text(miniCourse.name);
         $('#miniCourseDescription').text(miniCourse.description);
-        console.log(miniCourse)
         $('#teacherName').text(miniCourse.tutor.name);
         $('#subject').text(miniCourse.tags[0].subject.subjectName);
         $('#className').text(miniCourse.tags[0].subject.subjectName);
@@ -23,7 +21,6 @@ $(document).ready(function () {
         $('#teacherDescription').text(miniCourse.tutor.description);
 
         $.get('http://localhost:4000/api/minicourses/' + miniCourseId + '/isEnrolled', function (enrollment) {
-            console.log(enrollment);
             const enroll = $('#enroll');
             if (enrollment.isEnrolled === 'true') {
                 console.log(1);
@@ -33,7 +30,6 @@ $(document).ready(function () {
                     $('#msg').attr('class', 'text-success').text("Already Enrolled");
                 });
             } else if (enrollment.isEnrolled === 'false') {
-                console.log(2);
                 enroll.click(function () {
                     $.post("http://localhost:4000/api/minicourses/" + miniCourseId + "/enroll", function (data) {
                         console.log("enrol fn");
