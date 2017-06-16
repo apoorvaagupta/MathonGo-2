@@ -8,7 +8,7 @@ $('document').ready(function () {
     $.get("http://localhost:4000/api/students/bookmarks", function (bookmarks) {
         const lectures = $('#lectures');
         for (let i = 0; i < bookmarks.length; i++) {
-            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lesson/` + bookmarks[i].lessons.id + `'">
+            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lesson/` + bookmarks[i].lesson.id + `'">
                         <div class="row" style="margin-bottom: 0">
                             <div class="col-sm-1" style="padding-left: 0">
                                 <img src="/images/icons/movie.png">

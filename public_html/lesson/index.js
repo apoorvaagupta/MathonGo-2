@@ -24,7 +24,11 @@ $(document).ready(function () {
             $('#teacherDescription').text(miniCourse.tutor.description);
 
             $('#bookmark').click(function () {
-                $.
+                $.post('http://localhost:4000/api/lessons/'+ lessonId+'/bookmark',function (data) {
+                    if(data.success==='true'){
+                        $('#bookmark').text('BOOKMARKED');
+                    }
+                })
             });
 
             const lessons = $('#lessons');
