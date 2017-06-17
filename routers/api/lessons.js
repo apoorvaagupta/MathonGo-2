@@ -17,7 +17,7 @@ router.get('/:id', function (req, res) {
     })
 });
 
-router.post('/:lessonId/bookmark', function (req, res) {
+router.post('/:id/bookmark', function (req, res) {
     let lessonId = parseInt(req.params.id);
     models.Bookmark.create({
         lessonId: lessonId,

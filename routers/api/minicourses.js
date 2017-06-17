@@ -99,7 +99,7 @@ router.post('/withFilters', function (req, res) {
         }
 
         console.log("###############");
-    console.log(options);
+        console.log(options);
         models.MiniCourse.findAll({
             where: options
             // '$tags.classId$': classArray.indexOf(0) === 0 ? {$notIn: [0]} : {$in: classArray},
@@ -145,6 +145,25 @@ router.post('/:id/enroll', function (req, res) {
     });
     //DO AFTERWARDS
     //Ask
+});
+
+router.get('/:id/isEnrolled', function (req, res) {
+    let miniCourseId = parseInt(req.params.id);
+    models.Enrollment.findOne({
+        where: {
+            minicourseId: miniCourseId,
+            studentId: req.user.id
+        }
+    }).then(function (enrollment) {
+        if (enrollment) {
+            res.send({isEnrolled: 'true'});
+        } else {
+            res.send({isEnrolled: 'false'});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success:'false',message:'Could not get the enrollments right now'})
+    })
 });
 //Ask
 router.post('/:minicourse/review', function (req, res) {
