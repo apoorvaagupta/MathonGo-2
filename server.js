@@ -41,7 +41,7 @@ app.use('/logout', logoutrouter);
 app.use('/authorize', authorizerouter);
 
 //TODO passport.authenticate(['session', 'bearer-student'])
-app.use('/api', ensure.ensureLogin(), apirouter);
+app.use('/api', apirouter);
 app.use('/courses/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/minicourse')));
 app.use('/library', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/allMiniCourses')));
 app.use('/lessons/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/lesson')));

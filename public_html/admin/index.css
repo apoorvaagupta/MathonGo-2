@@ -1,0 +1,8 @@
+.buttons, #msg{
+    margin: 30px;
+    cursor: pointer;
+}
+
+form{
+    margin-left: 50px;
+}

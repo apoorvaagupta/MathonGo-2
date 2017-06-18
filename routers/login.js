@@ -8,3 +8,4 @@ router.post('/student', passport.authenticate('local-student'), function (req, r
 );
 
 module.exports = router;
+
