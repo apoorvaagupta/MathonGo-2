@@ -5,7 +5,7 @@
 $('document').ready(function () {
     $('#name').text(localStorage.getItem('name'));
     const studentId = window.location.pathname.split('/student/')[1].split('/')[0];
-    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/students/mycourses", function (enrollments) {
+    $.get("/api/students/mycourses", function (enrollments) {
         console.log(enrollments);
         const ul = $('#minicourses-list');
         for(let i=0;i<enrollments.length;i++){
@@ -14,7 +14,7 @@ $('document').ready(function () {
                 '<div class="row minicourse-chps"><span>' + enrollments[i].minicourse.tags[0].subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + enrollments[i].minicourse.tags[0].course.courseName + '</span></div>' +
                 '<div class="row minicourse-title"><span>' + enrollments[i].minicourse.name + '</span></div>' +
                 '<div class="row"><p class="minicourse-description">' + enrollments[i].minicourse.description + '</p></div>' +
-                '<div class="row align-items-center"><a href="http://localhost:4000/courses/' + enrollments[i].minicourse.id + '" class="enrol-style">VIEW</a></div>' +
+                '<div class="row align-items-center"><a href="/courses/' + enrollments[i].minicourse.id + '" class="enrol-style">VIEW</a></div>' +
                 '</div> </div> <div class="row minicourse-tags"> <div class="minicourse-tag">' +
                 '<div class="row tag-title">TEACHER </div> <div class="row tag-content"><span>' + enrollments[i].minicourse.tutor.name + '</span></div> </div>' +
                 '<div class="minicourse-tag"> <div class="row tag-title">DURATION</div>' +

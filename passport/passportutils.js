@@ -1,10 +1,9 @@
-
 function ensureLogin() {
 
     return function (req, res, next) {
 
         if (!req.user) {
-            res.redirect('http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/');
+            res.send({success: 'false', url: '/'});
         } else {
             next();
         }
@@ -13,13 +12,12 @@ function ensureLogin() {
 
 
 function ensureTutor() {
-
     return function (req, res, next) {
 
         if (req.user && req.user.role === 'Tutor') {
-            next()
+            next();
         } else {
-            res.send({success:'false',url:'http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/',message:"Tutors Only"});
+            res.send({success: 'false', url: '/', message: "Tutor Only"});
         }
     }
 }
@@ -30,14 +28,13 @@ function ensureAdmin() {
         if (req.user && req.user.role === 'Admin') {
             next();
         } else {
-            res.send({success:'false',url:'http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/',message:"Admin Only"});
+            res.send({success: 'false', url: '/', message: "Admin Only"});
         }
     }
 }
 
-
 module.exports = {
     ensureLogin,
-    ensureAdmin,
-    ensureTutor
-};
+    ensureTutor,
+    ensureAdmin
+}
