@@ -1,4 +1,5 @@
 $(document).ready(function () {
+    console.log("reached");
 
     $('#loginForm').submit(function (e) {
         e.preventDefault();
@@ -18,7 +19,7 @@ $(document).ready(function () {
             return;
         }
 
-        $.post("http://localhost:4000/signup/student", {
+        $.post("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/signup/student", {
             name: userName,
             email: userEmail,
             password: userPassword,
@@ -28,7 +29,7 @@ $(document).ready(function () {
             console.log(student);
             if (student.success === 'true') {
                 console.log("yo");
-                $.post("http://localhost:4000/login/student", {
+                $.post("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/login/student", {
                     email: userEmail,
                     password: userPassword
                 }, function (data) {
@@ -48,7 +49,7 @@ $(document).ready(function () {
 
     $('#loginButton').click(function () {
 
-        $.post("http://localhost:4000/login/student", {
+        $.post("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/login/student", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
         }, function (data) {

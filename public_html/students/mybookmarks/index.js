@@ -5,7 +5,7 @@
 $('document').ready(function () {
     $('#name').text(localStorage.getItem('name'));
     const studentId = window.location.pathname.split('/student/')[1].split('/')[0];
-    $.get("http://localhost:4000/api/students/bookmarks", function (bookmarks) {
+    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/students/bookmarks", function (bookmarks) {
         const lectures = $('#lectures');
         for (let i = 0; i < bookmarks.length; i++) {
             lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='http://localhost:4000/lesson/` + bookmarks[i].lesson.id + `'">

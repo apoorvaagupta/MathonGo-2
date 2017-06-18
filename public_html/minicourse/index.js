@@ -3,7 +3,9 @@ $(document).ready(function () {
     $('#name').text(localStorage.getItem('name'));
     const miniCourseId = window.location.pathname.split('/courses/')[1].split('/')[0];
 
-    $.get("http://localhost:4000/api/minicourses/" + miniCourseId, function (miniCourse) {
+
+    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/" + miniCourseId, function (miniCourse) {
+        console.log(miniCourse);
         $('#miniCourseName').text(miniCourse.name);
         $('#miniCourseDescription').text(miniCourse.description);
         $('#teacherName').text(miniCourse.tutor.name);
@@ -20,7 +22,9 @@ $(document).ready(function () {
         $('#nameOfTheTeacher').text(miniCourse.tutor.name);
         $('#teacherDescription').text(miniCourse.tutor.description);
 
-        $.get('http://localhost:4000/api/minicourses/' + miniCourseId + '/isEnrolled', function (enrollment) {
+
+        $.get('http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/' + miniCourseId + '/isEnrolled', function (enrollment) {
+            console.log(enrollment);
             const enroll = $('#enroll');
             if (enrollment.isEnrolled === 'true') {
                 console.log(1);
@@ -31,7 +35,7 @@ $(document).ready(function () {
                 });
             } else if (enrollment.isEnrolled === 'false') {
                 enroll.click(function () {
-                    $.post("http://localhost:4000/api/minicourses/" + miniCourseId + "/enroll", function (data) {
+                    $.post("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/" + miniCourseId + "/enroll", function (data) {
                         console.log("enrol fn");
                         if (data.success === 'true') {
                             enroll.text("Enrolled");
@@ -86,7 +90,7 @@ $(document).ready(function () {
 
 function goToLesson(lessonId) {
     if (isEnrolled) {
-        window.location = 'http://localhost:4000/lessons/' + lessonId;
+        window.location = 'http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/lessons/' + lessonId;
     } else {
         $('#msg').attr('class', 'text-danger').text("Please Enroll First");
     }

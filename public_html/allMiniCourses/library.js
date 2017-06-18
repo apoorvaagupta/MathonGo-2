@@ -7,9 +7,9 @@ $('document').ready(function () {
 
     $('#name').text(localStorage.getItem('name'));
 
-    $.get("http://localhost:4000/api/minicourses", addMiniCourses);
+    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses", addMiniCourses);
 
-    $.get("http://localhost:4000/api/extra/filters", function (filters) {
+    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/extra/filters", function (filters) {
 
         const allFilter = $('#allFilters');
         if (filters.categoryObject && filters.categoryObject.length > 1) {
@@ -159,10 +159,10 @@ $('document').ready(function () {
                 mediumObject: mediumArray
             };
             if (count === 0) {
-                $.get("http://localhost:4000/api/minicourses", addMiniCourses);
+                $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses", addMiniCourses);
 
             } else {
-                $.post("http://localhost:4000/api/minicourses/withFilters", {
+                $.post("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/withFilters", {
                     filter: filter
                 }, addMiniCourses);
             }

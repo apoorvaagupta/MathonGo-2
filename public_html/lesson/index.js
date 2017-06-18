@@ -3,6 +3,7 @@ $(document).ready(function () {
 
     const lessonId = window.location.pathname.split('/lessons/')[1].split('/')[0];
 
+
     $.get("http://localhost:4000/api/lessons/" + lessonId, function (data) {
         if (data.success === 'true') {
             const lesson = data.lesson;
@@ -50,6 +51,7 @@ $(document).ready(function () {
                         })
                     } else if (data.success === 'false') {
                         $('#msg').attr('class', 'text-danger').text("Bookmark Again");
+
                     }
 
 
