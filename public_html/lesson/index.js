@@ -6,8 +6,8 @@ $(document).ready(function () {
 
     const lessonId = window.location.pathname.split('/lessons/')[1].split('/')[0];
 
-    $.get("http://localhost:4000/api/lessons/" + lessonId, function (lesson) {
-        $.get("http://localhost:4000/api/minicourses/" + lesson.minicourseId, function (miniCourse) {
+    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/lessons/" + lessonId, function (lesson) {
+        $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/" + lesson.minicourseId, function (miniCourse) {
             $('#miniCourseName').text(miniCourse.name);
             $('#noOfLessons').text(miniCourse.noOfLessons + ' Lectures');
             $('#miniCourseDuration').text(miniCourse.duration);
@@ -24,7 +24,7 @@ $(document).ready(function () {
             $('#teacherDescription').text(miniCourse.tutor.description);
 
             $('#bookmark').click(function () {
-                $.post('http://localhost:4000/api/lessons/'+ lessonId+'/bookmark',function (data) {
+                $.post('http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/lessons/'+ lessonId+'/bookmark',function (data) {
                     if(data.success==='true'){
                         $('#bookmark').text('BOOKMARKED');
                     }

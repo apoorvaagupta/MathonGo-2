@@ -5,7 +5,7 @@
 $('document').ready(function () {
     $('#name').text(localStorage.getItem('name'));
     const studentId = window.location.pathname.split('/student/')[1].split('/')[0];
-    $.get("http://localhost:4000/api/students/mycourses", function (enrollments) {
+    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/students/mycourses", function (enrollments) {
         console.log(enrollments);
         const ul = $('#minicourses-list');
         for(let i=0;i<enrollments.length;i++){
