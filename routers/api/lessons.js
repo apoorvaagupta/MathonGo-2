@@ -10,7 +10,21 @@ router.get('/:id', function (req, res) {
             id: lessonId
         },
     }).then(function (lesson) {
-        res.send(lesson);
+        models.Enrollment.findOne({
+            where: {
+                studentId: req.user.id,
+                minicourseId: lesson.minicourseId
+            }
+        }).then(function (enrollment) {
+            if (enrollment) {
+                res.send({success: 'true', lesson: lesson.get()})
+            } else {
+                res.send({success: 'false', miniCourseId: lesson.minicourseId})
+            }
+        }).catch(function (err) {
+            console.log(err);
+            res.send("Could not get this lesson right now");
+        })
     }).catch(function (err) {
         console.log(err);
         res.send("Could not get this lesson right now");
@@ -33,6 +47,27 @@ router.post('/:id/bookmark', function (req, res) {
         res.send({success: 'error'})
     });
 });
+
+
+router.get('/:id/isBookmarked', function (req, res) {
+    let lessonId = parseInt(req.params.id);
+    models.Bookmark.findOne({
+        where: {
+            lessonId: lessonId,
+            studentId: req.user.id
+        }
+    }).then(function (enrollment) {
+        if (enrollment) {
+            res.send({isBookmarked: 'true'});
+        } else {
+            res.send({isBookmarked: 'false'});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'false', message: 'Could not get the bookmark right now'})
+    })
+});
+
 
 router.post('/:lessonId/report', function (req, res) {
     //report this lesson

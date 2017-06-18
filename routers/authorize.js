@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const models = require('./../db/models').models;
-
+const uid = require('uid2');
 
 router.post('/student', (req, res) => {
     password.pass2hash(req.body.password).then(function (hash) {
@@ -15,6 +15,8 @@ router.post('/student', (req, res) => {
             if (student) {
                 models.AuthStudent.create({
                     token: uid(30),
+
+                    //TODO: Most probably this is the error
                     studentId: student.id
                 }).then(function (authToken) {
                     res.send({
