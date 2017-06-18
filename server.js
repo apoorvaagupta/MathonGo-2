@@ -16,6 +16,12 @@ const secrets = require('./secrets.json')
 
 const ensure = require('./passport/passportutils');
 
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
 app.use('/', express.static(path.join(__dirname, 'public_html')));
 app.use(cookieParser(secrets.EXPRESS_SESSIONS_SECRET));
 app.use(bodyParser.json());
