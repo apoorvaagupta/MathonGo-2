@@ -4,10 +4,10 @@ $(document).ready(function () {
     const lessonId = window.location.pathname.split('/lessons/')[1].split('/')[0];
 
 
-    $.get("http://localhost:4000/api/lessons/" + lessonId, function (data) {
+    $.get("/api/lessons/" + lessonId, function (data) {
         if (data.success === 'true') {
             const lesson = data.lesson;
-            $.get("http://localhost:4000/api/minicourses/" + lesson.minicourseId, function (miniCourse) {
+            $.get("/api/minicourses/" + lesson.minicourseId, function (miniCourse) {
                 $('#miniCourseName').text(miniCourse.name);
                 $('#noOfLessons').text(miniCourse.noOfLessons + ' Lectures');
                 $('#miniCourseDuration').text(miniCourse.duration);
@@ -24,7 +24,7 @@ $(document).ready(function () {
                 $('#teacherDescription').text(miniCourse.tutor.description);
 
 
-                $.get('http://localhost:4000/api/lessons/' + lessonId + '/isBookmarked', function (data) {
+                $.get('/api/lessons/' + lessonId + '/isBookmarked', function (data) {
                     const bookmark = $('#bookmark');
                     console.log(data);
                     if (data.isBookmarked === 'true') {
@@ -35,7 +35,7 @@ $(document).ready(function () {
                         });
                     } else if (data.isBookmarked === 'false') {
                         bookmark.click(function () {
-                            $.post("http://localhost:4000/api/lessons/" + lessonId + "/bookmark", function (bookmarked) {
+                            $.post("/api/lessons/" + lessonId + "/bookmark", function (bookmarked) {
                                 console.log("enrol fn");
                                 if (bookmarked.success === 'true') {
                                     bookmark.text("BOOKMARKED");
@@ -74,7 +74,7 @@ $(document).ready(function () {
             })
         } else {
             alert("Please enroll for the course first");
-            window.location.replace('http://localhost:4000/courses/' + data.miniCourseId);
+            window.location.replace('/courses/' + data.miniCourseId);
         }
     })
 });

@@ -16,7 +16,7 @@
 
         let logoutfn = function () {
 
-            $.get('http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/logout', function (student) {
+            $.get('/logout', function (student) {
                 console.log(student);
                 window.location.replace(student.url);
             });
@@ -35,7 +35,7 @@
             <!--empty for search text box later-->
         </div>
         <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
-                class="header-links align-middle" style="text-align: center; color: #999" href="http://localhost:4000/library">Library</a></div>
+                class="header-links align-middle" style="text-align: center; color: #999" href="/library">Library</a></div>
         <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
                 class="align-middle header-links" style="text-align: center; color: #999" href="#">Events</a></div>
         <div class=" col-sm-1 col-12 align-middle" style="padding-top: 5px; padding-bottom: 5px"><a
@@ -53,9 +53,9 @@
             <span id="name"></span> <span class="caret"></span></a>
             <ul class="dropdown-menu"
                 style="padding: 0; margin-top:10px; border: none; border-radius: 0;border-bottom-right-radius: .25rem;border-bottom-left-radius: .25rem;background-color: #FFF">
-                <li style="padding: 10px ;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="http://localhost:4000/student/mycourses" class="header-links">My
+                <li style="padding: 10px ;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="/student/mycourses" class="header-links">My
                     Courses</a></li>
-                <li style="padding: 10px;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="http://localhost:4000/student/mybookmarks" class="header-links">My
+                <li style="padding: 10px;padding-left: 20px; border-bottom: solid 1px #DDD"><a style="color: #666" href="/student/mybookmarks" class="header-links">My
                     Bookmarks</a></li>
                 <li style="padding: 10px;padding-left: 20px;"><a onclick="logoutfn()" style="color: #666"
                                                                  class="header-links">Logout</a>

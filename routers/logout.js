@@ -4,7 +4,7 @@ router.get('/', function (req, res) {
     req.user = null;
     req.logout();
     req.session.destroy(function (err) {
-        res.send({url: 'http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/'});
+        res.send({url: '/'});
     });
 });
 
@@ -16,7 +16,7 @@ router.get('/bearer/student', function (req, res) {
                 token: token
             }
         }).then(function () {
-            res.send({url: 'http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/'});
+            res.send({url: '/'});
         }).catch(function (err) {
             console.log(err);
             res.send("Could not logout");

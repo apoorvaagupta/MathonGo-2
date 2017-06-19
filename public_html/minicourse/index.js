@@ -4,7 +4,7 @@ $(document).ready(function () {
     const miniCourseId = window.location.pathname.split('/courses/')[1].split('/')[0];
 
 
-    $.get("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/" + miniCourseId, function (miniCourse) {
+    $.get("/api/minicourses/" + miniCourseId, function (miniCourse) {
         console.log(miniCourse);
         $('#miniCourseName').text(miniCourse.name);
         $('#miniCourseDescription').text(miniCourse.description);
@@ -23,7 +23,7 @@ $(document).ready(function () {
         $('#teacherDescription').text(miniCourse.tutor.description);
 
 
-        $.get('http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/' + miniCourseId + '/isEnrolled', function (enrollment) {
+        $.get('/api/minicourses/' + miniCourseId + '/isEnrolled', function (enrollment) {
             console.log(enrollment);
             const enroll = $('#enroll');
             if (enrollment.isEnrolled === 'true') {
@@ -35,7 +35,7 @@ $(document).ready(function () {
                 });
             } else if (enrollment.isEnrolled === 'false') {
                 enroll.click(function () {
-                    $.post("http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/api/minicourses/" + miniCourseId + "/enroll", function (data) {
+                    $.post("/api/minicourses/" + miniCourseId + "/enroll", function (data) {
                         console.log("enrol fn");
                         if (data.success === 'true') {
                             enroll.text("Enrolled");
@@ -90,7 +90,7 @@ $(document).ready(function () {
 
 function goToLesson(lessonId) {
     if (isEnrolled) {
-        window.location = 'http://ec2-35-154-176-212.ap-south-1.compute.amazonaws.com:4000/lessons/' + lessonId;
+        window.location = '/lessons/' + lessonId;
     } else {
         $('#msg').attr('class', 'text-danger').text("Please Enroll First");
     }
