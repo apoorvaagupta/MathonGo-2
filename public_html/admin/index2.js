@@ -141,28 +141,28 @@ $(document).ready(function () {
                    `);
                 let classString = "<label>Class : ";
                 for (let i = 0; i < filters.classObject.length; i++) {
-                    classString += `<label><input type="radio" name="class" value="` + filters.classObject[i].className + `"> ` + filters.classObject[i].className + ` </label> `
+                    classString += `<label><input type="radio" name="class" value="` + filters.classObject[i].id + `"> ` + filters.classObject[i].className + ` </label> `
                 }
 
                 classString += `</label><br><br>`;
 
                 let subjectString = "<label>Subject : ";
                 for (let i = 0; i < filters.subjectObject.length; i++) {
-                    subjectString += `<label><input type="radio" name="subject" value="` + filters.subjectObject[i].subjectName + `"> ` + filters.subjectObject[i].subjectName + ` </label> `
+                    subjectString += `<label><input type="radio" name="subject" value="` + filters.subjectObject[i].id + `"> ` + filters.subjectObject[i].subjectName + ` </label> `
                 }
 
                 subjectString += `</label><br><br>`;
 
                 let courseString = "<label>Course : ";
                 for (let i = 0; i < filters.courseObject.length; i++) {
-                    courseString += `<label><input type="radio" name="course" value="` + filters.courseObject[i].courseName + `"> ` + filters.courseObject[i].courseName + ` </label> `
+                    courseString += `<label><input type="radio" name="course" value="` + filters.courseObject[i].id + `"> ` + filters.courseObject[i].courseName + ` </label> `
                 }
 
                 courseString += `</label><br><br>`;
 
                 let categoryString = "<label>Category : ";
                 for (let i = 0; i < filters.categoryObject.length; i++) {
-                    categoryString += `<label><input type="radio" name="category" value="` + filters.categoryObject[i].categoryName + `"> ` + filters.categoryObject[i].categoryName + ` </label> `
+                    categoryString += `<label><input type="checkbox" name="category" value="` + filters.categoryObject[i].id + `"> ` + filters.categoryObject[i].categoryName + ` </label> `
                 }
 
                 categoryString += `</label><br><br>`;
@@ -210,6 +210,10 @@ $(document).ready(function () {
                 console.log(1);
 
                 $submit.click(function () {
+                    categoryIds = [];
+                    $('input[name=category]:checked').each(function () {
+                        categoryIds.push($(this).val());
+                    });
                     console.log(2);
                     miniCourseData = {
                         name: $('#minicourse-name').val(),
@@ -218,10 +222,10 @@ $(document).ready(function () {
                         level: $('input[name="level"]:checked').val(),
                         duration: $('#minicourse-duration').val(),
                         medium: $('input[name="medium"]:checked').val(),
-                        className: $('input[name="class"]:checked').val(),
-                        subjectName: $('input[name="subject"]:checked').val(),
-                        categoryName: $('input[name="category"]:checked').val(),
-                        courseName: $('input[name="course"]:checked').val()
+                        classId: $('input[name="class"]:checked').val(),
+                        subjectId: $('input[name="subject"]:checked').val(),
+                        courseId: $('input[name="course"]:checked').val(),
+                        categoryIds: categoryIds
 
                     };
                     $.post('/api/tutors/1/addMiniCourse', miniCourseData, function (miniCourseFinal) {

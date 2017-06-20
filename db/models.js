@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
 
-const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
-    host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
-    port: 5432,
-    dialect: 'postgres'
-});
-
-// const db = new Sequelize('mathongo', 'muser', 'mpass', {
-//     host: 'localhost',
+// const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
+//     host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
+//     port: 5432,
 //     dialect: 'postgres'
 // });
+
+const db = new Sequelize('mathongo', 'muser', 'mpass', {
+    host: 'localhost',
+    dialect: 'postgres'
+});
 
 const Student = db.define('student', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
@@ -107,14 +107,18 @@ const Subject = db.define('subject', {
     subjectName: Sequelize.STRING
 });
 
+const Course = db.define('course', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+    courseName: Sequelize.STRING
+});
+
 const Category = db.define('category', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     categoryName: Sequelize.STRING
 });
 
-const Course = db.define('course', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    courseName: Sequelize.STRING
+const MiniCourseCategory = db.define('minicoursecategory', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true}
 });
 
 const Tag = db.define('tag', {
@@ -196,17 +200,19 @@ MiniCourse.hasMany(Review);
 
 Tag.belongsTo(Class);
 Tag.belongsTo(Subject);
-Tag.belongsTo(Category);
 Tag.belongsTo(Course);
 Tag.belongsTo(MiniCourse);
 Class.hasMany(Tag);
 Subject.hasMany(Tag);
-Category.hasMany(Tag);
 Course.hasMany(Tag);
-MiniCourse.hasMany(Tag);
+MiniCourse.hasOne(Tag);
 
+MiniCourseCategory.belongsTo(MiniCourse);
+MiniCourseCategory.belongsTo(Category);
+Category.hasMany(MiniCourseCategory);
+MiniCourse.hasMany(MiniCourseCategory);
 
-db.sync({force:true}).then(() => {
+db.sync({}).then(() => {
     console.log('Database configured')
 });
 
@@ -230,8 +236,9 @@ module.exports = {
         Review,
         Class,
         Subject,
-        Category,
         Course,
-        Tag
+        Tag,
+        Category,
+        MiniCourseCategory
     }
 };
