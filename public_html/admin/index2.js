@@ -241,10 +241,11 @@ $(document).ready(function () {
                                 minicourseId: miniCourseFinal.id
                             })
                         }
-
-                        $.post("/api/tutors/1/" + miniCourseFinal.id + "/addLesson", {lessons: lessonData}, function (lessons) {
-                            console.log(lessons);
-                        })
+                        if (lessonData.length !== 0) {
+                            $.post("/api/tutors/1/" + miniCourseFinal.id + "/addLesson", {lessons: lessonData}, function (lessons) {
+                                console.log(lessons);
+                            })
+                        }
                     })
                 })
             }

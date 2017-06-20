@@ -105,9 +105,13 @@ router.post('/withFilters', function (req, res) {
             options['$tags.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
         }
 
-        // if (req.body.filter.hasOwnProperty('categoryObject')) {
-        //     options['$tags.categoryId$'] = {$in: req.body.filter.categoryObject.map(Number)};
-        // }
+        if (req.body.filter.hasOwnProperty('courseObject')) {
+            options['$tags.courseId$'] = {$in: req.body.filter.courseObject.map(Number)};
+        }
+
+        if (req.body.filter.hasOwnProperty('categoryObject')) {
+            options['$minicoursecategories.categoryId$'] = {$in: req.body.filter.categoryObject.map(Number)};
+        }
 
         if (req.body.filter.hasOwnProperty('mediumObject')) {
             options['medium'] = {$in: mediumArray};
@@ -133,12 +137,38 @@ router.post('/withFilters', function (req, res) {
                 },
                 {
                     model: models.Tag,
-                    include: [models.Class, models.Subject, models.Course, models.Category]
+                    // include: [models.Class, models.Subject, models.Course]
+                },
+                {
+                    model: models.MiniCourseCategory,
+                    // include: [models.Category]
                 }
             ]
         }).then(function (miniCourses) {
-            console.log("************")
-            res.send(miniCourses);
+            console.log("************");
+            miniCourseIds = miniCourses.map((i) => i.id);
+            models.MiniCourse.findAll({
+                where:{
+                    id:{$in:miniCourseIds}
+                },
+                include: [
+                    {
+                        model: models.Tutor
+                    },
+                    {
+                        model: models.Tag,
+                        include: [models.Class, models.Subject, models.Course]
+                    },
+                    {
+                        model: models.MiniCourseCategory,
+                        include: [models.Category]
+                    }]
+            }).then(function (finalMiniCourses) {
+                res.send(finalMiniCourses);
+            }).catch(function (err) {
+                console.log(err);
+                res.send("Could not send all the minicourses");
+            })
         }).catch(function (err) {
             console.log(err);
             res.send("Could not send all the minicourses");
