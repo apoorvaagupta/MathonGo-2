@@ -120,29 +120,27 @@ router.post('/:id/addMiniCourse', function (req, res) {
                         classId: classObject.id,
                         subjectId: subjectObject.id,
                         courseId: courseObject.id,
+                        minicourseId: miniCourse.id
                     }).then(function (tagRow) {
-                        let tagcategory = [];
+                        let minicoursecategory = [];
                         for (let i = 0; i < req.body.categoryIds.length; i++) {
-                            tagcategory.push({
+                            minicoursecategory.push({
                                 categoryId: req.body.categoryIds[i],
-                                tagId: tagRow.id,
                                 minicourseId: miniCourse.id
                             })
                         }
-                        models.TagCategory.bulkCreate(tagcategory).then(function (tagCategories) {
+                        models.MiniCourseCategory.bulkCreate(minicoursecategory).then(function (minicourseCategories) {
                             models.MiniCourse.findOne({
                                 where: {id: miniCourse.id},
-                                include: [{
-                                    model: models.TagCategory,
-                                    include: [
-                                        {
-                                            model: models.Tag,
-                                            include: [models.Class, models.Subject, models.Course]
-                                        },
-                                        {
-                                            model: models.Category
-                                        }]
-                                }]
+                                include: [
+                                    {
+                                        model: models.Tag,
+                                        include: [models.Class, models.Subject, models.Course]
+                                    },
+                                    {
+                                        model: models.MiniCourseCategory,
+                                        include: [models.Category]
+                                    }]
                             }).then(function (miniCourseFinal) {
                                 res.send(miniCourseFinal);
                             }).catch(function (err) {
@@ -192,7 +190,7 @@ router.post('/:id/:miniCourseId/addLesson', function (req, res) {
     //     console.log(err);
     //     res.send("Could not add the lesson right now");
     // });
-    console.log(req.body);
+    // console.log(req.body);
     let bulkInsertArray = [];
     for (let i = 0; i < req.body.lessons.length; i++) {
         let tempObject = {

@@ -96,7 +96,7 @@ $(document).ready(function () {
                 categoryName: $('#categoryName').val()
             }, function (data) {
                 if (data.isSuccess === 'true') {
-                    $msg.attr('class', 'text-success').text('Course Added');
+                    $msg.attr('class', 'text-success').text('Category Added');
                 } else {
                     $msg.attr('class', 'text-danger').text(data.message);
                 }
@@ -241,6 +241,10 @@ $(document).ready(function () {
                                 minicourseId: miniCourseFinal.id
                             })
                         }
+
+                        $.post("/api/tutors/1/" + miniCourseFinal.id + "/addLesson", {lessons: lessonData}, function (lessons) {
+                            console.log(lessons);
+                        })
                     })
                 })
             }
