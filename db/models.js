@@ -15,15 +15,8 @@ const Student = db.define('student', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     name: Sequelize.STRING,
     email: Sequelize.STRING,
-    class: Sequelize.INTEGER,
-    contact: Sequelize.BIGINT,
-    role: {type: Sequelize.STRING, defaultValue: 'Student'}
-});
-
-const StudentLocal = db.define('studentlocal', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    email: Sequelize.STRING,
-    password: Sequelize.STRING
+    class: Sequelize.STRING,
+    contact: Sequelize.STRING,
 });
 
 const Tutor = db.define('tutor', {
@@ -32,22 +25,35 @@ const Tutor = db.define('tutor', {
     name: Sequelize.STRING,
     email: Sequelize.STRING,
     description: Sequelize.STRING(1234),
-    role: {type: Sequelize.STRING, defaultValue: 'Tutor'}
-});
-
-const TutorLocal = db.define('tutorlocal', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    email: Sequelize.STRING,
-    password: Sequelize.STRING
+    contact: Sequelize.STRING
 });
 
 const Admin = db.define('admin', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
     email: Sequelize.STRING,
-    password: Sequelize.STRING,
     name: Sequelize.STRING,
-    role: {type: Sequelize.STRING, defaultValue: 'Admin'}
 });
+
+const UserLocal = db.define('userlocal', {
+    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+    email: Sequelize.STRING,
+    password: Sequelize.STRING,
+    role: Sequelize.STRING
+});
+
+const AuthToken = db.define('authtoken', {
+    token: {
+        type: Sequelize.STRING,
+        primaryKey: true
+    },
+    role: Sequelize.STRING
+});
+
+AuthToken.belongsTo(UserLocal); UserLocal.hasMany(AuthToken);
+Student.belongsTo(UserLocal); UserLocal.hasOne(Student);
+Tutor.belongsTo(UserLocal); UserLocal.hasOne(Tutor);
+Admin.belongsTo(UserLocal); UserLocal.hasOne(Admin);
+
 
 const MiniCourse = db.define('minicourse', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
@@ -125,43 +131,6 @@ const Tag = db.define('tag', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
-const AuthStudent = db.define('authstudent', {
-    token: {
-        type: Sequelize.STRING,
-        primaryKey: true
-    }
-});
-
-const AuthTutor = db.define('authtutor', {
-    token: {
-        type: Sequelize.STRING,
-        primaryKey: true
-    }
-});
-
-const AuthAdmin = db.define('authadmin', {
-    token: {
-        type: Sequelize.STRING,
-        primaryKey: true
-    }
-});
-
-
-StudentLocal.belongsTo(Student);
-Student.hasOne(StudentLocal);
-
-TutorLocal.belongsTo(Tutor);
-Tutor.hasOne(TutorLocal);
-
-AuthStudent.belongsTo(Student);
-Student.hasMany(AuthStudent);
-
-AuthTutor.belongsTo(Tutor);
-Tutor.hasMany(AuthTutor);
-
-AuthAdmin.belongsTo(Admin);
-Admin.hasMany(AuthAdmin);
-
 MiniCourse.belongsTo(Tutor);
 Tutor.hasMany(MiniCourse);
 
@@ -219,13 +188,10 @@ db.sync({}).then(() => {
 module.exports = {
     models: {
         Student,
-        StudentLocal,
         Tutor,
-        TutorLocal,
         Admin,
-        AuthStudent,
-        AuthTutor,
-        AuthAdmin,
+        UserLocal,
+        AuthToken,
         MiniCourse,
         Lesson,
         Bookmark,
