@@ -64,15 +64,15 @@ $('document').ready(function () {
                     <div class="filter-column-divs-heading"><b>DIFFICULTY</b></div>
                     <div class="filter-column-divs-content">
                         <label class="label-style">
-                            <input class="checkbox-style" name="difficulty" value="1" type="checkbox">Beginner<br/>
+                            <input class="checkbox-style" name="difficulty" value="Beginner" type="checkbox">Beginner<br/>
                         </label>
                         <br>
                         <label class="label-style">
-                            <input class="checkbox-style" name="difficulty" value="2" type="checkbox">Intermediate<br>
+                            <input class="checkbox-style" name="difficulty" value="Intermediate" type="checkbox">Intermediate<br>
                         </label>
                         <br>
                         <label class="label-style">
-                            <input class="checkbox-style" name="difficulty" value="3" type="checkbox">Advanced<br>
+                            <input class="checkbox-style" name="difficulty" value="Advanced" type="checkbox">Advanced<br>
                         </label>
                     </div>
                 </div>
@@ -80,11 +80,11 @@ $('document').ready(function () {
                     <div class="filter-column-divs-heading"><b>MEDIUM</b></div>
                     <div class="filter-column-divs-content">
                         <label class="label-style">
-                            <input class="checkbox-style" name="medium" value="1" type="checkbox">English<br/>
+                            <input class="checkbox-style" name="medium" value="English" type="checkbox">English<br/>
                         </label>
                         <br>
                         <label class="label-style">
-                            <input class="checkbox-style" name="medium" value="2" type="checkbox">Hindi<br>
+                            <input class="checkbox-style" name="medium" value="Hindi" type="checkbox">Hindi<br>
                         </label>
 
                     </div>
@@ -178,9 +178,10 @@ function addMiniCourses(minicourses) {
     const ul = $('#minicourses-list');
     ul.empty();
     for (let i = 0; i < minicourses.length; i++) {
+        let categories = minicourses[i].minicoursecategories.map((i) => i.category.categoryName).join(', ');
         ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/cover.jpg" class="minicourse-img"></div>' +
             '<div class="col-sm-8 minicourse-content">' +
-            '<div class="row minicourse-chps"><span>' + minicourses[i].tags[0].subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + minicourses[i].tags[0].course.courseName + '</span></div>' +
+            '<div class="row minicourse-chps"><span>' + minicourses[i].tag.subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + minicourses[i].tag.course.courseName + '</span></div>' +
             '<div class="row minicourse-title"><span>' + minicourses[i].name + '</span></div>' +
             '<div class="row"><p class="minicourse-description">' + minicourses[i].description + '</p></div>' +
             '<div class="row align-items-center"><a href="http://localhost:4000/courses/' + minicourses[i].id + '" class="enrol-style">VIEW</a></div>' +
@@ -190,7 +191,7 @@ function addMiniCourses(minicourses) {
             '<div class="row tag-content"><span>' + minicourses[i].duration + '</span></div> </div> <div class="minicourse-tag">' +
             '<div class="row tag-title">DIFFICULTY</div> <div class="row tag-content"><span>' + minicourses[i].level + '</span></div>' +
             '</div> <div class="minicourse-tag"> <div class="row tag-title">RELEVANCE</div>' +
-            '<div class="row tag-content"><span>' + minicourses[i].tags[0].category.categoryName + '</span></div> </div> <div class="minicourse-tag">' +
+            '<div class="row tag-content"><span>' + categories + '</span></div> </div> <div class="minicourse-tag">' +
             '<div class="row tag-title">MEDIUM</div>' +
             '<div class="row tag-content"><span>' + minicourses[i].medium + '</span></div> </div> </div> </div> </li>'
         )
