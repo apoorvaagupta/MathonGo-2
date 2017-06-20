@@ -10,7 +10,6 @@ function ensureLogin() {
     }
 }
 
-
 function ensureTutor() {
     return function (req, res, next) {
 
