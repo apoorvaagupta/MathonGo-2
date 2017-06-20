@@ -73,14 +73,18 @@ router.get('/mycourses', function (req, res) {
         include: [
             {
                 model: models.MiniCourse,
-                include: [{
-                    model: models.Tutor
-                },
+                include: [
+                    {
+                        model: models.Tutor
+                    },
                     {
                         model: models.Tag,
-                        include: [models.Class, models.Category, models.Course, models.Subject]
-                    }
-                ]
+                        include: [models.Class, models.Subject, models.Course]
+                    },
+                    {
+                        model: models.MiniCourseCategory,
+                        include: [models.Category]
+                    }]
             }
         ]
     }).then(function (enrollments) {

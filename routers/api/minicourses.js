@@ -3,7 +3,6 @@ const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 
 router.get('/', function (req, res) {
-    //Get All Tags
 
     models.MiniCourse.findAll({
         include: [
@@ -12,9 +11,12 @@ router.get('/', function (req, res) {
             },
             {
                 model: models.Tag,
-                include: [models.Class, models.Subject, models.Course, models.Category]
-            }
-        ]
+                include: [models.Class, models.Subject, models.Course]
+            },
+            {
+                model: models.MiniCourseCategory,
+                include: [models.Category]
+            }]
     }).then(function (miniCourses) {
         res.send(miniCourses);
     }).catch(function (err) {
@@ -38,7 +40,11 @@ router.get('/:id', function (req, res) {
             },
             {
                 model: models.Tag,
-                include: [models.Class, models.Subject, models.Course, models.Category]
+                include: [models.Class, models.Subject, models.Course]
+            },
+            {
+                model: models.MiniCourseCategory,
+                include: [models.Category]
             }
         ]
     }).then(function (miniCourse) {
@@ -46,13 +52,26 @@ router.get('/:id', function (req, res) {
         res.send(miniCourse);
     }).catch(function (err) {
         console.log(err);
-        res.send("Could not get this lesson right now");
+        res.send("Could not get this minicourse right now");
     })
 });
 
 router.post('/withFilters', function (req, res) {
     if (!req.body.hasOwnProperty('filter')) {
-        models.MiniCourse.findAll().then(function (minicourses) {
+        models.MiniCourse.findAll({
+            include: [
+                {
+                    model: models.Tutor
+                },
+                {
+                    model: models.Tag,
+                    include: [models.Class, models.Subject, models.Course]
+                },
+                {
+                    model: models.MiniCourseCategory,
+                    include: [models.Category]
+                }]
+        }).then(function (minicourses) {
             return res.send(minicourses);
         }).catch(function (err) {
             console.log(err);
@@ -68,13 +87,13 @@ router.post('/withFilters', function (req, res) {
         //
         // console.log(classArray);
         //
-        for (let i = 0; i < difficultyArray.length; i++) {
-            difficultyArray[i] = difficultyArray[i] === '1' ? 'Beginner' : difficultyArray[i] === '2' ? 'Intermediate' : difficultyArray[i] === '3' ? 'Advance' : '';
-        }
+        // for (let i = 0; i < difficultyArray.length; i++) {
+        //     difficultyArray[i] = difficultyArray[i] === '1' ? 'Beginner' : difficultyArray[i] === '2' ? 'Intermediate' : difficultyArray[i] === '3' ? 'Advance' : '';
+        // }
 
-        for (let i = 0; i < mediumArray.length; i++) {
-            mediumArray[i] = mediumArray[i] === '1' ? 'English' : mediumArray[i] === '1' ? 'Hindi' : '';
-        }
+        // for (let i = 0; i < mediumArray.length; i++) {
+        //     mediumArray[i] = mediumArray[i] === '1' ? 'English' : mediumArray[i] === '1' ? 'Hindi' : '';
+        // }
 
 
         let options = {};
@@ -86,8 +105,12 @@ router.post('/withFilters', function (req, res) {
             options['$tags.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
         }
 
+        if (req.body.filter.hasOwnProperty('courseObject')) {
+            options['$tags.courseId$'] = {$in: req.body.filter.courseObject.map(Number)};
+        }
+
         if (req.body.filter.hasOwnProperty('categoryObject')) {
-            options['$tags.categoryId$'] = {$in: req.body.filter.categoryObject.map(Number)};
+            options['$minicoursecategories.categoryId$'] = {$in: req.body.filter.categoryObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('mediumObject')) {
@@ -114,12 +137,38 @@ router.post('/withFilters', function (req, res) {
                 },
                 {
                     model: models.Tag,
-                    include: [models.Class, models.Subject, models.Course, models.Category]
+                    // include: [models.Class, models.Subject, models.Course]
+                },
+                {
+                    model: models.MiniCourseCategory,
+                    // include: [models.Category]
                 }
             ]
         }).then(function (miniCourses) {
-            console.log("************")
-            res.send(miniCourses);
+            console.log("************");
+            miniCourseIds = miniCourses.map((i) => i.id);
+            models.MiniCourse.findAll({
+                where:{
+                    id:{$in:miniCourseIds}
+                },
+                include: [
+                    {
+                        model: models.Tutor
+                    },
+                    {
+                        model: models.Tag,
+                        include: [models.Class, models.Subject, models.Course]
+                    },
+                    {
+                        model: models.MiniCourseCategory,
+                        include: [models.Category]
+                    }]
+            }).then(function (finalMiniCourses) {
+                res.send(finalMiniCourses);
+            }).catch(function (err) {
+                console.log(err);
+                res.send("Could not send all the minicourses");
+            })
         }).catch(function (err) {
             console.log(err);
             res.send("Could not send all the minicourses");
@@ -162,7 +211,7 @@ router.get('/:id/isEnrolled', function (req, res) {
         }
     }).catch(function (err) {
         console.log(err);
-        res.send({success:'false',message:'Could not get the enrollments right now'})
+        res.send({success: 'false', message: 'Could not get the enrollments right now'})
     })
 });
 //Ask

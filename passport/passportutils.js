@@ -3,7 +3,7 @@ function ensureLogin() {
     return function (req, res, next) {
 
         if (!req.user) {
-            res.send({success: 'false', url: '/'});
+            res.redirect('/');
         } else {
             next();
         }

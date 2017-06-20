@@ -9,12 +9,12 @@ $(document).ready(function () {
         $('#miniCourseName').text(miniCourse.name);
         $('#miniCourseDescription').text(miniCourse.description);
         $('#teacherName').text(miniCourse.tutor.name);
-        $('#subject').text(miniCourse.tags[0].subject.subjectName);
-        $('#className').text(miniCourse.tags[0].subject.subjectName);
+        $('#subject').text(miniCourse.tag.subject.subjectName);
+        $('#className').text(miniCourse.tag.class.className);
         $('#miniCourseDuration').text(miniCourse.duration);
         $('#difficulty').text(miniCourse.level);
         $('#medium').text(miniCourse.medium);
-        $('#relevance').text(miniCourse.tags[0].category.categoryName);
+        $('#relevance').text(miniCourse.minicoursecategories.map((i) => i.category.categoryName).join(', '));
 
         if (miniCourse.tutor.image != null) {
             $('#teacherImage').attr('src', miniCourse.tutor.img);
