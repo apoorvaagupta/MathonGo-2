@@ -2,17 +2,19 @@ $(document).ready(function () {
     $signup = $('#signup');
     $login = $('#login');
     $signup.unbind('click');
-    let name = $('#name').val();
-    let email = $('#email').val();
-    let password = $('#password').val();
-    let secret = $('#secret').val();
+    $login.unbind('click');
     $signup.click(function () {
+        let name = $('#name').val();
+        let email = $('#email').val();
+        let password = $('#password').val();
+        let secret = $('#secret').val();
         $.post("/signup/admin", {
             name: name,
             email: email,
             password: password,
             secret: secret
         }, function (data) {
+            console.log(data);
             if (data.success === 'true') {
                 $.post("/authorize", {
                     email: email,
@@ -35,8 +37,8 @@ $(document).ready(function () {
 
     $login.click(function () {
         $.post("/authorize", {
-            email: $('#EmailLogin'),
-            password: $('#PasswordLogin')
+            email: $('#EmailLogin').val(),
+            password: $('#PasswordLogin').val()
         }, function (admindata) {
             if (admindata.success === 'true') {
                 window.localStorage.token = admindata.token;

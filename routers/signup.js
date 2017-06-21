@@ -78,7 +78,7 @@ router.post('/tutor', function (req, res) {
 router.post('/admin', function (req, res) {
 
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
-        res.send("Insufficient Details");
+        return res.send("Insufficient Details");
     }
     if (req.body.secret === secret.ADMIN_SECRET) {
         password.pass2hash(req.body.password).then(function (hash) {
@@ -94,21 +94,21 @@ router.post('/admin', function (req, res) {
                 include: [models.Admin]
             }).then(function (userLocal) {
                 if (userLocal) {
-                    res.send({success: 'true'});
+                    return res.send({success: 'true'});
                 } else {
-                    res.send({success: 'false'})
+                    return res.send({success: 'false'})
                 }
             }).catch(function (err) {
                 console.log(err);
-                res.send({success: 'error'});
+                return res.send({success: 'error'});
             })
         }).catch(function (err) {
             console.log(err);
-            res.send({success: 'error'});
+            return res.send({success: 'error'});
         })
     }
     else {
-        res.send("only admin")
+        return res.send("only admin");
     }
 });
 

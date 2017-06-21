@@ -2,7 +2,7 @@ $(document).ready(function () {
     $.ajax({
         url: '/checkAdmin',
         method: 'GET',
-        header: {
+        headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
     }).done(function (data) {
