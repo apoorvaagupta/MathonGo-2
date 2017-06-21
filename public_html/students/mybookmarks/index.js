@@ -5,7 +5,13 @@
 $('document').ready(function () {
     $('#name').text(localStorage.getItem('name'));
     const studentId = window.location.pathname.split('/student/')[1].split('/')[0];
-    $.get("/api/students/bookmarks", function (bookmarks) {
+    
+
+    $.ajax({
+        url: "/api/students/bookmarks",
+        method: 'GET',
+        headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+    }).done(function (bookmarks) {
         const lectures = $('#lectures');
         for (let i = 0; i < bookmarks.length; i++) {
             lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='/lesson/` + bookmarks[i].lesson.id + `'">
@@ -30,6 +36,11 @@ $('document').ready(function () {
             `)
         }
 
+    }).fail(function (object) {
+        if (object.responseText === 'Unauthorized') {
+            window.alert("Please Login First");
+            window.location.replace('/');
+        }
     });
 
 

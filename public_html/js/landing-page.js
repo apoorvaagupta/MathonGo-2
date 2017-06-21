@@ -33,9 +33,13 @@ $(document).ready(function () {
                     email: userEmail,
                     password: userPassword
                 }, function (authToken) {
+                    console.log(authToken);
                     if (authToken.success === 'true') {
+                        window.localStorage.name = authToken;
+
                         window.localStorage.token = authToken.token;
-                        window.location.replace(authToken.url)
+                        window.location.replace(authToken.url);
+
                     }
                 }).fail(function (err) {
                     $('#error').text("Wrong Credentials");
