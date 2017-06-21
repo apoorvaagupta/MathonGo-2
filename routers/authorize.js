@@ -11,7 +11,7 @@ router.post('/', (req, res) => {
     }).then(function (user) {
         if (!user) {
             return res.send({
-                success: "true",
+                success: "false",
                 message: "invalid email"
             })
         }
