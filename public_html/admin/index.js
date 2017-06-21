@@ -12,10 +12,22 @@ $(document).ready(function () {
             password = password,
             secret = secret
         }, function (data) {
-            if (data.isSuccess === 'true') {
-                $msg.attr('class', 'text-success').text('Category Added');
-            } else {
-                $msg.attr('class', 'text-danger').text(data.message);
+            if (data.success === 'true') {
+                $.post("/authorize", {
+                    email: email,
+                    password: password
+                }, function (admindata) {
+                    if (admindata.success === 'true') {
+                        window.localStorage.token = admindata.token;
+                        window.location.replace('/admin/dashboard')
+                    }else{
+                        window.alert("Please Try Again");
+                    }
+                })
+            } else if(data.success === 'false' || data.success === 'error'){
+                window.alert("Please Try Again");
+            } else if(data === "only admin"){
+                window.alert("Only Admins Are Allowed To SignUp");
             }
         })
     })
