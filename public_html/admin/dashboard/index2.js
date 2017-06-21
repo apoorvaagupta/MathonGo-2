@@ -20,7 +20,7 @@ $(document).ready(function () {
                 $msg.text("");
                 $form.append(`
             <label>
-            Class name : <input type="text" id="className">
+            Class name : <input type="text" id="className" required>
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
@@ -56,7 +56,7 @@ $(document).ready(function () {
                 $msg.text("");
                 $form.append(`
             <label>
-            Subject name : <input type="text" id="subjectName">
+            Subject name : <input type="text" id="subjectName" required>
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
@@ -92,7 +92,7 @@ $(document).ready(function () {
                 $msg.text("");
                 $form.append(`
             <label>
-            Course name : <input type="text" id="courseName">
+            Course name : <input type="text" id="courseName"  required>
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
@@ -128,7 +128,7 @@ $(document).ready(function () {
                 $msg.text("");
                 $form.append(`
             <label>
-            Category name : <input type="text" id="categoryName">
+            Category name : <input type="text" id="categoryName"  required>
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
@@ -165,31 +165,31 @@ $(document).ready(function () {
                     if (filters.isSuccess === 'true') {
                         $form.append(`
                     <label>
-                    Name of the minicourse: <input type="text" id="minicourse-name">
+                    Name of the minicourse: <input type="text" id="minicourse-name"  required>
                     </label>
                     <br><br>
                     <label>
-                    No. of lessons: <input type="text" id="minicourse-no-of-lessons">
+                    No. of lessons: <input type="text" id="minicourse-no-of-lessons" required>
                     </label>
                     <br><br>
                     <label>
-                    Description: <br><textarea cols="60" id="minicourse-description"></textarea>
+                    Description: <br><textarea cols="60" id="minicourse-description"  required></textarea>
                     </label>
                     <br><br>
                     <label>
-                    Duration of the minicourse: <input type="text" id="minicourse-duration">
+                    Duration of the minicourse: <input type="text" id="minicourse-duration" required>
                     </label>
                     <br><br>
                     <label>
                     Level:
-                    <label><input type="radio" name="level" value="Beginner"> Beginner</label>
+                    <label><input type="radio" name="level" value="Beginner" required> Beginner</label>
                     <label><input type="radio" name="level" value="Intermediate"> Intermediate</label>
                     <label><input type="radio" name="level" value="Advance"> Advance</label>
                     </label>
                     <br><br>
                     <label>
                     Medium:
-                    <label><input type="radio" name="medium" value="English"> English</label>
+                    <label><input type="radio" name="medium" value="English" required> English</label>
                     <label><input type="radio" name="medium" value="Hindi"> Hindi</label>
                     </label><br><br>
                    `);
@@ -232,24 +232,24 @@ $(document).ready(function () {
                         $('#add-lesson').click(function () {
                             $('#lessons-list').append(`<li>
             <label>
-        Name of the Lesson: <input type="text" id="lesson-` + counter + `-name">
+        Name of the Lesson: <input type="text" id="lesson-` + counter + `-name"  required>
     </label>
     <br><br>
     <label>
-        Video URL: <input type="text" id="lesson-` + counter + `-videourl">
+        Video URL: <input type="text" id="lesson-` + counter + `-videourl" required>
     </label>
     <br><br>
     <label>
-        Description: <input type="text" id="lesson-` + counter + `-description">
+        Description: <input type="text" id="lesson-` + counter + `-description" required>
     </label>
     <br><br>
     <label>
-        Duration of the minicourse: <input type="text" id="lesson-` + counter + `-duration">
+        Duration of the minicourse: <input type="text" id="lesson-` + counter + `-duration" required>
     </label>
     <br><br>
     <label>
         Level:
-        <label><input type="radio" name="lessonlevel` + counter + `" value="Beginner"> Beginner</label>
+        <label><input type="radio" name="lessonlevel` + counter + `" value="Beginner" required> Beginner</label>
         <label><input type="radio" name="lessonlevel` + counter + `" value="Intermediate"> Intermediate</label>
         <label><input type="radio" name="lessonlevel` + counter + `" value="Advance"> Advance</label>
     </label>
