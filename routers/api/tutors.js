@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
-
+const ensure = require('./../../passport/passportutils');
 
 router.post('/add', function (req, res) {
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
@@ -25,11 +25,6 @@ router.post('/add', function (req, res) {
     })
 });
 
-
-//will have to think about the method being get or post
-router.get('/login', function (req, res) {
-
-});
 
 router.get('/:id', function (req, res) {
     // models.Student.findOne({
@@ -89,7 +84,7 @@ router.get('/:id/:minicourse/:lesson', function (req, res) {
 });
 
 
-router.post('/:id/addMiniCourse', function (req, res) {
+router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
     const tutorId = parseInt(req.params.id);
     models.MiniCourse.create({
         name: req.body.name,
@@ -175,7 +170,7 @@ router.post('/:id/addMiniCourse', function (req, res) {
 
 });
 
-router.post('/:id/:miniCourseId/addLesson', function (req, res) {
+router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
     const tutorId = parseInt(req.params.id);
     const miniCourseId = parseInt(req.params.miniCourseId);
     // models.Lesson.create({

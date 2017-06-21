@@ -2,6 +2,7 @@ const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 
+
 router.get('/:id', function (req, res) {
     //get the lecture of this id
     let lessonId = req.params.id;

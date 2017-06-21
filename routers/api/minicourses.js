@@ -1,6 +1,7 @@
 const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
+const passport = require('./../../passport/passporthandler');
 
 router.get('/', function (req, res) {
 
@@ -176,7 +177,7 @@ router.post('/withFilters', function (req, res) {
     }
 });
 
-router.post('/:id/enroll', function (req, res) {
+router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
     //enrol in a minicourse
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.create({
@@ -196,7 +197,7 @@ router.post('/:id/enroll', function (req, res) {
     //Ask
 });
 
-router.get('/:id/isEnrolled', function (req, res) {
+router.get('/:id/isEnrolled',passport.authenticate('bearer'), function (req, res) {
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.findOne({
         where: {
@@ -215,7 +216,7 @@ router.get('/:id/isEnrolled', function (req, res) {
     })
 });
 //Ask
-router.post('/:minicourse/review', function (req, res) {
+router.post('/:minicourse/review',passport.authenticate('bearer'), function (req, res) {
     //review this minicourse
     //PHASE 2
 });
