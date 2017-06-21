@@ -23,6 +23,7 @@ router.post('/', (req, res) => {
                 }).then(function (authToken) {
                     res.send({
                         success: 'true',
+                        url: '/library',
                         token: authToken.token
                     })
                 }).catch(function (err) {

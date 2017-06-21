@@ -26,15 +26,15 @@ app.use('/', express.static(path.join(__dirname, 'public_html')));
 app.use(cookieParser(secrets.EXPRESS_SESSIONS_SECRET));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
-
-app.use(session({
-    secret: secrets.EXPRESS_SESSIONS_SECRET,
-    resave: false,
-    saveUninitialized: false
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
+//
+// app.use(session({
+//     secret: secrets.EXPRESS_SESSIONS_SECRET,
+//     resave: false,
+//     saveUninitialized: false
+// }));
+//
+ app.use(passport.initialize());
+// app.use(passport.session());
 app.use('/signup', signuprouter);
 app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
@@ -42,11 +42,11 @@ app.use('/authorize', authorizerouter);
 
 //TODO passport.authenticate(['session', 'bearer-student'])
 app.use('/api', apirouter);
-app.use('/courses/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/minicourse')));
-app.use('/library', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/allMiniCourses')));
-app.use('/lessons/:id', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/lesson')));
-app.use('/student/mycourses', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/students/mycourses')));
-app.use('/student/mybookmarks', ensure.ensureLogin(), express.static(path.join(__dirname, 'public_html/students/mybookmarks')));
+app.use('/courses/:id', express.static(path.join(__dirname, 'public_html/minicourse')));
+app.use('/library',  express.static(path.join(__dirname, 'public_html/allMiniCourses')));
+app.use('/lessons/:id',express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/student/mycourses',  express.static(path.join(__dirname, 'public_html/students/mycourses')));
+app.use('/student/mybookmarks', express.static(path.join(__dirname, 'public_html/students/mybookmarks')));
 
 app.listen(4000, function () {
     console.log("Listening on 4000");
