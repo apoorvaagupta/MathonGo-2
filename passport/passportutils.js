@@ -3,9 +3,21 @@ function ensureLogin() {
     return function (req, res, next) {
 
         if (!req.user) {
-            res.redirect('/');
+            res.send({url:'/', message: "user not logged in"});
         } else {
             next();
+        }
+    }
+}
+
+
+function ensureStudent() {
+    return function (req, res, next) {
+
+        if (req.user && req.user.role === 'Student') {
+            next();
+        } else {
+            res.send({success: 'false', url: '/', message: "Student Only"});
         }
     }
 }
@@ -35,5 +47,6 @@ function ensureAdmin() {
 module.exports = {
     ensureLogin,
     ensureTutor,
-    ensureAdmin
+    ensureAdmin,
+    ensureStudent
 }

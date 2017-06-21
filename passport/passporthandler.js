@@ -9,10 +9,10 @@ passport.serializeUser(function (user, cb) {
 });
 
 
-passport.deserializeUser(function (user, cb) {
-    if (user && user.role) {
-        models[user.role].findByPrimary(user.key).then(function (user) {
-            return cb(null, user);
+passport.deserializeUser(function (userObj, cb) {
+    if (userObj && userObj.role) {
+        models[userObj.role].findByPrimary(userObj.key).then(function (user) {
+            return cb(null, {role: userObj.role,user: user});
         }).catch(function (err) {
             console.log(err);
             cb(err, false);
