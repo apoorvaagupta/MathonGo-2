@@ -2,7 +2,7 @@ const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 
-router.post('/addClass', function (req, res) {
+router.post('/addClass', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
     models.Class.create({
         className: req.body.className
     }).then(function (classObject) {
@@ -13,7 +13,7 @@ router.post('/addClass', function (req, res) {
     });
 });
 
-router.post('/addSubject', function (req, res) {
+router.post('/addSubject',  passport.authenticate('bearer'), ensure.ensureAdmin,function (req, res) {
     models.Subject.create({
         subjectName: req.body.subjectName
     }).then(function (subject) {
@@ -24,7 +24,7 @@ router.post('/addSubject', function (req, res) {
     });
 });
 
-router.post('/addCategory', function (req, res) {
+router.post('/addCategory',  passport.authenticate('bearer'), ensure.ensureAdmin,function (req, res) {
     models.Category.create({
         categoryName: req.body.categoryName
     }).then(function (category) {
@@ -34,7 +34,7 @@ router.post('/addCategory', function (req, res) {
         res.send({isSuccess: 'false', message: "Could not add the category right now"})
     });
 });
-router.post('/addCourse', function (req, res) {
+router.post('/addCourse',  passport.authenticate('bearer'), ensure.ensureAdmin,function (req, res) {
     models.Course.create({
         courseName: req.body.courseName
     }).then(function (course) {
