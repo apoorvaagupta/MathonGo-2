@@ -3,87 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Admin Page - MathonGo</title>
-    <script src="./../js/jquery-3.2.1.js"></script>
-    <script src="index.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <script src="/js/jquery-3.2.1.js"></script>
+    <script src="./index.js"></script>
+    <link rel="stylesheet" href="dashboard/index.css">
 </head>
 <body>
-
-<h1>
-Add a Minicourse
-</h1>
-
-<form>
-    <label>
-        Name of the minicourse: <input type="text" id="minicourse-name">
-    </label>
-    <br><br>
-    <label>
-        No. of lessons: <input type="text" id="minicourse-lessonNo">
-    </label>
-    <br><br>
-    <label>
-        Description: <input type="text" id="minicourse-description">
-    </label>
-    <br><br>
-    <label>
-        Duration of the minicourse: <input type="text" id="minicourse-duration">
-    </label>
-    <br><br>
-    <label>
-        Course name: <input type="text" id="minicourse-course">
-    </label>
-    <br><br>
-    <label>
-        Level:
-        <label><input type="radio" name="level" value="beginner"> Beginner</label>
-        <label><input type="radio" name="level" value="intermediate"> Intermediate</label>
-        <label><input type="radio" name="level" value="advance"> Advance</label>
-    </label>
-    <br><br>
-    <label>
-        Medium:
-        <label><input type="radio" name="medium" value="english"> English</label>
-        <label><input type="radio" name="medium" value="hindi"> Hindi</label>
-    </label>
-    <br><br>
-    <label>
-        Class:
-        <label><input type="radio" name="class" value="XI"> XI</label>
-        <label><input type="radio" name="class" value="XII"> XII</label>
-        <label><input type="radio" name="class" value="XII+"> XII+</label>
-    </label>
-    <br><br>
-    <label>
-        Subject:
-        <label><input type="radio" name="subject" value="maths"> Maths</label>
-        <label><input type="radio" name="subject" value="physics"> Physics</label>
-        <label><input type="radio" name="subject" value="chemistry"> Chemistry</label>
-    </label>
-    <br><br>
-    <label>
-        Category:
-        <label><input type="radio" name="category" value="JEE Mains"> JEE Mains</label>
-        <label><input type="radio" name="category" value="JEE Advance"> JEE Advance</label>
-        <label><input type="radio" name="category" value="CBSE"> CBSE</label>
-    </label>
-    <br><br>
-
-
-    <h3>Add Lessons To The Minicourse</h3>
-
-    <a style="background-color: #00C2FA; color: whitesmoke; cursor: pointer; padding: 15px" id="add-lesson-btn">Add a lesson to this minicourse</a>
-<br>
+<div class="container">
     <br>
-    <ul id="lessons-add">
-
-    </ul>
-
-
-
-
-    <a style="background-color: seagreen; color: whitesmoke; cursor: pointer; padding: 15px" id="submit">Create the Minicourse with lessons</a>
-
-</form>
+    <div class="row text-center">
+        <div class="col-sm-12"><h1>The Admin portal</h1></div>
+    </div>
+    <br><br>
+    <div class="row text-center">
+        <div class="col-sm-6 col-12">
+            <h3>SignUp</h3>
+            <br>
+            <br>
+            <label>
+                Name : <input type="text" id="name">
+            </label><br>
+            <label>
+                Email : <input type="text" id="email">
+            </label><br>
+            <label>
+                Password : <input type="text" id="password">
+            </label><br>
+            <label>
+                Secret : <input type="text" id="secret">
+            </label><br>
+            <button class="btn buttons" id="signup">Sign Up</button>
+        </div>
+        <div class="col-sm-6 col-12">
+            <h3>Login</h3>
+            <br>
+            <br>
+            <label>
+                Email : <input type="text" id="EmailLogin">
+            </label><br>
+            <label>
+                Password : <input type="text" id="PasswordLogin">
+            </label><br>
+            <button class="btn buttons" id="login">Log In</button>
+        </div>
+    </div>
+</div>
 
 </body>
 </html>

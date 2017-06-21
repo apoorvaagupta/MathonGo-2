@@ -16,7 +16,7 @@ const secrets = require('./secrets.json')
 
 const ensure = require('./passport/passportutils');
 
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     next();
@@ -33,20 +33,27 @@ app.use(bodyParser.urlencoded({extended: true}));
 //     saveUninitialized: false
 // }));
 //
- app.use(passport.initialize());
+app.use(passport.initialize());
 // app.use(passport.session());
 app.use('/signup', signuprouter);
 app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
 app.use('/authorize', authorizerouter);
+app.get('/checkAdmin', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
+    res.send({success: "true"});
+});
 
 //TODO passport.authenticate(['session', 'bearer-student'])
+
 app.use('/api', apirouter);
+
 app.use('/courses/:id', express.static(path.join(__dirname, 'public_html/minicourse')));
-app.use('/library',  express.static(path.join(__dirname, 'public_html/allMiniCourses')));
-app.use('/lessons/:id',express.static(path.join(__dirname, 'public_html/lesson')));
-app.use('/student/mycourses',  express.static(path.join(__dirname, 'public_html/students/mycourses')));
+app.use('/library', express.static(path.join(__dirname, 'public_html/allMiniCourses')));
+app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/student/mycourses', express.static(path.join(__dirname, 'public_html/students/mycourses')));
 app.use('/student/mybookmarks', express.static(path.join(__dirname, 'public_html/students/mybookmarks')));
+app.use('/admin/dashboard', express.static(path.join(__dirname, 'public_html/admin/dashboard')));
+
 
 app.listen(4000, function () {
     console.log("Listening on 4000");
