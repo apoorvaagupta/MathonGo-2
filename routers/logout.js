@@ -8,10 +8,10 @@ router.get('/', function (req, res) {
     });
 });
 
-router.get('/bearer/student', function (req, res) {
+router.get('/bearer', function (req, res) {
     if (req.headers.Authorization) {
         let token = req.headers.Authorization.split(' ')[1];
-        models.AuthStudent.destroy({
+        models.AuthToken.destroy({
             where: {
                 token: token
             }
