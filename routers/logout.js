@@ -16,7 +16,7 @@ router.get('/bearer', function (req, res) {
                 token: token
             }
         }).then(function () {
-            res.send({url: '/'});
+            res.send({success:true,url: '/'});
         }).catch(function (err) {
             console.log(err);
             res.send("Could not logout");

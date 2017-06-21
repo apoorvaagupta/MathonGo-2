@@ -1,23 +1,25 @@
 const router = require('express').Router();
 const models = require('./../db/models').models;
 const uid = require('uid2');
+const passutils = require('./../utils/password');
 
-router.post('/student', (req, res) => {
-    password.pass2hash(req.body.password).then(function (hash) {
-
-        models.StudentLocal.findOne({
-            where: {
-                email: req.body.email,
-                password: hash
-            }
-            //TODO : Same as login
-        }).then(function (student) {
-            if (student) {
-                models.AuthStudent.create({
+router.post('/', (req, res) => {
+    models.UserLocal.findOne({
+        where: {
+            email: req.body.email,
+        }
+    }).then(function (user) {
+        if (!user) {
+            return res.send({
+                success: "true",
+                message: "invalid email"
+            })
+        }
+        passutils.compare2hash(req.body.password, user.password).then(function (match) {
+            if (match) {
+                models.AuthToken.create({
                     token: uid(30),
-
-                    //TODO: Most probably this is the error
-                    studentId: student.id
+                    role: user.role
                 }).then(function (authToken) {
                     res.send({
                         success: 'true',
@@ -27,16 +29,19 @@ router.post('/student', (req, res) => {
                     console.log(err);
                     res.send({success: 'false'})
                 })
+            } else {
+                res.send({success: 'false'})
             }
         }).catch(function (err) {
             console.log(err);
-            res.send({success: 'false'})
-        })
+            res.send({success: 'false'});
+        });
+
+
     }).catch(function (err) {
         console.log(err);
-        res.send({success: 'error'});
-    })
+        res.send({success: 'false'});
+    });
+
 });
-
-
 module.exports = router;

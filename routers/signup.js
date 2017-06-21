@@ -36,7 +36,7 @@ router.post('/student', function (req, res) {
     })
 });
 
-router.post('/student', function (req, res) {
+router.post('/tutor', function (req, res) {
 
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
         res.send("Insufficient Details");
