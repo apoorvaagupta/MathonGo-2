@@ -23,7 +23,11 @@ $(document).ready(function () {
         $('#teacherDescription').text(miniCourse.tutor.description);
 
 
-        $.get('/api/minicourses/' + miniCourseId + '/isEnrolled', function (enrollment) {
+        $.ajax({
+            url: '/api/minicourses/' + miniCourseId + '/isEnrolled',
+            method: 'GET',
+            headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+        }).done(function (enrollment) {
             console.log(enrollment);
             const enroll = $('#enroll');
             if (enrollment.isEnrolled === 'true') {
@@ -35,7 +39,11 @@ $(document).ready(function () {
                 });
             } else if (enrollment.isEnrolled === 'false') {
                 enroll.click(function () {
-                    $.post("/api/minicourses/" + miniCourseId + "/enroll", function (data) {
+                    $.ajax({
+                        url: "/api/minicourses/" + miniCourseId + "/enroll",
+                        method: 'POST',
+                        headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+                    }).done(function (data) {
                         console.log("enrol fn");
                         if (data.success === 'true') {
                             enroll.text("Enrolled");
@@ -48,13 +56,22 @@ $(document).ready(function () {
                         } else {
                             $('#msg').attr('class', 'text-danger').text("Enroll Again");
                         }
-                    })
+                    }).fail(function (object) {
+                        window.alert('Please Login First');
+                        window.location.replace('/');
+                    });
                 })
             } else if (enrollment.success === 'false') {
                 $('#msg').attr('class', 'text-danger').text("Enroll Again");
             }
-
-
+        }).fail(function (object) {
+            if (object.responseText === 'Unauthorized') {
+                const enroll = $('#enroll');
+                enroll.click(function () {
+                    window.alert('Please Login First');
+                    window.location.replace('/');
+                });
+            }
         });
 
 
