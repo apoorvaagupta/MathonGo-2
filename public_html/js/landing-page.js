@@ -52,7 +52,7 @@ $(document).ready(function () {
 
     $('#loginButton').click(function () {
 
-        $.post("/authorize/student", {
+        $.post("/authorize", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
         }, function (authToken) {

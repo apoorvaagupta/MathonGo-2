@@ -6,7 +6,8 @@ $(document).ready(function () {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
     }).done(function (data) {
-
+        console.log(1);
+        console.log(data);
         if (data.success === 'true') {
             $msg = $('#msg');
             $form = $('#dataForm');
@@ -262,10 +263,12 @@ $(document).ready(function () {
             })
         }
         else {
+            console.log(2);
             alert("You are not allowed");
             window.location.replace("/");
         }
     }).fail(function (object) {
+        console.log(3);
         alert("You are not allowed");
         window.location.replace("/");
     })

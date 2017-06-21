@@ -13,13 +13,13 @@ module.exports = new BearerStrategy(function (token, done) {
     }).then(function (authToken) {
         // console.log(authToken.get());
         if (authToken && authToken.userlocal.student) {
-            return done(null, authToken.userlocal.student);
+            return done(null,{role: "Student", user: authToken.userlocal.student});
         }
         else if (authToken && authToken.userlocal.tutor) {
-            return done(null, authToken.userlocal.tutor);
+            return done(null, {role: "Tutor", user: authToken.userlocal.tutor});
         }
          else if (authToken && authToken.userlocal.admin) {
-            return done(null, authToken.userlocal.admin);
+            return done(null, {role: "Admin", user: authToken.userlocal.admin});
         }
         else {
             return done(null, false, {message: 'Could not authorize'})
