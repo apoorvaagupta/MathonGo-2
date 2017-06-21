@@ -4,10 +4,18 @@ $(document).ready(function () {
     const lessonId = window.location.pathname.split('/lessons/')[1].split('/')[0];
 
 
-    $.get("/api/lessons/" + lessonId, function (data) {
+    $.ajax({
+        url: "/api/lessons/" + lessonId,
+        method: 'GET',
+        headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+    }).done(function (data) {
         if (data.success === 'true') {
             const lesson = data.lesson;
-            $.get("/api/minicourses/" + lesson.minicourseId, function (miniCourse) {
+            $.ajax({
+                url: "/api/minicourses/" + lesson.minicourseId,
+                method: 'GET',
+                headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+            }).done(function (miniCourse) {
                 $('#miniCourseName').text(miniCourse.name);
                 $('#noOfLessons').text(miniCourse.noOfLessons + ' Lectures');
                 $('#miniCourseDuration').text(miniCourse.duration);
@@ -24,7 +32,11 @@ $(document).ready(function () {
                 $('#teacherDescription').text(miniCourse.tutor.description);
 
 
-                $.get('/api/lessons/' + lessonId + '/isBookmarked', function (data) {
+                $.ajax({
+                    url: '/api/lessons/' + lessonId + '/isBookmarked',
+                    method: 'GET',
+                    headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+                }).done(function (data) {
                     const bookmark = $('#bookmark');
                     console.log(data);
                     if (data.isBookmarked === 'true') {
@@ -35,7 +47,12 @@ $(document).ready(function () {
                         });
                     } else if (data.isBookmarked === 'false') {
                         bookmark.click(function () {
-                            $.post("/api/lessons/" + lessonId + "/bookmark", function (bookmarked) {
+
+                            $.ajax({
+                                url: "/api/lessons/" + lessonId + "/bookmark",
+                                method: 'POST',
+                                headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+                            }).done(function (bookmarked) {
                                 console.log("enrol fn");
                                 if (bookmarked.success === 'true') {
                                     bookmark.text("BOOKMARKED");
@@ -47,6 +64,11 @@ $(document).ready(function () {
                                 } else {
                                     $('#msg').attr('class', 'text-danger').text("Bookmark Again");
                                 }
+                            }).fail(function (object) {
+                                if (object.responseText === 'Unauthorized') {
+                                    window.alert("Please Login First");
+                                    window.location.replace('/');
+                                }
                             })
                         })
                     } else if (data.success === 'false') {
@@ -55,6 +77,12 @@ $(document).ready(function () {
                     }
 
 
+                }).fail(function (object) {
+                    const bookmark = $('#bookmark');
+                    bookmark.click(function () {
+                        window.alert("Please Login First");
+                        window.location.replace('/')
+                    });
                 });
 
 
@@ -71,10 +99,21 @@ $(document).ready(function () {
                     }
                 }
 
+            }).fail(function (object) {
+                if (object.responseText === 'Unauthorized') {
+                    window.alert("Please Login First");
+                    window.location.replace('/');
+                }
             })
         } else {
             alert("Please enroll for the course first");
             window.location.replace('/courses/' + data.miniCourseId);
+
+        }
+    }).fail(function (object) {
+        if (object.responseText === 'Unauthorized') {
+            window.alert("Please Login First");
+            window.location.replace('/');
         }
     })
 });
