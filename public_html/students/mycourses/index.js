@@ -5,10 +5,15 @@
 $('document').ready(function () {
     $('#name').text(localStorage.getItem('name'));
     const studentId = window.location.pathname.split('/student/')[1].split('/')[0];
-    $.get("/api/students/mycourses", function (enrollments) {
+
+    $.ajax({
+        url: "/api/students/mycourses",
+        method: 'GET',
+        headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+    }).done(function (enrollments) {
         console.log(enrollments);
         const ul = $('#minicourses-list');
-        for(let i=0;i<enrollments.length;i++){
+        for (let i = 0; i < enrollments.length; i++) {
             let categories = enrollments[i].minicourse.minicoursecategories.map((i) => i.category.categoryName).join(', ');
             ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../../images/cover.jpg" class="minicourse-img"></div>' +
                 '<div class="col-sm-8 minicourse-content">' +
@@ -26,6 +31,11 @@ $('document').ready(function () {
                 '<div class="row tag-title">MEDIUM</div>' +
                 '<div class="row tag-content"><span>' + enrollments[i].minicourse.medium + '</span></div> </div> </div> </div> </li>'
             )
+        }
+    }).fail(function (object) {
+        if (object.responseText === 'Unauthorized') {
+            window.alert("Please Login First");
+            window.location.replace('/');
         }
     });
 
