@@ -35,7 +35,7 @@ $(document).ready(function () {
                 }, function (authToken) {
                     console.log(authToken);
                     if (authToken.success === 'true') {
-                        window.localStorage.name = authToken;
+                        window.localStorage.name = authToken.name;
 
                         window.localStorage.token = authToken.token;
                         window.location.replace(authToken.url);
@@ -58,6 +58,7 @@ $(document).ready(function () {
         }, function (authToken) {
             if (authToken.success === 'true') {
                 window.localStorage.token = authToken.token;
+                window.localStorage.name = authToken.name;
                 window.location.replace(authToken.url)
             }
         }).fail(function (err) {

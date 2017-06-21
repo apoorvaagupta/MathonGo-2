@@ -282,7 +282,7 @@ $(document).ready(function () {
                                 categoryIds: categoryIds
 
                             };
-                            
+
                             $.ajax({
                                 url: "/api/tutors/1/addMiniCourse",
                                 data: miniCourseData,
@@ -304,11 +304,25 @@ $(document).ready(function () {
                                     })
                                 }
                                 if (lessonData.length !== 0) {
-                                    $.post("/api/tutors/1/" + miniCourseFinal.id + "/addLesson", {lessons: lessonData}, function (lessons) {
+
+                                    $.ajax({
+                                        url: "/api/tutors/1/" + miniCourseFinal.id + "/addLesson",
+                                        data: {lessons: lessonData},
+                                        method: 'POST',
+                                        headers: {
+                                            "Authorization": "Bearer " + localStorage.getItem("token")
+                                        }
+                                    }).done(function (lessons) {
                                         console.log(lessons);
+                                    }).fail(function (object) {
+                                        if (object.responseText === 'Unauthorized') {
+                                            window.alert("Please Login First");
+                                            window.location.replace('/');
+                                        }
                                     })
                                 }
                             }).fail(function (object) {
+                                console.log(111111111);
                                 if (object.responseText === 'Unauthorized') {
                                     window.alert("Please Login First");
                                     window.location.replace('/');
@@ -321,6 +335,7 @@ $(document).ready(function () {
         }
         else {
             console.log(2);
+            console.log(1);
             alert("You are not allowed");
             window.location.replace("/");
         }
