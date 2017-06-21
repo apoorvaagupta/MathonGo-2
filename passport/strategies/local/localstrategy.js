@@ -14,13 +14,13 @@ module.exports = new LocalStrategy({
             return done(null, false, {message: 'Incorrect email'});
         passutils.compare2hash(password, user.password).then(function (match) {
             if (match && user.student) {
-                return done(null, user.student);
+                return done(null, {role: "Student", user: user.student});
             }
             else if (match && user.tutor) {
-                return done(null, user.tutor);
+                return done(null, {role: "Tutor",user: user.tutor});
             }
             else if (match && user.admin) {
-                return done(null, user.admin);
+                return done(null, {role: "Admin",user: user.admin});
             }
             else {
                 return done(null, false, {message: 'Incorrect password'});
