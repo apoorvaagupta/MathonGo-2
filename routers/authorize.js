@@ -19,8 +19,11 @@ router.post('/', (req, res) => {
             if (match) {
                 models.AuthToken.create({
                     token: uid(30),
-                    role: user.role
+                    role: user.role,
+                    userlocalId:user.id
                 }).then(function (authToken) {
+                    console.log("**************");
+                    console.log(authToken.get());
                     res.send({
                         success: 'true',
                         url: '/library',

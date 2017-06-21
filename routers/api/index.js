@@ -1,7 +1,7 @@
 const router = require('express').Router();
 const ensure = require('./../../passport/passportutils')
 
-router.use('/minicourses', require('./minicourses'));
+router.use('/minicourses',require('./minicourses'));
 router.use('/lessons', require('./lessons'));
 router.use('/students', require('./students'));
 //TODO : Add ensure admin

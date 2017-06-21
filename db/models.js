@@ -50,9 +50,9 @@ const AuthToken = db.define('authtoken', {
 });
 
 AuthToken.belongsTo(UserLocal); UserLocal.hasMany(AuthToken);
-Student.belongsTo(UserLocal); UserLocal.hasOne(Student);
-Tutor.belongsTo(UserLocal); UserLocal.hasOne(Tutor);
-Admin.belongsTo(UserLocal); UserLocal.hasOne(Admin);
+UserLocal.belongsTo(Student); Student.hasOne(UserLocal);
+UserLocal.belongsTo(Tutor); Tutor.hasOne(UserLocal);
+UserLocal.belongsTo(Admin); Admin.hasOne(UserLocal);
 
 
 const MiniCourse = db.define('minicourse', {

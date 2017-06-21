@@ -11,6 +11,7 @@ module.exports = new BearerStrategy(function (token, done) {
             include: [models.Student, models.Tutor, models.Admin]
         }]
     }).then(function (authToken) {
+        console.log(authToken.get());
         if (authToken && authToken.userlocal.student) {
             return done(null, authToken.userlocal.student);
         }

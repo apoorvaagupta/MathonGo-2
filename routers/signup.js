@@ -21,6 +21,9 @@ router.post('/student', function (req, res) {
         }, {
             include: [models.Student]
         }).then(function (userLocal) {
+            console.log(userLocal.get());
+            console.log("=-----------------=");
+            console.log(userLocal.student.get());
             if (userLocal) {
                 res.send({success: 'true'});
             } else {
@@ -102,7 +105,6 @@ router.post('/admin', function (req, res) {
         res.send({success: 'error'});
     })
 });
-
 
 
 module.exports = router;
