@@ -49,10 +49,14 @@ const AuthToken = db.define('authtoken', {
     role: Sequelize.STRING
 });
 
-AuthToken.belongsTo(UserLocal); UserLocal.hasMany(AuthToken);
-UserLocal.belongsTo(Student); Student.hasOne(UserLocal);
-UserLocal.belongsTo(Tutor); Tutor.hasOne(UserLocal);
-UserLocal.belongsTo(Admin); Admin.hasOne(UserLocal);
+AuthToken.belongsTo(UserLocal);
+UserLocal.hasMany(AuthToken);
+UserLocal.belongsTo(Student);
+Student.hasOne(UserLocal);
+UserLocal.belongsTo(Tutor);
+Tutor.hasOne(UserLocal);
+UserLocal.belongsTo(Admin);
+Admin.hasOne(UserLocal);
 
 
 const MiniCourse = db.define('minicourse', {

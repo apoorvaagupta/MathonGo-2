@@ -7,7 +7,7 @@ router.post('/', (req, res) => {
     models.UserLocal.findOne({
         where: {
             email: req.body.email,
-        }
+        }, include: [models.Student, models.Tutor, models.Admin]
     }).then(function (user) {
         if (!user) {
             return res.send({
@@ -20,15 +20,39 @@ router.post('/', (req, res) => {
                 models.AuthToken.create({
                     token: uid(30),
                     role: user.role,
-                    userlocalId:user.id
+                    userlocalId: user.id
                 }).then(function (authToken) {
-                    console.log("**************");
-                    console.log(authToken.get());
-                    res.send({
-                        success: 'true',
-                        url: '/library',
-                        token: authToken.token
-                    })
+                    if (user.student) {
+                        return res.send({
+                            success: 'true',
+                            url: '/library',
+                            name: user.student.name,
+                            token: authToken.token
+                        })
+                    }
+                    else if (user.tutor) {
+                        return res.send({
+                            success: 'true',
+                            name: user.tutor.name,
+                            url: '/library',
+                            token: authToken.token
+                        })
+                    }
+                    else if (user.admin) {
+                        return res.send({
+                            success: 'true',
+                            url: '/admin/dashboard',
+                            name: user.admin.name,
+                            token: authToken.token
+                        })
+                    }
+                    else {
+                        return res.send({
+                            success: 'false',
+                        })
+                    }
+
+
                 }).catch(function (err) {
                     console.log(err);
                     res.send({success: 'false'})

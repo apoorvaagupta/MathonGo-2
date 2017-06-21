@@ -1,6 +1,6 @@
 $(document).ready(function () {
     console.log("reached");
-
+    // TODO: Delete token from db after 30days
     $('#loginForm').submit(function (e) {
         e.preventDefault();
     });
@@ -29,14 +29,17 @@ $(document).ready(function () {
             console.log(student);
             if (student.success === 'true') {
                 //console.log("yo");
-                $.post("/login/student", {
+                $.post("/authorize", {
                     email: userEmail,
                     password: userPassword
-                }, function (data) {
-                    if (data.success === 'true') {
-                        console.log(data.name);
-                        window.localStorage.name =  data.name;
-                        window.location.replace(data.url)
+                }, function (authToken) {
+                    console.log(authToken);
+                    if (authToken.success === 'true') {
+                        window.localStorage.name = authToken;
+
+                        window.localStorage.token = authToken.token;
+                        window.location.replace(authToken.url);
+
                     }
                 }).fail(function (err) {
                     $('#error').text("Wrong Credentials");
@@ -49,13 +52,13 @@ $(document).ready(function () {
 
     $('#loginButton').click(function () {
 
-        $.post("/login/student", {
+        $.post("/authorize/student", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
-        }, function (data) {
-            if (data.success === 'true') {
-                localStorage.setItem('name', data.name);
-                window.location.replace(data.url)
+        }, function (authToken) {
+            if (authToken.success === 'true') {
+                window.localStorage.token = authToken.token;
+                window.location.replace(authToken.url)
             }
         }).fail(function (err) {
             $('#error').text("Wrong Credentials");

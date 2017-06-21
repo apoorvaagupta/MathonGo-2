@@ -44,7 +44,9 @@ app.get('/checkAdmin', passport.authenticate('bearer'), ensure.ensureAdmin, func
 });
 
 //TODO passport.authenticate(['session', 'bearer-student'])
-app.use('/api', passport.authenticate('bearer'), apirouter);
+
+app.use('/api', apirouter);
+
 app.use('/courses/:id', express.static(path.join(__dirname, 'public_html/minicourse')));
 app.use('/library', express.static(path.join(__dirname, 'public_html/allMiniCourses')));
 app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
