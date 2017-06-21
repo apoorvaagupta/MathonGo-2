@@ -2,6 +2,7 @@ const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 const ensure = require('./../../passport/passportutils');
+const passport = require('./../../passport/passporthandler');
 
 router.post('/add', function (req, res) {
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {

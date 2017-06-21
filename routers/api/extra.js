@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
+const ensure = require('./../../passport/passportutils');
+const passport = require('./../../passport/passporthandler');
 
 router.post('/addClass', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
     models.Class.create({
