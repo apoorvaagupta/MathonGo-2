@@ -2,6 +2,9 @@ const BearerStrategy = require('passport-http-bearer').Strategy;
 const models = require('./../../../db/models').models;
 
 module.exports = new BearerStrategy(function (token, done) {
+    if (token === null || token === undefined) {
+        return done(null, false, {message: 'Could not authorize'});
+    }
     models.AuthToken.findOne({
         where: {
             token: token
@@ -13,12 +16,12 @@ module.exports = new BearerStrategy(function (token, done) {
     }).then(function (authToken) {
         // console.log(authToken.get());
         if (authToken && authToken.userlocal.student) {
-            return done(null,{role: "Student", user: authToken.userlocal.student});
+            return done(null, {role: "Student", user: authToken.userlocal.student});
         }
         else if (authToken && authToken.userlocal.tutor) {
             return done(null, {role: "Tutor", user: authToken.userlocal.tutor});
         }
-         else if (authToken && authToken.userlocal.admin) {
+        else if (authToken && authToken.userlocal.admin) {
             return done(null, {role: "Admin", user: authToken.userlocal.admin});
         }
         else {
