@@ -28,14 +28,14 @@ router.post('/add', function (req, res) {
 
 
 router.get('/:id', function (req, res) {
-    // models.Student.findOne({
-    //     where: {id: req.params.id}
-    // }).then(function (student) {
-    //     res.send(student);
-    // }).catch(function (err) {
-    //     console.log(err);
-    //     res.send('Unknown Student');
-    // })
+    models.Tutor.findOne({
+        where: {id: req.params.id}
+    }).then(function (student) {
+        res.send(student);
+    }).catch(function (err) {
+        console.log(err);
+        res.send('Unknown Student');
+    })
 });
 
 router.post('/:id/edit', function (req, res) {
