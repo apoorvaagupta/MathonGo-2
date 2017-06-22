@@ -43,6 +43,10 @@ app.get('/checkAdmin', passport.authenticate('bearer'), ensure.ensureAdmin(), fu
     return res.send({success: "true"});
 });
 
+app.get('/checkLoggedIn', passport.authenticate('bearer'), ensure.ensureLogin(), function (req, res) {
+    return res.send({success: "true"});
+});
+
 //TODO passport.authenticate(['session', 'bearer-student'])
 
 app.use('/api', apirouter);
