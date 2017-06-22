@@ -39,8 +39,12 @@ app.use('/signup', signuprouter);
 app.use('/login', loginrouter);
 app.use('/logout', logoutrouter);
 app.use('/authorize', authorizerouter);
-app.get('/checkAdmin', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
-    res.send({success: "true"});
+app.get('/checkAdmin', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
+    return res.send({success: "true"});
+});
+
+app.get('/checkLoggedIn', passport.authenticate('bearer'), ensure.ensureLogin(), function (req, res) {
+    return res.send({success: "true"});
 });
 
 //TODO passport.authenticate(['session', 'bearer-student'])

@@ -85,7 +85,7 @@ router.get('/:id/:minicourse/:lesson', function (req, res) {
 });
 
 
-router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
+router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     const tutorId = parseInt(req.params.id);
     models.MiniCourse.create({
         name: req.body.name,
@@ -171,7 +171,7 @@ router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensure
 
 });
 
-router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ensure.ensureAdmin, function (req, res) {
+router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     const tutorId = parseInt(req.params.id);
     const miniCourseId = parseInt(req.params.miniCourseId);
     // models.Lesson.create({

@@ -1,6 +1,35 @@
 let isEnrolled = false;
 $(document).ready(function () {
-    $('#name').text(localStorage.getItem('name'));
+
+    $.ajax({
+        url: '/checkLoggedIn',
+        method: 'GET',
+        headers: {
+            "Authorization": "Bearer " + localStorage.getItem("token")
+        }
+    }).done(function (data) {
+
+        if (data.success === 'true') {
+            $('#name').text(localStorage.getItem('name'));
+        } else {
+            $('#userDetails').remove();
+            $('#header-bar').append(`<div class=" col-sm-2 col-12 align-middle header-links-div"><a
+                class="align-middle header-links" href="/">Register / Login</a></div>`)
+
+        }
+    }).fail(function (object) {
+        if (object.responseText === 'Unauthorized') {
+            $('#userDetails').remove();
+            $('#header-bar').append(`<div class=" col-sm-2 col-12 align-middle header-links-div"><a
+                class="align-middle header-links" href="/">Register / Login</a></div>`)
+        }
+    });
+
+
+
+
+
+
     const miniCourseId = window.location.pathname.split('/courses/')[1].split('/')[0];
 
 

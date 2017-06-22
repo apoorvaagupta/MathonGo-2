@@ -2,11 +2,12 @@ $(document).ready(function () {
     $.ajax({
         url: '/checkAdmin',
         method: 'GET',
-        header: {
+        headers: {
             "Authorization": "Bearer " + localStorage.getItem("token")
         }
     }).done(function (data) {
-
+        console.log(1);
+        console.log(data);
         if (data.success === 'true') {
             $msg = $('#msg');
             $form = $('#dataForm');
@@ -26,16 +27,26 @@ $(document).ready(function () {
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
-                    $.post("/api/extra/addClass", {
-                        className: $('#className').val()
-                    }, function (data) {
+
+
+                    $.ajax({
+                        url: "/api/extra/addClass",
+                        data: {className: $('#className').val()},
+                        method: 'POST',
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    }).done(function (data) {
                         if (data.isSuccess === 'true') {
                             $msg.attr('class', 'text-success').text('Class Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
                         }
-                    }).fail(function () {
-                        console.log("haw");
+                    }).fail(function (object) {
+                        if (object.responseText === 'Unauthorized') {
+                            window.alert("Please Login First");
+                            window.location.replace('/');
+                        }
                     })
                 })
             });
@@ -52,14 +63,25 @@ $(document).ready(function () {
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
-                    $.post("/api/extra/addSubject", {
-                        subjectName: $('#subjectName').val()
-                    }, function (data) {
+
+                    $.ajax({
+                        url: "/api/extra/addSubject",
+                        data: {subjectName: $('#subjectName').val()},
+                        method: 'POST',
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    }).done(function (data) {
                         console.log(1);
                         if (data.isSuccess === 'true') {
                             $msg.attr('class', 'text-success').text('Subject Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
+                        }
+                    }).fail(function (object) {
+                        if (object.responseText === 'Unauthorized') {
+                            window.alert("Please Login First");
+                            window.location.replace('/');
                         }
                     })
                 })
@@ -77,13 +99,25 @@ $(document).ready(function () {
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
-                    $.post("/api/extra/addCourse", {
-                        courseName: $('#courseName').val()
-                    }, function (data) {
+
+
+                    $.ajax({
+                        url: "/api/extra/addCourse",
+                        data: {courseName: $('#courseName').val()},
+                        method: 'POST',
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    }).done(function (data) {
                         if (data.isSuccess === 'true') {
                             $msg.attr('class', 'text-success').text('Course Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
+                        }
+                    }).fail(function (object) {
+                        if (object.responseText === 'Unauthorized') {
+                            window.alert("Please Login First");
+                            window.location.replace('/');
                         }
                     })
                 })
@@ -101,13 +135,24 @@ $(document).ready(function () {
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
-                    $.post("/api/extra/addCategory", {
-                        categoryName: $('#categoryName').val()
-                    }, function (data) {
+
+                    $.ajax({
+                        url: "/api/extra/addCategory",
+                        data: {categoryName: $('#categoryName').val()},
+                        method: 'POST',
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    }).done(function (data) {
                         if (data.isSuccess === 'true') {
                             $msg.attr('class', 'text-success').text('Category Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
+                        }
+                    }).fail(function (object) {
+                        if (object.responseText === 'Unauthorized') {
+                            window.alert("Please Login First");
+                            window.location.replace('/');
                         }
                     })
                 })
@@ -237,7 +282,15 @@ $(document).ready(function () {
                                 categoryIds: categoryIds
 
                             };
-                            $.post('/api/tutors/1/addMiniCourse', miniCourseData, function (miniCourseFinal) {
+
+                            $.ajax({
+                                url: "/api/tutors/1/addMiniCourse",
+                                data: miniCourseData,
+                                method: 'POST',
+                                headers: {
+                                    "Authorization": "Bearer " + localStorage.getItem("token")
+                                }
+                            }).done(function (miniCourseFinal) {
                                 let lessonData = [];
                                 console.log(miniCourseFinal);
                                 for (let i = 0; i < counter; i++) {
@@ -251,9 +304,28 @@ $(document).ready(function () {
                                     })
                                 }
                                 if (lessonData.length !== 0) {
-                                    $.post("/api/tutors/1/" + miniCourseFinal.id + "/addLesson", {lessons: lessonData}, function (lessons) {
+
+                                    $.ajax({
+                                        url: "/api/tutors/1/" + miniCourseFinal.id + "/addLesson",
+                                        data: {lessons: lessonData},
+                                        method: 'POST',
+                                        headers: {
+                                            "Authorization": "Bearer " + localStorage.getItem("token")
+                                        }
+                                    }).done(function (lessons) {
                                         console.log(lessons);
+                                    }).fail(function (object) {
+                                        if (object.responseText === 'Unauthorized') {
+                                            window.alert("Please Login First");
+                                            window.location.replace('/');
+                                        }
                                     })
+                                }
+                            }).fail(function (object) {
+                                console.log(111111111);
+                                if (object.responseText === 'Unauthorized') {
+                                    window.alert("Please Login First");
+                                    window.location.replace('/');
                                 }
                             })
                         })
@@ -262,11 +334,15 @@ $(document).ready(function () {
             })
         }
         else {
+            console.log(2);
+            console.log(1);
             alert("You are not allowed");
             window.location.replace("/");
         }
     }).fail(function (object) {
-        alert("You are not allowed");
-        window.location.replace("/");
+        if (object.responseText === 'Unauthorized') {
+            window.alert("Please Login First");
+            window.location.replace('/');
+        }
     })
 });

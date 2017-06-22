@@ -35,7 +35,7 @@ $(document).ready(function () {
                 }, function (authToken) {
                     console.log(authToken);
                     if (authToken.success === 'true') {
-                        window.localStorage.name = authToken;
+                        window.localStorage.name = authToken.name;
 
                         window.localStorage.token = authToken.token;
                         window.location.replace(authToken.url);
@@ -52,12 +52,13 @@ $(document).ready(function () {
 
     $('#loginButton').click(function () {
 
-        $.post("/authorize/student", {
+        $.post("/authorize", {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
         }, function (authToken) {
             if (authToken.success === 'true') {
                 window.localStorage.token = authToken.token;
+                window.localStorage.name = authToken.name;
                 window.location.replace(authToken.url)
             }
         }).fail(function (err) {

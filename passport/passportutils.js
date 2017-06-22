@@ -35,7 +35,9 @@ function ensureTutor() {
 
 function ensureAdmin() {
     return function (req, res, next) {
-
+        console.log("*********************************************************")
+        console.log(req.user);
+        console.log("*********************************************************");
         if (req.user && req.user.role === 'Admin') {
             next();
         } else {

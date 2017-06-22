@@ -16,9 +16,13 @@
 
         let logoutfn = function () {
 
-            $.get('/logout', function (student) {
-                console.log(student);
-                window.location.replace(student.url);
+            $.ajax({
+                url: '/logout',
+                headers: {"Authorization": "Bearer " + localStorage.token},
+                method: "GET"
+            }).done(function (user) {
+                localStorage.removeItem("token");
+                window.location.replace(user.url);
             });
         }
     </script>

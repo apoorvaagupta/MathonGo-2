@@ -15,6 +15,7 @@ router.post('/', (req, res) => {
                 message: "invalid email"
             })
         }
+        console.log(user.get());
         passutils.compare2hash(req.body.password, user.password).then(function (match) {
             if (match) {
                 models.AuthToken.create({

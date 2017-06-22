@@ -18,10 +18,14 @@
 
     let logoutfn = function () {
 
-    $.get('/logout', function (student) {
-    console.log(student);
-    window.location.replace(student.url);
-    });
+        $.ajax({
+            url: '/logout',
+            headers: {"Authorization": "Bearer " + localStorage.token},
+            method: "GET"
+        }).done(function (user) {
+            localStorage.removeItem("token");
+            window.location.replace(user.url);
+        });
     }
     </script>
 </head>
@@ -44,13 +48,13 @@
                 class="align-middle header-links" href="#">Teachers</a></div>
 
 
-        <div class="dropdown col-sm-2 col-12 align-middle header-dropdown">
+        <div id="userDetails" class="dropdown col-sm-2 col-12 align-middle header-dropdown">
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <!-- <a href="#"><i class="fa fa-bell"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;-->
             &nbsp;&nbsp;&nbsp;<a style="color: #222;" href="#" class="dropdown-toggle header-links"
                                              data-toggle="dropdown"
                                              role="button" aria-haspopup="true" aria-expanded="false">
-            <img src="./../images/boy.png" class="img-circle header-profile-img">
+            <img src="/images/boy.png" class="img-circle header-profile-img">
             <span id="name"></span> <span class="caret"></span></a>
             <ul class="dropdown-menu header-dropdown-menu">
                 <li class="header-dropdown-menu-li"><a href="/student/mycourses"
