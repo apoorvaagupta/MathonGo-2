@@ -244,7 +244,7 @@ $(document).ready(function () {
     </label>
     <br><br>
     <label>
-        Description: <textarea cols="60" id="lesson-` + counter + `-description" required>
+        Description: <textarea cols="100" id="lesson-` + counter + `-description" required></textarea>
     </label>
     <br><br>
     <label>
