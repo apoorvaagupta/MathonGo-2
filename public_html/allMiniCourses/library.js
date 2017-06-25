@@ -97,7 +97,7 @@ $('document').ready(function () {
                         </label>
                         <br>
                         <label class="label-style">
-                            <input class="checkbox-style" name="difficulty" value="Advanced" type="checkbox">Advanced<br>
+                            <input class="checkbox-style" name="difficulty" value="Advance" type="checkbox">Advance<br>
                         </label>
                     </div>
                 </div>
