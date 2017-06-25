@@ -183,7 +183,7 @@ router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.create({
         minicourseId: miniCourseId,
-        studentId: req.user.id
+        studentId: req.user.user.id
     }).then(function (enroll) {
         if (enroll) {
             res.send({success: 'true'})
@@ -206,7 +206,7 @@ console.log(req.user.id);
     models.Enrollment.findOne({
         where: {
             minicourseId: miniCourseId,
-            studentId: req.user.id
+            studentId: req.user.user.id
         }
     }).then(function (enrollment) {
         if (enrollment) {
