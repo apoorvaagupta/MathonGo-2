@@ -13,7 +13,7 @@ router.get('/:id', function (req, res) {
     }).then(function (lesson) {
         models.Enrollment.findOne({
             where: {
-                studentId: req.user.id,
+                studentId: req.user.user.id,
                 minicourseId: lesson.minicourseId
             }
         }).then(function (enrollment) {
@@ -36,7 +36,7 @@ router.post('/:id/bookmark', function (req, res) {
     let lessonId = parseInt(req.params.id);
     models.Bookmark.create({
         lessonId: lessonId,
-        studentId: req.user.id
+        studentId: req.user.user.id
     }).then(function (bookmark) {
         if (bookmark) {
             res.send({success: 'true'})
@@ -55,7 +55,7 @@ router.get('/:id/isBookmarked', function (req, res) {
     models.Bookmark.findOne({
         where: {
             lessonId: lessonId,
-            studentId: req.user.id
+            studentId: req.user.user.id
         }
     }).then(function (enrollment) {
         if (enrollment) {

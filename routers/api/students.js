@@ -70,7 +70,7 @@ router.post('/:id/edit', function (req, res) {
 
 router.get('/mycourses', function (req, res) {
     models.Enrollment.findAll({
-        where: {studentId: req.user.id},
+        where: {studentId: req.user.user.id},
         include: [
             {
                 model: models.MiniCourse,
@@ -97,7 +97,7 @@ router.get('/mycourses', function (req, res) {
 
 router.get('/bookmarks', function (req, res) {
     models.Bookmark.findAll({
-        where: {studentId: req.user.id},
+        where: {studentId: req.user.user.id},
         include: models.Lesson
     }).then(function (bookmarks) {
         res.send(bookmarks);

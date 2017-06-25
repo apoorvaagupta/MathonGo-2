@@ -2,7 +2,7 @@ function ensureLogin() {
 
     return function (req, res, next) {
 
-        if (!req.user) {
+        if (!req.user.user) {
             res.send({url:'/', message: "user not logged in"});
         } else {
             next();
@@ -14,7 +14,7 @@ function ensureLogin() {
 function ensureStudent() {
     return function (req, res, next) {
 
-        if (req.user && req.user.role === 'Student') {
+        if (req.user.user && req.user.role === 'Student') {
             next();
         } else {
             res.send({success: 'false', url: '/', message: "Student Only"});
@@ -25,7 +25,7 @@ function ensureStudent() {
 function ensureTutor() {
     return function (req, res, next) {
 
-        if (req.user && req.user.role === 'Tutor') {
+        if (req.user.user && req.user.role === 'Tutor') {
             next();
         } else {
             res.send({success: 'false', url: '/', message: "Tutor Only"});
@@ -38,7 +38,7 @@ function ensureAdmin() {
         console.log("*********************************************************")
         console.log(req.user);
         console.log("*********************************************************");
-        if (req.user && req.user.role === 'Admin') {
+        if (req.user.user && req.user.role === 'Admin') {
             next();
         } else {
             res.send({success: 'false', url: '/', message: "Admin Only"});
