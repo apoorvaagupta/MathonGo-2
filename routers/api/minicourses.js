@@ -179,6 +179,7 @@ router.post('/withFilters', function (req, res) {
 
 router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
     //enrol in a minicourse
+    console.log(req.user); 
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.create({
         minicourseId: miniCourseId,
@@ -198,6 +199,9 @@ router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
 });
 
 router.get('/:id/isEnrolled',passport.authenticate('bearer'), function (req, res) {
+console.log(req.user);
+console.log(req.user.get());    
+console.log(req.user.id);
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.findOne({
         where: {
