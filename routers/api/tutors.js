@@ -9,7 +9,7 @@ router.post('/add', function (req, res) {
         res.send("Insufficient Details");
     }
     password.pass2hash(req.body.password).then(function (hash) {
-        models.TutorLocal.create({
+        models.UserLocal.create({
             email: req.body.email,
             password: hash,
             tutor: {

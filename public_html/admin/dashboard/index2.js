@@ -177,7 +177,7 @@ $(document).ready(function () {
                     </label>
                     <br><br>
                     <label>
-                    Description: <br><textarea cols="60" id="minicourse-description"  required></textarea>
+                    Description: <br><textarea cols="100" rows="10" id="minicourse-description"  required></textarea>
                     </label>
                     <br><br>
                     <label>
