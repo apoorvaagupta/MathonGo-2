@@ -6,10 +6,10 @@ const Sequelize = require('sequelize');
      dialect: 'postgres'
  });
 
-//const db = new Sequelize('mathongo', 'muser', 'mpass', {
+// const db = new Sequelize('mathongo', 'muser', 'mpass', {
 //    host: 'localhost',
 //    dialect: 'postgres'
-//});
+// });
 
 const Student = db.define('student', {
     id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},

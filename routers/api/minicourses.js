@@ -138,11 +138,11 @@ router.post('/withFilters', function (req, res) {
                 },
                 {
                     model: models.Tag,
-                    // include: [models.Class, models.Subject, models.Course]
+                    include: [models.Class, models.Subject, models.Course]
                 },
                 {
                     model: models.MiniCourseCategory,
-                    // include: [models.Category]
+                    include: [models.Category]
                 }
             ]
         }).then(function (miniCourses) {
