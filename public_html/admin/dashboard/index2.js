@@ -24,11 +24,11 @@ $(document).ready(function () {
             </label>
             <br><br>
             <label>
-                    Email: <input type="text" style="width: 250px" id="tutor-email"  required>
+                    Email: <input type="email" style="width: 250px" id="tutor-email"  required>
             </label>
             <br><br>
             <label>
-                    Password: <input type="text" style="width: 250px" id="tutor-password"  required>
+                    Password: <input type="password" style="width: 250px" id="tutor-password"  required>
             </label>
             <br><br>
             <label>
@@ -40,7 +40,7 @@ $(document).ready(function () {
             </label>
             <br><br>
             <label>
-                    Description:(25 pages)<textarea type="text"  cols="60"  rows="5" id="tutor-description"  required></textarea>
+                    Description:(25 words)<br><textarea type="text"  cols="60"  rows="5" id="tutor-description"  required></textarea>
             </label>
             <br><br>
             <button class="btn buttons" id="submit">Submit</button>

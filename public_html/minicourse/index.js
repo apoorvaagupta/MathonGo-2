@@ -83,7 +83,11 @@ $(document).ready(function () {
                                 $('#msg').attr('class', 'text-success').text("Already Enrolled");
                             });
                         } else {
-                            $('#msg').attr('class', 'text-danger').text("Enroll Again");
+
+                            if(data.message === "Student Only")
+                                $('#msg').attr('class', 'text-danger').text("Only Students Can Enroll");
+                            else
+                                $('#msg').attr('class', 'text-danger').text("Enroll Again");
                         }
                     }).fail(function (object) {
                         window.alert('Please Login First');
