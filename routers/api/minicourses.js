@@ -178,7 +178,7 @@ router.post('/withFilters', function (req, res) {
     }
 });
 
-router.post('/:id/enroll', passport.authenticate('bearer'), function (req, res) {
+router.post('/:id/enroll', passport.authenticate('bearer'), ensure.ensureStudent(),function (req, res) {
     //enrol in a minicourse
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.create({
