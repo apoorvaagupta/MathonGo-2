@@ -222,8 +222,63 @@ router.post('/:minicourse/review', passport.authenticate('bearer'), function (re
     //PHASE 2
 });
 
-router.delete('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
-    models.MiniCourse.destroy();
-});
+router.delete('/:id', function (req, res) {
+    let miniCourseId = parseInt(req.params.id);
+    models.MiniCourse.destroy({
+        where: {id: miniCourseId}
+    }).then(function (noOfMiniCoursesDeleted) {
+        if (noOfMiniCoursesDeleted !== 0) {
+            models.Lesson.destroy({
+                where: {minicourseId: miniCourseId}
+            }).then(function (noOfLessonsDeleted) {
+                    models.Enrollment.destroy({
+                        where: {minicourseId: miniCourseId}
+                    }).then(function (noOfEnrollmentsDeleted) {
+                        models.Review.destroy({
+                            where: {minicourseId: miniCourseId}
+                        }).then(function (noOfReviewsDeleted) {
+                            models.Tag.destroy({
+                                where: {minicourseId: miniCourseId}
+                            }).then(function (noOfTagsDeleted) {
+                                models.MiniCourseCategory.destroy({
+                                    where: {minicourseId: miniCourseId}
+                                }).then(function (noOfMiniCourseCategoriesDeleted) {
+                                    res.send({
+                                        success: 'true',
+                                        noOfMiniCoursesDeleted,
+                                        noOfLessonsDeleted,
+                                        noOfEnrollmentsDeleted,
+                                        noOfReviewsDeleted,
+                                        noOfTagsDeleted,
+                                        noOfMiniCourseCategoriesDeleted
+                                    });
+                                }).catch(function (err) {
+                                    console.log(err);
+                                    res.send("Could not delete the MiniCourse Categories");
+                                })
+                            }).catch(function (err) {
+                                console.log(err);
+                                res.send("Could not delete the Tags");
+                            })
+                        }).catch(function (err) {
+                            console.log(err);
+                            res.send("Could not delete the Reviews");
+                        })
+                    }).catch(function (err) {
+                        console.log(err);
+                        res.send("Could not delete the Enrollments");
+                    })
+                }
+            ).catch(function (err) {
+                console.log(err);
+                res.send("Could not delete the Lessons");
+            })
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send("Could not delete the minicourse");
+    })
+})
+;
 
 module.exports = router;

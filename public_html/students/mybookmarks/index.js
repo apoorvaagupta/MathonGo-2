@@ -14,7 +14,7 @@ $('document').ready(function () {
     }).done(function (bookmarks) {
         const lectures = $('#lectures');
         for (let i = 0; i < bookmarks.length; i++) {
-            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='/lesson/` + bookmarks[i].lesson.id + `'">
+            lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='/lessons/` + bookmarks[i].lesson.id + `'">
                         <div class="row" style="margin-bottom: 0">
                             <div class="col-sm-1" style="padding-left: 0">
                                 <img src="/images/icons/movie.png">
