@@ -43,7 +43,7 @@ router.post('/student', function (req, res) {
 router.post('/tutor', function (req, res) {
 
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
-        res.send("Insufficient Details");
+        res.send({isSuccess: "false", msg: "Insufficient Details"});
     }
     password.pass2hash(req.body.password).then(function (hash) {
         models.UserLocal.create({

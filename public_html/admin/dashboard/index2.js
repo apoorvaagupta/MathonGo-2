@@ -15,6 +15,71 @@ $(document).ready(function () {
                 e.preventDefault();
             });
 
+            $('#tutorButton').click(function () {
+                $form.text("");
+                $msg.text("");
+                $form.append(`
+            <label>
+                    Name: <input type="text" style="width: 250px" id="tutor-name"  required>
+            </label>
+            <br><br>
+            <label>
+                    Email: <input type="text" style="width: 250px" id="tutor-email"  required>
+            </label>
+            <br><br>
+            <label>
+                    Password: <input type="text" style="width: 250px" id="tutor-password"  required>
+            </label>
+            <br><br>
+            <label>
+                    Contact: <input type="text" style="width: 250px" id="tutor-contact"  required>
+            </label>
+            <br><br>
+            <label>
+                    Image: (name in all lowercase) <input type="text"  style="width: 250px" id="tutor-img"  required>
+            </label>
+            <br><br>
+            <label>
+                    Description:(25 pages)<textarea type="text"  cols="60"  rows="5" id="tutor-description"  required></textarea>
+            </label>
+            <br><br>
+            <button class="btn buttons" id="submit">Submit</button>
+        `);
+                $submit = $('#submit');
+                $submit.unbind('click');
+                $submit.click(function () {
+
+
+                    $.ajax({
+                        url: "/api/tutors/add",
+                        data: {
+                            name: $('#tutor-name').val(),
+                            password: $('#tutor-password').val(),
+                            email: $('#tutor-email').val(),
+                            img: $('#tutor-img').val(),
+                            contact: $('#tutor-contact').val(),
+                            description: $('#tutor-description').val()
+                        },
+                        method: 'POST',
+                        headers: {
+                            "Authorization": "Bearer " + localStorage.getItem("token")
+                        }
+                    }).done(function (data) {
+                        if (data.isSuccess === 'true') {
+                            $form.text('');
+                            $msg.attr('class', 'text-success').text('Tutor Added');
+                        } else {
+                            $msg.attr('class', 'text-danger').text(data.message);
+                        }
+                    }).fail(function (object) {
+                        if (object.responseText === 'Unauthorized') {
+                            window.alert("Please Login First");
+                            window.location.replace('/admin');
+                        }
+                    })
+                })
+            });
+
             $('#classButton').click(function () {
                 $form.text("");
                 $msg.text("");
@@ -46,7 +111,7 @@ $(document).ready(function () {
                     }).fail(function (object) {
                         if (object.responseText === 'Unauthorized') {
                             window.alert("Please Login First");
-                            window.location.replace('/');
+                            window.location.replace('/admin');
                         }
                     })
                 })
@@ -83,13 +148,13 @@ $(document).ready(function () {
                     }).fail(function (object) {
                         if (object.responseText === 'Unauthorized') {
                             window.alert("Please Login First");
-                            window.location.replace('/');
+                            window.location.replace('/admin');
                         }
                     })
                 })
             });
 
-            $('#courseButton').click(function () {
+            $('#chapterButton').click(function () {
                 $form.text("");
                 $msg.text("");
                 $form.append(`
@@ -120,7 +185,7 @@ $(document).ready(function () {
                     }).fail(function (object) {
                         if (object.responseText === 'Unauthorized') {
                             window.alert("Please Login First");
-                            window.location.replace('/');
+                            window.location.replace('/admin');
                         }
                     })
                 })
@@ -156,13 +221,13 @@ $(document).ready(function () {
                     }).fail(function (object) {
                         if (object.responseText === 'Unauthorized') {
                             window.alert("Please Login First");
-                            window.location.replace('/');
+                            window.location.replace('/admin');
                         }
                     })
                 })
             });
 
-            $('#minicourseButton').click(function () {
+            $('#courseButton').click(function () {
                 $form.text("");
                 $msg.text("");
                 $.get("/api/extra/filters", function (filters) {
@@ -332,7 +397,7 @@ $(document).ready(function () {
                                         }
                                     })
                                 }
-                                else{
+                                else {
                                     $form.text('');
                                     if (miniCourseFinal.success === 'true') {
                                         $form.text('');
@@ -345,7 +410,7 @@ $(document).ready(function () {
                                 console.log(111111111);
                                 if (object.responseText === 'Unauthorized') {
                                     window.alert("Please Login First");
-                                    window.location.replace('/');
+                                    window.location.replace('/admin');
                                 }
                             })
                         })
