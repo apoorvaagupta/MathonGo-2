@@ -99,15 +99,15 @@ router.post('/withFilters', function (req, res) {
 
         let options = {};
         if (req.body.filter.hasOwnProperty('classObject')) {
-            options['$tags.classId$'] = {$in: req.body.filter.classObject.map(Number)};
+            options['$tag.classId$'] = {$in: req.body.filter.classObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('subjectObject')) {
-            options['$tags.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
+            options['$tag.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('courseObject')) {
-            options['$tags.courseId$'] = {$in: req.body.filter.courseObject.map(Number)};
+            options['$tag.courseId$'] = {$in: req.body.filter.courseObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('categoryObject')) {
@@ -168,7 +168,7 @@ router.post('/withFilters', function (req, res) {
                 res.send(finalMiniCourses);
             }).catch(function (err) {
                 console.log(err);
-                res.send("Could not send all the minicourses");
+                res.send("Could not send all t");
             })
         }).catch(function (err) {
             console.log(err);
