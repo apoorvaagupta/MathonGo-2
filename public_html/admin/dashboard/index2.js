@@ -48,35 +48,48 @@ $(document).ready(function () {
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
+                    var name = $('#tutor-name').val(),
+                        password = $('#tutor-password').val(),
+                        email = $('#tutor-email').val(),
+                        img = $('#tutor-img').val(),
+                        contact = $('#tutor-contact').val(),
+                        description = $('#tutor-description').val();
+
+                    if (name !== "" && password !== "" && email !== "" && img !== "" && contact !== "" && description !== "") {
+
+                        $.ajax({
+                            url: "/api/tutors/add",
+                            data: {
+                                name: name,
+                                password: password,
+                                email: email,
+                                img: img,
+                                contact: contact,
+                                description: description
+                            },
+                            method: 'POST',
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            }
+                        }).done(function (data) {
+                            if (data.isSuccess === 'true') {
+                                $form.text('');
+                                $msg.attr('class', 'text-success').text('Tutor Added');
+                            } else {
+                                $msg.attr('class', 'text-danger').text(data.message);
+                            }
+                        }).fail(function (object) {
+                            if (object.responseText === 'Unauthorized') {
+                                window.alert("Please Login First");
+                                window.location.replace('/admin');
+                            }
+                        })
+                    }
+                    else {
+                        $msg.text("Please fill all the details");
+                    }
 
 
-                    $.ajax({
-                        url: "/api/tutors/add",
-                        data: {
-                            name: $('#tutor-name').val(),
-                            password: $('#tutor-password').val(),
-                            email: $('#tutor-email').val(),
-                            img: $('#tutor-img').val(),
-                            contact: $('#tutor-contact').val(),
-                            description: $('#tutor-description').val()
-                        },
-                        method: 'POST',
-                        headers: {
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
-                    }).done(function (data) {
-                        if (data.isSuccess === 'true') {
-                            $form.text('');
-                            $msg.attr('class', 'text-success').text('Tutor Added');
-                        } else {
-                            $msg.attr('class', 'text-danger').text(data.message);
-                        }
-                    }).fail(function (object) {
-                        if (object.responseText === 'Unauthorized') {
-                            window.alert("Please Login First");
-                            window.location.replace('/admin');
-                        }
-                    })
                 })
             });
 
@@ -94,26 +107,32 @@ $(document).ready(function () {
                 $submit.click(function () {
 
 
-                    $.ajax({
-                        url: "/api/extra/addClass",
-                        data: {className: $('#className').val()},
-                        method: 'POST',
-                        headers: {
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
-                    }).done(function (data) {
-                        if (data.isSuccess === 'true') {
-                            $form.text('');
-                            $msg.attr('class', 'text-success').text('Class Added');
-                        } else {
-                            $msg.attr('class', 'text-danger').text(data.message);
-                        }
-                    }).fail(function (object) {
-                        if (object.responseText === 'Unauthorized') {
-                            window.alert("Please Login First");
-                            window.location.replace('/admin');
-                        }
-                    })
+                    var className = $('#className').val();
+                    if (className !== "") {
+                        $.ajax({
+                            url: "/api/extra/addClass",
+                            data: {className: className},
+                            method: 'POST',
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            }
+                        }).done(function (data) {
+                            if (data.isSuccess === 'true') {
+                                $form.text('');
+                                $msg.attr('class', 'text-success').text('Class Added');
+                            } else {
+                                $msg.attr('class', 'text-danger').text(data.message);
+                            }
+                        }).fail(function (object) {
+                            if (object.responseText === 'Unauthorized') {
+                                window.alert("Please Login First");
+                                window.location.replace('/admin');
+                            }
+                        })
+                    }
+                    else {
+                        $msg.text("Please fill all fields");
+                    }
                 })
             });
 
@@ -130,27 +149,33 @@ $(document).ready(function () {
                 $submit.unbind('click');
                 $submit.click(function () {
 
-                    $.ajax({
-                        url: "/api/extra/addSubject",
-                        data: {subjectName: $('#subjectName').val()},
-                        method: 'POST',
-                        headers: {
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
-                    }).done(function (data) {
-                        console.log(1);
-                        if (data.isSuccess === 'true') {
-                            $form.text('');
-                            $msg.attr('class', 'text-success').text('Subject Added');
-                        } else {
-                            $msg.attr('class', 'text-danger').text(data.message);
-                        }
-                    }).fail(function (object) {
-                        if (object.responseText === 'Unauthorized') {
-                            window.alert("Please Login First");
-                            window.location.replace('/admin');
-                        }
-                    })
+                    var subjectName = $('#subjectName').val();
+                    if (subjectName !== "") {
+                        $.ajax({
+                            url: "/api/extra/addSubject",
+                            data: {subjectName: subjectName},
+                            method: 'POST',
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            }
+                        }).done(function (data) {
+                            console.log(1);
+                            if (data.isSuccess === 'true') {
+                                $form.text('');
+                                $msg.attr('class', 'text-success').text('Subject Added');
+                            } else {
+                                $msg.attr('class', 'text-danger').text(data.message);
+                            }
+                        }).fail(function (object) {
+                            if (object.responseText === 'Unauthorized') {
+                                window.alert("Please Login First");
+                                window.location.replace('/admin');
+                            }
+                        })
+                    }
+                    else {
+                        $msg.text("Please fill all fields");
+                    }
                 })
             });
 
@@ -168,26 +193,32 @@ $(document).ready(function () {
                 $submit.click(function () {
 
 
-                    $.ajax({
-                        url: "/api/extra/addCourse",
-                        data: {courseName: $('#courseName').val()},
-                        method: 'POST',
-                        headers: {
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
-                    }).done(function (data) {
-                        if (data.isSuccess === 'true') {
-                            $form.text('');
-                            $msg.attr('class', 'text-success').text('Course Added');
-                        } else {
-                            $msg.attr('class', 'text-danger').text(data.message);
-                        }
-                    }).fail(function (object) {
-                        if (object.responseText === 'Unauthorized') {
-                            window.alert("Please Login First");
-                            window.location.replace('/admin');
-                        }
-                    })
+                    var courseName = $('#courseName').val();
+                    if (courseName !== "") {
+                        $.ajax({
+                            url: "/api/extra/addCourse",
+                            data: {courseName: courseName},
+                            method: 'POST',
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            }
+                        }).done(function (data) {
+                            if (data.isSuccess === 'true') {
+                                $form.text('');
+                                $msg.attr('class', 'text-success').text('Course Added');
+                            } else {
+                                $msg.attr('class', 'text-danger').text(data.message);
+                            }
+                        }).fail(function (object) {
+                            if (object.responseText === 'Unauthorized') {
+                                window.alert("Please Login First");
+                                window.location.replace('/admin');
+                            }
+                        })
+                    }
+                    else {
+                        $msg.text("Please fill all fields");
+                    }
                 })
             });
 
@@ -204,26 +235,32 @@ $(document).ready(function () {
                 $submit.unbind('click');
                 $submit.click(function () {
 
-                    $.ajax({
-                        url: "/api/extra/addCategory",
-                        data: {categoryName: $('#categoryName').val()},
-                        method: 'POST',
-                        headers: {
-                            "Authorization": "Bearer " + localStorage.getItem("token")
-                        }
-                    }).done(function (data) {
-                        if (data.isSuccess === 'true') {
-                            $form.text('');
-                            $msg.attr('class', 'text-success').text('Category Added');
-                        } else {
-                            $msg.attr('class', 'text-danger').text(data.message);
-                        }
-                    }).fail(function (object) {
-                        if (object.responseText === 'Unauthorized') {
-                            window.alert("Please Login First");
-                            window.location.replace('/admin');
-                        }
-                    })
+                    var categoryName = $('#categoryName').val();
+                    if (categoryName !== "") {
+                        $.ajax({
+                            url: "/api/extra/addCategory",
+                            data: {categoryName: categoryName},
+                            method: 'POST',
+                            headers: {
+                                "Authorization": "Bearer " + localStorage.getItem("token")
+                            }
+                        }).done(function (data) {
+                            if (data.isSuccess === 'true') {
+                                $form.text('');
+                                $msg.attr('class', 'text-success').text('Category Added');
+                            } else {
+                                $msg.attr('class', 'text-danger').text(data.message);
+                            }
+                        }).fail(function (object) {
+                            if (object.responseText === 'Unauthorized') {
+                                window.alert("Please Login First");
+                                window.location.replace('/admin');
+                            }
+                        })
+                    }
+                    else {
+                        $msg.text("Please fill all fields");
+                    }
                 })
             });
 
