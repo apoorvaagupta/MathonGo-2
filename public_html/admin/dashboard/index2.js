@@ -72,6 +72,7 @@ $(document).ready(function () {
                                 "Authorization": "Bearer " + localStorage.getItem("token")
                             }
                         }).done(function (data) {
+                            console.log(data);
                             if (data.isSuccess === 'true') {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Tutor Added');
