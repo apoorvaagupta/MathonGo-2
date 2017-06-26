@@ -6,23 +6,35 @@ const passport = require('./../../passport/passporthandler');
 
 router.post('/add', function (req, res) {
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
-        res.send("Insufficient Details");
+        res.send({isSuccess: "false", msg: "Insufficient Details"});
     }
     password.pass2hash(req.body.password).then(function (hash) {
         models.UserLocal.create({
             email: req.body.email,
             password: hash,
+            role: "Tutor",
             tutor: {
                 name: req.body.name,
                 email: req.body.email,
-                description: req.body.description,
-                img: req.body.img
+                contact: req.body.contact,
+                img: req.body.img,
+                description: req.body.description
             }
         }, {
-            include: models.Tutor
-        }).then(function (tutorLocal) {
-            res.send(tutorLocal.tutor);
+            include: [models.Tutor]
+        }).then(function (userLocal) {
+            if (userLocal) {
+                res.send({isSuccess: 'true'});
+            } else {
+                res.send({isSuccess: 'false'})
+            }
+        }).catch(function (err) {
+            console.log(err);
+            res.send({isSuccess: 'error'});
         })
+    }).catch(function (err) {
+        console.log(err);
+        res.send({isSuccess: 'error'});
     })
 });
 
