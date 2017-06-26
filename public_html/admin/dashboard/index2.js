@@ -159,7 +159,7 @@ $(document).ready(function () {
                 $msg.text("");
                 $form.append(`
             <label>
-            Course name : <input type="text" id="courseName"  required>
+            Chapter name : <input type="text" id="courseName"  required>
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
@@ -234,7 +234,7 @@ $(document).ready(function () {
                     if (filters.isSuccess === 'true') {
                         $form.append(`
                     <label>
-                    Name of the minicourse: <input type="text"  width="250px" id="minicourse-name"  required>
+                    Name of the Course: <input type="text"  width="250px" id="minicourse-name"  required>
                     </label>
                     <br><br>
                     <label>
@@ -246,7 +246,7 @@ $(document).ready(function () {
                     </label>
                     <br><br>
                     <label>
-                    Duration of the minicourse: <input type="text" id="minicourse-duration" required>
+                    Duration of the Course: <input type="text" id="minicourse-duration" required>
                     </label>
                     <br><br>
                     <label>
