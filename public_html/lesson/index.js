@@ -19,7 +19,8 @@ $(document).ready(function () {
                 $('#miniCourseName').text(miniCourse.name);
                 $('#noOfLessons').text(miniCourse.noOfLessons + ' Lectures');
                 $('#miniCourseDuration').text(miniCourse.duration);
-
+                console.log(lesson.videoUrl);
+                $('#video').attr('src', lesson.videoUrl);
                 $('#nameOfTheMiniCourse').text(lesson.name);
                 $('#durationOfMiniCourse').text(lesson.duration);
                 $('#lessonViews').text();
