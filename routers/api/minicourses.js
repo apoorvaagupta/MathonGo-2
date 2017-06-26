@@ -2,6 +2,7 @@ const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 const passport = require('./../../passport/passporthandler');
+const ensure = require('./../../passport/passportutils');
 
 router.get('/', function (req, res) {
 
@@ -99,15 +100,15 @@ router.post('/withFilters', function (req, res) {
 
         let options = {};
         if (req.body.filter.hasOwnProperty('classObject')) {
-            options['$tags.classId$'] = {$in: req.body.filter.classObject.map(Number)};
+            options['$tag.classId$'] = {$in: req.body.filter.classObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('subjectObject')) {
-            options['$tags.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
+            options['$tag.subjectId$'] = {$in: req.body.filter.subjectObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('courseObject')) {
-            options['$tags.courseId$'] = {$in: req.body.filter.courseObject.map(Number)};
+            options['$tag.courseId$'] = {$in: req.body.filter.courseObject.map(Number)};
         }
 
         if (req.body.filter.hasOwnProperty('categoryObject')) {
@@ -138,19 +139,19 @@ router.post('/withFilters', function (req, res) {
                 },
                 {
                     model: models.Tag,
-                    // include: [models.Class, models.Subject, models.Course]
+                    include: [models.Class, models.Subject, models.Course]
                 },
                 {
                     model: models.MiniCourseCategory,
-                    // include: [models.Category]
+                    include: [models.Category]
                 }
             ]
         }).then(function (miniCourses) {
             console.log("************");
             miniCourseIds = miniCourses.map((i) => i.id);
             models.MiniCourse.findAll({
-                where:{
-                    id:{$in:miniCourseIds}
+                where: {
+                    id: {$in: miniCourseIds}
                 },
                 include: [
                     {
@@ -177,7 +178,7 @@ router.post('/withFilters', function (req, res) {
     }
 });
 
-router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
+router.post('/:id/enroll', passport.authenticate('bearer'), function (req, res) {
     //enrol in a minicourse
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.create({
@@ -197,7 +198,7 @@ router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
     //Ask
 });
 
-router.get('/:id/isEnrolled',passport.authenticate('bearer'), function (req, res) {
+router.get('/:id/isEnrolled', passport.authenticate('bearer'), function (req, res) {
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.findOne({
         where: {
@@ -216,9 +217,13 @@ router.get('/:id/isEnrolled',passport.authenticate('bearer'), function (req, res
     })
 });
 //Ask
-router.post('/:minicourse/review',passport.authenticate('bearer'), function (req, res) {
+router.post('/:minicourse/review', passport.authenticate('bearer'), function (req, res) {
     //review this minicourse
     //PHASE 2
+});
+
+router.delete('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
+    models.MiniCourse.destroy();
 });
 
 module.exports = router;
