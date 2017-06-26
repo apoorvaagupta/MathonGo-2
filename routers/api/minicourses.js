@@ -2,6 +2,7 @@ const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
 const passport = require('./../../passport/passporthandler');
+const ensure = require('./../../passport/passportutils');
 
 router.get('/', function (req, res) {
 
@@ -149,8 +150,8 @@ router.post('/withFilters', function (req, res) {
             console.log("************");
             miniCourseIds = miniCourses.map((i) => i.id);
             models.MiniCourse.findAll({
-                where:{
-                    id:{$in:miniCourseIds}
+                where: {
+                    id: {$in: miniCourseIds}
                 },
                 include: [
                     {
@@ -177,7 +178,7 @@ router.post('/withFilters', function (req, res) {
     }
 });
 
-router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
+router.post('/:id/enroll', passport.authenticate('bearer'), function (req, res) {
     //enrol in a minicourse
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.create({
@@ -197,7 +198,7 @@ router.post('/:id/enroll',passport.authenticate('bearer'), function (req, res) {
     //Ask
 });
 
-router.get('/:id/isEnrolled',passport.authenticate('bearer'), function (req, res) {
+router.get('/:id/isEnrolled', passport.authenticate('bearer'), function (req, res) {
     let miniCourseId = parseInt(req.params.id);
     models.Enrollment.findOne({
         where: {
@@ -216,9 +217,13 @@ router.get('/:id/isEnrolled',passport.authenticate('bearer'), function (req, res
     })
 });
 //Ask
-router.post('/:minicourse/review',passport.authenticate('bearer'), function (req, res) {
+router.post('/:minicourse/review', passport.authenticate('bearer'), function (req, res) {
     //review this minicourse
     //PHASE 2
+});
+
+router.delete('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
+    models.MiniCourse.destroy();
 });
 
 module.exports = router;
