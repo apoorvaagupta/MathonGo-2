@@ -38,6 +38,7 @@ $(document).ready(function () {
                         }
                     }).done(function (data) {
                         if (data.isSuccess === 'true') {
+                            $form.text('');
                             $msg.attr('class', 'text-success').text('Class Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
@@ -74,6 +75,7 @@ $(document).ready(function () {
                     }).done(function (data) {
                         console.log(1);
                         if (data.isSuccess === 'true') {
+                            $form.text('');
                             $msg.attr('class', 'text-success').text('Subject Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
@@ -110,6 +112,7 @@ $(document).ready(function () {
                         }
                     }).done(function (data) {
                         if (data.isSuccess === 'true') {
+                            $form.text('');
                             $msg.attr('class', 'text-success').text('Course Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
@@ -145,6 +148,7 @@ $(document).ready(function () {
                         }
                     }).done(function (data) {
                         if (data.isSuccess === 'true') {
+                            $form.text('');
                             $msg.attr('class', 'text-success').text('Category Added');
                         } else {
                             $msg.attr('class', 'text-danger').text(data.message);
@@ -165,7 +169,7 @@ $(document).ready(function () {
                     if (filters.isSuccess === 'true') {
                         $form.append(`
                     <label>
-                    Name of the minicourse: <input type="text" id="minicourse-name"  required>
+                    Name of the minicourse: <input type="text"  width="250px" id="minicourse-name"  required>
                     </label>
                     <br><br>
                     <label>
@@ -207,7 +211,7 @@ $(document).ready(function () {
 
                         subjectString += `</label><br><br>`;
 
-                        let courseString = "<label>Course : ";
+                        let courseString = "<label>Chapter : ";
                         for (let i = 0; i < filters.courseObject.length; i++) {
                             courseString += `<label><input type="radio" name="course" value="` + filters.courseObject[i].id + `"> ` + filters.courseObject[i].courseName + ` </label> `
                         }
@@ -232,15 +236,15 @@ $(document).ready(function () {
                         $('#add-lesson').click(function () {
                             $('#lessons-list').append(`<li>
             <label>
-        Name of the Lesson: <input type="text" id="lesson-` + counter + `-name"  required>
+        Name of the Lesson: <input type="text" width="250px" id="lesson-` + counter + `-name"  required>
     </label>
     <br><br>
     <label>
-        Video URL: <input type="text" id="lesson-` + counter + `-videourl" required>
+        Video URL: <input type="text" width="250px" id="lesson-` + counter + `-videourl" required>
     </label>
     <br><br>
     <label>
-        Description: <input type="text" id="lesson-` + counter + `-description" required>
+        Description: <br><textarea cols="100" rows="4" id="lesson-` + counter + `-description" required></textarea>
     </label>
     <br><br>
     <label>
@@ -313,13 +317,29 @@ $(document).ready(function () {
                                             "Authorization": "Bearer " + localStorage.getItem("token")
                                         }
                                     }).done(function (lessons) {
+                                        $form.text('');
                                         console.log(lessons);
+                                        if (lessons.success === 'true') {
+                                            $form.text('');
+                                            $msg.attr('class', 'text-success').text('Course and lessons Added');
+                                        } else {
+                                            $msg.attr('class', 'text-danger').text(data.message);
+                                        }
                                     }).fail(function (object) {
                                         if (object.responseText === 'Unauthorized') {
                                             window.alert("Please Login First");
                                             window.location.replace('/');
                                         }
                                     })
+                                }
+                                else{
+                                    $form.text('');
+                                    if (miniCourseFinal.success === 'true') {
+                                        $form.text('');
+                                        $msg.attr('class', 'text-success').text('Course Added');
+                                    } else {
+                                        $msg.attr('class', 'text-danger').text(data.message);
+                                    }
                                 }
                             }).fail(function (object) {
                                 console.log(111111111);

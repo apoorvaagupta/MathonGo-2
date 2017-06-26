@@ -138,34 +138,34 @@ router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensure
                                         include: [models.Category]
                                     }]
                             }).then(function (miniCourseFinal) {
-                                res.send(miniCourseFinal);
+                                res.send({ success: "true", data: miniCourseFinal});
                             }).catch(function (err) {
                                 console.log(err);
-                                res.send("Could not find the MiniCourse right now");
+                                res.send({ success: "false", msg : "Could not find the MiniCourse right now"});
                             });
                         }).catch(function (err) {
                             console.log(err);
-                            res.send("Could not add the category tag right now")
+                            res.send({ success: "false", msg:"Could not add the category tag right now"})
                         })
                     }).catch(function (err) {
                         console.log(err);
-                        res.send("Could not add the tags right now");
+                        res.send({ success: "false", msg:"Could not add the tags right now"});
                     })
                 }).catch(function (err) {
                     console.log(err);
-                    res.send("Could not add the course right now");
+                    res.send({ success: "false", msg:"Could not add the course right now"});
                 })
             }).catch(function (err) {
                 console.log(err);
-                res.send("Could not add the subject right now");
+                res.send({ success: "false", msg:"Could not add the subject right now"});
             })
         }).catch(function (err) {
             console.log(err);
-            res.send("Could not add the class right now");
+            res.send({ success: "false", msg:"Could not add the class right now"});
         })
     }).catch(function (err) {
         console.log(err);
-        res.send("Could not add the minicourse right now");
+        res.send({ success: "false", msg:"Could not add the minicourse right now"});
 
     })
 
@@ -207,10 +207,10 @@ router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ens
             }
         })
     }).then(function (lessons) {
-        res.send(lessons);
+        res.send({ success: "true", msg:lessons});
     }).catch(function (err) {
         console.log(err);
-        res.send("Could not add the lesson right now");
+        res.send({success: 'false', msg: "Could not add the lesson right now"});
     })
 
 });
