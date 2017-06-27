@@ -486,7 +486,7 @@ $(document).ready(function () {
                 $form.text("");
                 $msg.text("");
                 $.get("/api/minicourses", function (minicourses) {
-                    $form.append(`<ul id="minicourses-list" class="list-group" style="width:300px"></ul>`);
+                    $form.append(`<ul id="minicourses-list" class="list-group" style="width:500px"></ul>`);
                     const $minicourses_list = $('#minicourses-list');
                     minicourses.forEach(function (minicourse) {
                         $minicourses_list.append(`
