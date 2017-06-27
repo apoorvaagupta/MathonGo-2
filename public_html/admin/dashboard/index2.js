@@ -275,7 +275,7 @@ $(document).ready(function () {
                             if (filters.isSuccess === 'true') {
                                 $form.append(`
                     <label>
-                    Name of the Course: <input type="text"  style=" width:250px" id="minicourse-name"  required>
+                    Name of the Course: <input type="text"  style=" width:600px" id="minicourse-name"  required>
                     </label>
                     <br><br>
                     <label>
@@ -351,11 +351,11 @@ $(document).ready(function () {
                                     $('#lessons-list').append(`
 <li>
                             <label>
-        Name of the Lesson: <input type="text" width="250px" id="lesson-` + counter + `-name"  required>
+        Name of the Lesson: <input type="text" style=" width:600px" id="lesson-` + counter + `-name"  required>
     </label>
     <br><br>
     <label>
-        Video URL: <input type="text" width="250px" id="lesson-` + counter + `-videourl" required>
+        Video URL: <input type="text" style=" width:800px" id="lesson-` + counter + `-videourl" required>
     </label>
     <br><br>
     <label>
@@ -486,7 +486,7 @@ $(document).ready(function () {
                 $form.text("");
                 $msg.text("");
                 $.get("/api/minicourses", function (minicourses) {
-                    $form.append(`<ul id="minicourses-list" class="list-group"></ul>`);
+                    $form.append(`<ul id="minicourses-list" class="list-group" style="width:500px"></ul>`);
                     const $minicourses_list = $('#minicourses-list');
                     minicourses.forEach(function (minicourse) {
                         $minicourses_list.append(`
