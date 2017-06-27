@@ -73,7 +73,7 @@ $(document).ready(function () {
                             }
                         }).done(function (data) {
                             console.log(data);
-                            if (data.isSuccess === 'true') {
+                            if (data.success === 'true') {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Tutor Added');
                             } else {
