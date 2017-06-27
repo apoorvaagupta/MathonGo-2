@@ -16,8 +16,8 @@ $(document).ready(function () {
             });
 
             $('#tutorButton').click(function () {
-                $form.text("");
-                $msg.text("");
+                $form.text('');
+                $msg.text('');
                 $form.append(`
             <label>
                     Name: <input type="text" style="width: 250px" id="tutor-name"  required>
@@ -45,6 +45,7 @@ $(document).ready(function () {
             <br><br>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
@@ -77,7 +78,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Tutor Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -122,7 +123,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Class Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -165,7 +166,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Subject Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -208,7 +209,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Course Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -250,7 +251,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Category Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -268,8 +269,8 @@ $(document).ready(function () {
             $('#courseButton').click(function () {
                 $form.text("");
                 $msg.text("");
-                $.get('/api/tutors',function (tutors) {
-                    if(tutors.success === 'true'){
+                $.get('/api/tutors', function (tutors) {
+                    if (tutors.success === 'true') {
                         $.get("/api/extra/filters", function (filters) {
                             if (filters.isSuccess === 'true') {
                                 $form.append(`
@@ -302,8 +303,8 @@ $(document).ready(function () {
                     <label><input type="radio" name="medium" value="Hindi"> Hindi</label>
                     </label><br><br>
                    `);
-
                                 let tutorString = "<label>Tutor : ";
+
                                 for (let i = 0; i < tutors.data.length; i++) {
                                     tutorString += `<label><input type="radio" name="tutor" value="` + tutors.data[i].id + `"> ` + tutors.data[i].name + ` </label> `
                                 }
@@ -347,8 +348,9 @@ $(document).ready(function () {
                                 $submit.unbind('click');
                                 let counter = 0;
                                 $('#add-lesson').click(function () {
-                                    $('#lessons-list').append(`<li>
-            <label>
+                                    $('#lessons-list').append(`
+<li>
+                            <label>
         Name of the Lesson: <input type="text" width="250px" id="lesson-` + counter + `-name"  required>
     </label>
     <br><br>
@@ -386,7 +388,7 @@ $(document).ready(function () {
                                         categoryIds.push($(this).val());
                                     });
                                     console.log(2);
-                                    tutorId= $('input[name="tutor"]:checked').val();
+                                    tutorId = $('input[name="tutor"]:checked').val();
                                     miniCourseData = {
                                         name: $('#minicourse-name').val(),
                                         noOfLessons: $('#minicourse-no-of-lessons').val(),
@@ -402,7 +404,7 @@ $(document).ready(function () {
                                     };
 
                                     $.ajax({
-                                        url: "/api/tutors/"+tutorId+"/addMiniCourse",
+                                        url: "/api/tutors/" + tutorId + "/addMiniCourse",
                                         data: miniCourseData,
                                         method: 'POST',
                                         headers: {
@@ -437,7 +439,7 @@ $(document).ready(function () {
                                                     $form.text('');
                                                     $msg.attr('class', 'text-success').text('Course and lessons Added');
                                                 } else {
-                                                    $msg.attr('class', 'text-danger').text(data.message);
+                                                    $msg.attr('class', 'text-danger').text('Error, Try Again');
                                                 }
                                             }).fail(function (object) {
                                                 if (object.responseText === 'Unauthorized') {
@@ -452,7 +454,7 @@ $(document).ready(function () {
                                                 $form.text('');
                                                 $msg.attr('class', 'text-success').text('Course Added');
                                             } else {
-                                                $msg.attr('class', 'text-danger').text(data.message);
+                                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                                             }
                                         }
                                     }).fail(function (object) {
@@ -464,16 +466,37 @@ $(document).ready(function () {
                                     })
                                 })
                             }
-                            else {$msg.text("Please add filters first");}
+                            else {
+                                $msg.text("Please add filters first");
+                            }
                         });
-                    }else{
+                    } else {
                         $msg.text("Please add tutors first");
                     }
+                }).fail(function (object) {
+                    console.log(111111111);
+                    if (object.responseText === 'Unauthorized') {
+                        window.alert("Please Login First");
+                        window.location.replace('/admin');
+                    }
                 })
+            });
 
+            $('#viewCoursesButton').click(function () {
+                $form.text("");
+                $msg.text("");
+                $.get("/api/minicourses", function (minicourses) {
+                    $form.append(`<ol id="minicourses-list"></ol>`);
+                    const $minicourses_list = $('#minicourses-list');
+                    minicourses.forEach(function (minicourse) {
+                        $minicourses_list.append(`
+              <li>` + minicourse.name + `</li>
+            `)
+                    })
+
+                });
             })
         }
-
 
 
         else {

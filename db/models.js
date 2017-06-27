@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 
+
   const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
       host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
       port: 5432,
@@ -12,41 +13,41 @@ const Sequelize = require('sequelize');
 //});
 
 const Student = db.define('student', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
-    email: Sequelize.STRING,
-    class: Sequelize.STRING,
-    contact: Sequelize.STRING,
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  name: Sequelize.STRING,
+  email: {type: Sequelize.STRING, unique: true},
+  class: Sequelize.STRING,
+  contact: Sequelize.STRING,
 });
 
 const Tutor = db.define('tutor', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    img: Sequelize.STRING(1234),
-    name: Sequelize.STRING,
-    email: Sequelize.STRING,
-    description: Sequelize.STRING(1234),
-    contact: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  img: Sequelize.STRING(1234),
+  name: Sequelize.STRING,
+  email: {type: Sequelize.STRING, unique: true},
+  description: Sequelize.STRING(1234),
+  contact: Sequelize.STRING
 });
 
 const Admin = db.define('admin', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    email: Sequelize.STRING,
-    name: Sequelize.STRING,
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  email: {type: Sequelize.STRING, unique: true},
+  name: Sequelize.STRING,
 });
 
 const UserLocal = db.define('userlocal', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    email: {type: Sequelize.STRING, unique: true},
-    password: Sequelize.STRING,
-    role: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  email: {type: Sequelize.STRING, unique: true},
+  password: Sequelize.STRING,
+  role: Sequelize.STRING
 });
 
 const AuthToken = db.define('authtoken', {
-    token: {
-        type: Sequelize.STRING,
-        primaryKey: true
-    },
-    role: Sequelize.STRING
+  token: {
+    type: Sequelize.STRING,
+    primaryKey: true
+  },
+  role: Sequelize.STRING
 });
 
 AuthToken.belongsTo(UserLocal);
@@ -60,79 +61,79 @@ Admin.hasOne(UserLocal);
 
 
 const MiniCourse = db.define('minicourse', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
-    noOfLessons: Sequelize.STRING,
-    description: Sequelize.STRING,
-    level: Sequelize.STRING,
-    medium: Sequelize.STRING,
-    duration: Sequelize.STRING,
-    img: {type: Sequelize.STRING, defaultValue: ""}
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  name: Sequelize.STRING,
+  noOfLessons: Sequelize.STRING,
+  description: Sequelize.STRING,
+  level: Sequelize.STRING,
+  medium: Sequelize.STRING,
+  duration: Sequelize.STRING,
+  img: {type: Sequelize.STRING, defaultValue: ""}
 });
 
 
 const Lesson = db.define('lesson', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    name: Sequelize.STRING,
-    videoUrl: Sequelize.STRING(1234),
-    level: Sequelize.STRING,
-    duration: Sequelize.STRING,
-    description: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  name: Sequelize.STRING,
+  videoUrl: Sequelize.STRING(1234),
+  level: Sequelize.STRING,
+  duration: Sequelize.STRING,
+  description: Sequelize.STRING
 });
 
 const Bookmark = db.define('bookmark', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
 const Enrollment = db.define('enrollment', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
 const Report = db.define('report', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    description: Sequelize.STRING(1234),
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  description: Sequelize.STRING(1234),
 });
 
 const Follow = db.define('follow', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
 const Upvote = db.define('upvote', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
 const Review = db.define('review', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    rating: Sequelize.INTEGER,      //discuss
-    description: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  rating: Sequelize.INTEGER,      //discuss
+  description: Sequelize.STRING
 });
 
 const Class = db.define('class', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    className: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  className: Sequelize.STRING
 });
 
 const Subject = db.define('subject', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    subjectName: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  subjectName: Sequelize.STRING
 });
 
 const Course = db.define('course', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    courseName: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  courseName: Sequelize.STRING
 });
 
 const Category = db.define('category', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-    categoryName: Sequelize.STRING
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  categoryName: Sequelize.STRING
 });
 
 const MiniCourseCategory = db.define('minicoursecategory', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true}
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true}
 });
 
 const Tag = db.define('tag', {
-    id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
+  id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
 });
 
 MiniCourse.belongsTo(Tutor);
@@ -186,29 +187,29 @@ Category.hasMany(MiniCourseCategory);
 MiniCourse.hasMany(MiniCourseCategory);
 
 db.sync({}).then(() => {
-    console.log('Database configured')
+  console.log('Database configured')
 });
 
 module.exports = {
-    models: {
-        Student,
-        Tutor,
-        Admin,
-        UserLocal,
-        AuthToken,
-        MiniCourse,
-        Lesson,
-        Bookmark,
-        Enrollment,
-        Report,
-        Follow,
-        Upvote,
-        Review,
-        Class,
-        Subject,
-        Course,
-        Tag,
-        Category,
-        MiniCourseCategory
-    }
+  models: {
+    Student,
+    Tutor,
+    Admin,
+    UserLocal,
+    AuthToken,
+    MiniCourse,
+    Lesson,
+    Bookmark,
+    Enrollment,
+    Report,
+    Follow,
+    Upvote,
+    Review,
+    Class,
+    Subject,
+    Course,
+    Tag,
+    Category,
+    MiniCourseCategory
+  }
 };
