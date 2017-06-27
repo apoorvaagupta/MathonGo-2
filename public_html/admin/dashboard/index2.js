@@ -417,6 +417,7 @@ $(document).ready(function () {
                   }).done(function (miniCourseFinal) {
                     let lessonData = [];
                     console.log(miniCourseFinal);
+                    miniCourseFinal = miniCourseFinal.data;
                     for (let i = 0; i < counter; i++) {
                       lessonData.push({
                         name: $('#lesson-' + i + '-name').val(),
@@ -428,7 +429,7 @@ $(document).ready(function () {
                       })
                     }
                     if (lessonData.length !== 0) {
-
+                      console.log("/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson")
                       $.ajax({
                         url: "/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson",
                         data: {lessons: lessonData},
@@ -502,9 +503,9 @@ $(document).ready(function () {
               </li>
             `)
           });
-            $('.view').click(function (e) {
-                console.log(e.target.parentElement.getAttribute('miniCourseId'));
-            });
+          $('.view').click(function (e) {
+            console.log(e.target.parentElement.getAttribute('miniCourseId'));
+          });
           $('.edit').click(function (e) {
             console.log(e.target.parentElement.getAttribute('miniCourseId'));
           });
