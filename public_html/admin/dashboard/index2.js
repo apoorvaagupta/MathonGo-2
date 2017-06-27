@@ -77,7 +77,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Tutor Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -122,7 +122,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Class Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -165,7 +165,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Subject Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -208,7 +208,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Course Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -250,7 +250,7 @@ $(document).ready(function () {
                                 $form.text('');
                                 $msg.attr('class', 'text-success').text('Category Added');
                             } else {
-                                $msg.attr('class', 'text-danger').text(data.message);
+                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
                         }).fail(function (object) {
                             if (object.responseText === 'Unauthorized') {
@@ -437,7 +437,7 @@ $(document).ready(function () {
                                                     $form.text('');
                                                     $msg.attr('class', 'text-success').text('Course and lessons Added');
                                                 } else {
-                                                    $msg.attr('class', 'text-danger').text(data.message);
+                                                    $msg.attr('class', 'text-danger').text('Error, Try Again');
                                                 }
                                             }).fail(function (object) {
                                                 if (object.responseText === 'Unauthorized') {
@@ -452,7 +452,7 @@ $(document).ready(function () {
                                                 $form.text('');
                                                 $msg.attr('class', 'text-success').text('Course Added');
                                             } else {
-                                                $msg.attr('class', 'text-danger').text(data.message);
+                                                $msg.attr('class', 'text-danger').text('Error, Try Again');
                                             }
                                         }
                                     }).fail(function (object) {
@@ -479,12 +479,10 @@ $(document).ready(function () {
         else {
             console.log(2);
             console.log(1);
-            alert("You are not allowed");
             window.location.replace("/");
         }
     }).fail(function (object) {
         if (object.responseText === 'Unauthorized') {
-            window.alert("Please Login First");
             window.location.replace('/');
         }
     })
