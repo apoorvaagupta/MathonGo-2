@@ -185,7 +185,7 @@ MiniCourseCategory.belongsTo(Category);
 Category.hasMany(MiniCourseCategory);
 MiniCourse.hasMany(MiniCourseCategory);
 
-db.sync({}).then(() => {
+db.sync({force: false}).then(() => {
   console.log('Database configured')
 });
 
