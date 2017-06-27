@@ -4,6 +4,20 @@ const password = require('./../../utils/password');
 const ensure = require('./../../passport/passportutils');
 const passport = require('./../../passport/passporthandler');
 
+router.get('/',function (req,res) {
+   models.Tutor.findAll().then(function (tutors) {
+       if(tutors){
+           return res.send({success: 'true', data: tutors});
+       }else {
+           return res.send({success: 'false'});
+       }
+   }).catch(function (err) {
+       console.log(err);
+       return res.send({success: 'false'});
+   })
+
+});
+
 router.post('/add', function (req, res) {
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
         res.send({isSuccess: "false", msg: "Insufficient Details"});
