@@ -480,20 +480,22 @@ $(document).ready(function () {
                         window.location.replace('/admin');
                     }
                 })
-            })
+            });
 
             $('#viewCoursesButton').click(function () {
                 $form.text("");
                 $msg.text("");
                 $.get("/api/minicourses", function (minicourses) {
                     $form.append(`<ol id="minicourses-list"></ol>`);
+                    const $minicourses_list = $('#minicourses-list');
                     minicourses.forEach(function (minicourse) {
-
+                        $minicourses_list.append(`
+              <li>` + minicourse.name + `</li>
+            `)
                     })
 
                 });
             })
-
         }
 
 
@@ -509,5 +511,4 @@ $(document).ready(function () {
             window.location.replace('/');
         }
     })
-})
-;
+});
