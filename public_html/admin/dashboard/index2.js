@@ -496,11 +496,15 @@ $(document).ready(function () {
             $minicourses_list.append(`
               <li class="list-group-item"  miniCourseId="` + minicourse.id + `">
               <span>` + minicourse.name + `</span>
-                <button class="btn btn-info edit" style="margin-left: 50px">Edit</button>
+              <button class="btn btn-outline-success view" style="margin-left: 50px">View</button>
+                <button class="btn btn-info edit" style="margin-left: 20px">Edit</button>
                 <button class="btn btn-danger delete" style="margin-left: 20px">Delete</button>
               </li>
             `)
           });
+            $('.view').click(function (e) {
+                console.log(e.target.parentElement.getAttribute('miniCourseId'));
+            });
           $('.edit').click(function (e) {
             console.log(e.target.parentElement.getAttribute('miniCourseId'));
           });
