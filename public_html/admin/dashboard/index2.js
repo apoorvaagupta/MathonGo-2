@@ -45,6 +45,7 @@ $(document).ready(function () {
             <br><br>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+
         $submit = $('#submit');
         $submit.unbind('click');
         $submit.click(function () {
@@ -73,7 +74,7 @@ $(document).ready(function () {
               }
             }).done(function (data) {
               console.log(data);
-              if (data.isSuccess === 'true') {
+              if (data.success === 'true') {
                 $form.text('');
                 $msg.attr('class', 'text-success').text('Tutor Added');
               } else {
@@ -480,7 +481,10 @@ $(document).ready(function () {
         $form.text("");
         $msg.text("");
         $.get("/api/minicourses", function (minicourses) {
+          $form.append(`<ol id="minicourses-list"></ol>`);
+          minicourses.forEach(function (minicourse) {
 
+          })
 
         });
       })
