@@ -270,9 +270,13 @@ $(document).ready(function () {
         $form.text("");
         $msg.text("");
         $.get('/api/tutors', function (tutors) {
-          if (tutors.success === 'true') {
+          if (tutors.success === 'true' && tutors.data.length > 0) {
             $.get("/api/extra/filters", function (filters) {
-              if (filters.isSuccess === 'true') {
+              if (filters.isSuccess === 'true'
+                && filters.classObject.length > 0
+                && filters.subjectObject.length > 0 &&
+                filters.courseObject.length > 0 &&
+                filters.categoryObject.length > 0) {
                 $form.append(`
                     <label>
                     Name of the Course: <input type="text"  style=" width:600px" id="minicourse-name"  required>
@@ -486,18 +490,22 @@ $(document).ready(function () {
         $form.text("");
         $msg.text("");
         $.get("/api/minicourses", function (minicourses) {
-          $form.append(`<ul id="minicourses-list" class="list-group" style="width:500px"></ul>`);
+          $form.append(`<ul id="minicourses-list" class="list-group" ></ul>`);
           const $minicourses_list = $('#minicourses-list');
           minicourses.forEach(function (minicourse) {
             $minicourses_list.append(`
-              <li class="list-group-item" miniCourseId="` + minicourse.id + `">` + minicourse.name + `
-                <button class="buttons btn edit">Edit</button>
-                <button class="buttons btn delete">Delete</button>
+              <li class="list-group-item"  miniCourseId="` + minicourse.id + `">
+              <span>` + minicourse.name + `</span>
+                <button class="btn btn-info edit" style="margin-left: 50px">Edit</button>
+                <button class="btn btn-danger delete" style="margin-left: 20px">Delete</button>
               </li>
             `)
           });
           $('.edit').click(function (e) {
-            console.log(e.target.parent.attr('miniCourseId'));
+            console.log(e.target.parentElement.getAttribute('miniCourseId'));
+          });
+          $('.delete').click(function (e) {
+            console.log(e.target.parentElement.getAttribute('miniCourseId'));
           })
 
         });
