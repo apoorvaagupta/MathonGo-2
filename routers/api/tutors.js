@@ -20,7 +20,7 @@ router.get('/',function (req,res) {
 
 router.post('/add', function (req, res) {
     if (req.body.name === "" || req.body.email === "" || req.body.password === "") {
-        res.send({isSuccess: "false", msg: "Insufficient Details"});
+        res.send({success: "false", msg: "Insufficient Details"});
     }
     password.pass2hash(req.body.password).then(function (hash) {
         models.UserLocal.create({
@@ -38,17 +38,17 @@ router.post('/add', function (req, res) {
             include: [models.Tutor]
         }).then(function (userLocal) {
             if (userLocal) {
-                res.send({isSuccess: 'true'});
+                res.send({success: 'true'});
             } else {
-                res.send({isSuccess: 'false'})
+                res.send({success: 'false'})
             }
         }).catch(function (err) {
             console.log(err);
-            res.send({isSuccess: 'error'});
+            res.send({success: 'passerror'});
         })
     }).catch(function (err) {
         console.log(err);
-        res.send({isSuccess: 'error'});
+        res.send({success: 'emailerror'});
     })
 });
 
