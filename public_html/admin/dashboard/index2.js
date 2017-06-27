@@ -505,7 +505,21 @@ $(document).ready(function () {
             console.log(e.target.parentElement.getAttribute('miniCourseId'));
           });
           $('.delete').click(function (e) {
-            console.log(e.target.parentElement.getAttribute('miniCourseId'));
+            let miniCourseId = e.target.parentElement.getAttribute('miniCourseId');
+            $.ajax({
+              url: "/api/minicourses/" + miniCourseId,
+              method: 'DELETE',
+              headers: {
+                "Authorization": "Bearer " + localStorage.getItem("token")
+              }
+            }).done(function (miniCourse) {
+              if (miniCourse.success === 'true') {
+                $form.text('');
+                $msg.attr('class', 'text-success').text('Course and its lessons are deleted');
+              } else {
+                $msg.attr('class', 'text-danger').text(miniCourse);
+              }
+            })
           })
 
         });
