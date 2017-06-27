@@ -275,7 +275,7 @@ $(document).ready(function () {
                             if (filters.isSuccess === 'true') {
                                 $form.append(`
                     <label>
-                    Name of the Course: <input type="text"  width="250px" id="minicourse-name"  required>
+                    Name of the Course: <input type="text"  style=" width:250px" id="minicourse-name"  required>
                     </label>
                     <br><br>
                     <label>
@@ -426,7 +426,7 @@ $(document).ready(function () {
                                         if (lessonData.length !== 0) {
 
                                             $.ajax({
-                                                url: "/api/tutors/1/" + miniCourseFinal.id + "/addLesson",
+                                                url: "/api/tutors/"+tutorId+"/" + miniCourseFinal.id + "/addLesson",
                                                 data: {lessons: lessonData},
                                                 method: 'POST',
                                                 headers: {
