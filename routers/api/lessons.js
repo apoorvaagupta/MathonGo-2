@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const models = require('./../../db/models').models;
 const password = require('./../../utils/password');
+const passport = require('./../../passport/passporthandler');
+const ensure = require('./../../passport/passportutils');
 
 
 router.get('/:id', function (req, res) {
@@ -134,9 +136,9 @@ router.put('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(), functi
     where: {id: lessonId}
   }).then(function (count) {
     if (count > 0) {
-      res.send("Lesson Updated");
+      res.send({success:'true'});
     } else {
-      res.send("No lesson found");
+      res.send({success:'false'});
     }
   }).catch(function (err) {
     console.log(err);
