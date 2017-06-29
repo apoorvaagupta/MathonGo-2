@@ -4,17 +4,17 @@ const password = require('./../../utils/password');
 const ensure = require('./../../passport/passportutils');
 const passport = require('./../../passport/passporthandler');
 
-router.get('/',function (req,res) {
-   models.Tutor.findAll().then(function (tutors) {
-       if(tutors){
-           return res.send({success: 'true', data: tutors});
-       }else {
-           return res.send({success: 'false'});
-       }
-   }).catch(function (err) {
-       console.log(err);
-       return res.send({success: 'false'});
-   })
+router.get('/', function (req, res) {
+    models.Tutor.findAll().then(function (tutors) {
+        if (tutors) {
+            return res.send({success: 'true', data: tutors});
+        } else {
+            return res.send({success: 'false'});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        return res.send({success: 'false'});
+    })
 
 });
 
@@ -164,34 +164,34 @@ router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensure
                                         include: [models.Category]
                                     }]
                             }).then(function (miniCourseFinal) {
-                                res.send({ success: "true", data: miniCourseFinal});
+                                res.send({success: "true", data: miniCourseFinal});
                             }).catch(function (err) {
                                 console.log(err);
-                                res.send({ success: "false", msg : "Could not find the MiniCourse right now"});
+                                res.send({success: "false", msg: "Could not find the MiniCourse right now"});
                             });
                         }).catch(function (err) {
                             console.log(err);
-                            res.send({ success: "false", msg:"Could not add the category tag right now"})
+                            res.send({success: "false", msg: "Could not add the category tag right now"})
                         })
                     }).catch(function (err) {
                         console.log(err);
-                        res.send({ success: "false", msg:"Could not add the tags right now"});
+                        res.send({success: "false", msg: "Could not add the tags right now"});
                     })
                 }).catch(function (err) {
                     console.log(err);
-                    res.send({ success: "false", msg:"Could not add the course right now"});
+                    res.send({success: "false", msg: "Could not add the course right now"});
                 })
             }).catch(function (err) {
                 console.log(err);
-                res.send({ success: "false", msg:"Could not add the subject right now"});
+                res.send({success: "false", msg: "Could not add the subject right now"});
             })
         }).catch(function (err) {
             console.log(err);
-            res.send({ success: "false", msg:"Could not add the class right now"});
+            res.send({success: "false", msg: "Could not add the class right now"});
         })
     }).catch(function (err) {
         console.log(err);
-        res.send({ success: "false", msg:"Could not add the minicourse right now"});
+        res.send({success: "false", msg: "Could not add the minicourse right now"});
 
     })
 
@@ -235,7 +235,7 @@ router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ens
             }
         })
     }).then(function (lessons) {
-        res.send({ success: "true", msg:lessons});
+        res.send({success: "true", msg: lessons});
     }).catch(function (err) {
         console.log(err);
         res.send({success: 'false', msg: "Could not add the lesson right now"});
@@ -246,6 +246,93 @@ router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ens
 
 //Write
 router.post('/:id/:miniCourseId/edit', function (req, res) {
+
+    const tutorId = parseInt(req.params.id);
+    models.MiniCourse.update({
+        name: req.body.name,
+        noOfLessons: req.body.noOfLessons,
+        description: req.body.description,
+        level: req.body.level,
+        duration: req.body.duration,
+        medium: req.body.medium,
+        tutorId: tutorId
+    }, {
+        where: {id: req.params.minicourseId}
+    }).then(function (miniCourse) {
+        models.Class.findOne({
+            where: {
+                id: req.body.classId
+            }
+        }).then(function (classObject) {
+            models.Subject.findOne({
+                where: {
+                    id: req.body.subjectId
+                }
+            }).then(function (subjectObject) {
+                models.Course.findOne({
+                    where: {
+                        id: req.body.courseId
+                    }
+                }).then(function (courseObject) {
+                    models.Tag.update({
+                        classId: classObject.id,
+                        subjectId: subjectObject.id,
+                        courseId: courseObject.id,
+
+                    }, {
+                        where: {minicourseId: miniCourse.id}
+                    }).then(function (tagRow) {
+                        let minicoursecategory = [];
+                        for (let i = 0; i < req.body.categoryIds.length; i++) {
+                            minicoursecategory.push({
+                                categoryId: req.body.categoryIds[i],
+                                minicourseId: miniCourse.id
+                            })
+                        }
+                        models.MiniCourseCategory.bulkCreate(minicoursecategory).then(function (minicourseCategories) {
+                            models.MiniCourse.findOne({
+                                where: {id: miniCourse.id},
+                                include: [
+                                    {
+                                        model: models.Tag,
+                                        include: [models.Class, models.Subject, models.Course]
+                                    },
+                                    {
+                                        model: models.MiniCourseCategory,
+                                        include: [models.Category]
+                                    }]
+                            }).then(function (miniCourseFinal) {
+                                res.send({success: "true", data: miniCourseFinal});
+                            }).catch(function (err) {
+                                console.log(err);
+                                res.send({success: "false", msg: "Could not find the MiniCourse right now"});
+                            });
+                        }).catch(function (err) {
+                            console.log(err);
+                            res.send({success: "false", msg: "Could not add the category tag right now"})
+                        })
+                    }).catch(function (err) {
+                        console.log(err);
+                        res.send({success: "false", msg: "Could not add the tags right now"});
+                    })
+                }).catch(function (err) {
+                    console.log(err);
+                    res.send({success: "false", msg: "Could not add the course right now"});
+                })
+            }).catch(function (err) {
+                console.log(err);
+                res.send({success: "false", msg: "Could not add the subject right now"});
+            })
+        }).catch(function (err) {
+            console.log(err);
+            res.send({success: "false", msg: "Could not add the class right now"});
+        })
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: "false", msg: "Could not add the minicourse right now"});
+
+    })
+
 
 });
 

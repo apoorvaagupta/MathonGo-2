@@ -559,7 +559,7 @@ $(document).ready(function () {
                                             let tutorString = "<label>Tutor : ";
 
                                             for (let i = 0; i < tutors.data.length; i++) {
-                                                tutorString += `<label><input type="radio" name="tutor" value="` + tutors.data[i].id + `"> ` + tutors.data[i].name + ` </label> `
+                                                tutorString += `<label><input type="radio" name="tutor" value="` + tutors.data[i].name + `"> ` + tutors.data[i].name + ` </label> `
                                             }
 
                                             tutorString += `</label><br><br>`;
@@ -573,13 +573,14 @@ $(document).ready(function () {
 
                                             let subjectString = "<label>Subject : ";
                                             for (let i = 0; i < filters.subjectObject.length; i++) {
-                                                subjectString += `<label><input type="radio" name="subject" value="` + filters.subjectObject[i].id + `"> ` + filters.subjectObject[i].subjectName + ` </label> `
+                                                subjectString += `<label><input type="radio" name="subject" value="` + filters.subjectObject[i].id+ `"> ` + filters.subjectObject[i].subjectName + ` </label> `
                                             }
 
                                             subjectString += `</label><br><br>`;
 
                                             let courseString = "<label>Chapter : ";
                                             for (let i = 0; i < filters.courseObject.length; i++) {
+                                                console.log(filters.courseObject[i].name );
                                                 courseString += `<label><input type="radio" name="course" value="` + filters.courseObject[i].id + `"> ` + filters.courseObject[i].courseName + ` </label> `
                                             }
 
@@ -599,10 +600,18 @@ $(document).ready(function () {
                                             $('#minicourse-description').val(miniCourse.description);
                                             $('#minicourse-duration').val(miniCourse.duration);
                                             $('input[value="' + miniCourse.medium + '"]').prop('checked', true);
+                                            $('input[value="' + miniCourse.level + '"]').prop('checked', true);
+                                            $('input[ name = "tutor" value="' + miniCourse.tutor.id + '"]').prop('checked', true);
+                                            $('input[ name = "class" value="' + miniCourse.tag.class.id + '"]').prop('checked', true);
+                                            $('input[ name = "subject" value="' + miniCourse.tag.subject.id + '"]').prop('checked', true);
+                                            $('input[ name = "course" value="' + miniCourse.tag.course.id + '"]').prop('checked', true);
+                                            categories = miniCourse.minicoursecategories;
+                                            for(category of categories){
+                                                $('input[ name = "category" value="'+category.category.id+'"]').prop('checked', true);
+                                            }
 
                                             $form.append(`<ul id="lessons-list" class="list-group" ></ul>`);
                                             const $lessons_list = $('#lessons-list');
-                                            console.log(miniCourse.lessons);
                                             miniCourse.lessons.forEach(function (lesson) {
                                                 $lessons_list.append(`
                                               <li class="list-group-item"  lessonId="` + lesson.id + `">
@@ -613,7 +622,6 @@ $(document).ready(function () {
                                             `);
 
                                             })
-                                            console.log("appending save button")
                                             $form.append(`<button class="btn buttons" id="save">Save</button>`);
                                             $save = $('#save');
                                             $save.unbind('click');
@@ -641,60 +649,60 @@ $(document).ready(function () {
                                                 };
 
                                                 $.ajax({
-                                                    url: "/api/tutors/" + tutorId + "/addMiniCourse",
+                                                    url: "/api/tutors/" + tutorId + "/" + miniCourseId + "/edit",
                                                     data: miniCourseData,
                                                     method: 'POST',
                                                     headers: {
                                                         "Authorization": "Bearer " + localStorage.getItem("token")
                                                     }
                                                 }).done(function (miniCourseFinal) {
-                                                    let lessonData = [];
-                                                    console.log(miniCourseFinal);
-                                                    miniCourseFinal = miniCourseFinal.data;
-                                                    for (let i = 0; i < counter; i++) {
-                                                        lessonData.push({
-                                                            name: $('#lesson-' + i + '-name').val(),
-                                                            videoUrl: $('#lesson-' + i + '-videourl').val(),
-                                                            level: $('input[name="lessonlevel"]:checked').val(),
-                                                            duration: $('#lesson-' + i + '-duration').val(),
-                                                            description: $('#lesson-' + i + '-description').val(),
-                                                            minicourseId: miniCourseFinal.id
-                                                        })
-                                                    }
-                                                    if (lessonData.length !== 0) {
-                                                        console.log("/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson")
-                                                        $.ajax({
-                                                            url: "/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson",
-                                                            data: {lessons: lessonData},
-                                                            method: 'POST',
-                                                            headers: {
-                                                                "Authorization": "Bearer " + localStorage.getItem("token")
-                                                            }
-                                                        }).done(function (lessons) {
-                                                            $form.text('');
-                                                            console.log(lessons);
-                                                            if (lessons.success === 'true') {
-                                                                $form.text('');
-                                                                $msg.attr('class', 'text-success').text('Course and lessons Added');
-                                                            } else {
-                                                                $msg.attr('class', 'text-danger').text('Error, Try Again');
-                                                            }
-                                                        }).fail(function (object) {
-                                                            if (object.responseText === 'Unauthorized') {
-                                                                window.alert("Please Login First");
-                                                                window.location.replace('/');
-                                                            }
-                                                        })
-                                                    }
-                                                    else {
-                                                        $form.text('');
+                                                    // let lessonData = [];
+                                                    // console.log(miniCourseFinal);
+                                                    // miniCourseFinal = miniCourseFinal.data;
+                                                    // for (let i = 0; i < counter; i++) {
+                                                    //     lessonData.push({
+                                                    //         name: $('#lesson-' + i + '-name').val(),
+                                                    //         videoUrl: $('#lesson-' + i + '-videourl').val(),
+                                                    //         level: $('input[name="lessonlevel"]:checked').val(),
+                                                    //         duration: $('#lesson-' + i + '-duration').val(),
+                                                    //         description: $('#lesson-' + i + '-description').val(),
+                                                    //         minicourseId: miniCourseFinal.id
+                                                    //     })
+                                                    // }
+                                                    // if (lessonData.length !== 0) {
+                                                    //     console.log("/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson")
+                                                    //     $.ajax({
+                                                    //         url: "/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson",
+                                                    //         data: {lessons: lessonData},
+                                                    //         method: 'POST',
+                                                    //         headers: {
+                                                    //             "Authorization": "Bearer " + localStorage.getItem("token")
+                                                    //         }
+                                                    //     }).done(function (lessons) {
+                                                    //         $form.text('');
+                                                    //         console.log(lessons);
+                                                    //         if (lessons.success === 'true') {
+                                                    //             $form.text('');
+                                                    //             $msg.attr('class', 'text-success').text('Course and lessons Added');
+                                                    //         } else {
+                                                    //             $msg.attr('class', 'text-danger').text('Error, Try Again');
+                                                    //         }
+                                                    //     }).fail(function (object) {
+                                                    //         if (object.responseText === 'Unauthorized') {
+                                                    //             window.alert("Please Login First");
+                                                    //             window.location.replace('/');
+                                                    //         }
+                                                    //     })
+                                                    // }
+                                                    // else {
+                                                    //     $form.text('');
                                                         if (miniCourseFinal.success === 'true') {
                                                             $form.text('');
-                                                            $msg.attr('class', 'text-success').text('Course Added');
+                                                            $msg.attr('class', 'text-success').text('Course changes saved');
                                                         } else {
                                                             $msg.attr('class', 'text-danger').text('Error, Try Again');
                                                         }
-                                                    }
+                                                    // }
                                                 }).fail(function (object) {
                                                     console.log(111111111);
                                                     if (object.responseText === 'Unauthorized') {
