@@ -27,9 +27,6 @@ $(document).ready(function () {
 
 
 
-
-
-
     const miniCourseId = window.location.pathname.split('/courses/')[1].split('/')[0];
 
 

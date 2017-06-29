@@ -51,7 +51,7 @@ app.get('/checkLoggedIn', passport.authenticate('bearer'), ensure.ensureLogin(),
 
 app.use('/api', apirouter);
 
-app.use('/courses/:id', express.static(path.join(__dirname, 'public_html/minicourse')));
+app.use('/courses/:id/:name', express.static(path.join(__dirname, 'public_html/minicourse')));
 app.use('/library', express.static(path.join(__dirname, 'public_html/allMiniCourses')));
 app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
 app.use('/student/mycourses', express.static(path.join(__dirname, 'public_html/students/mycourses')));

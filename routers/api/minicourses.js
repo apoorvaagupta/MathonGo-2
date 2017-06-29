@@ -27,7 +27,7 @@ router.get('/', function (req, res) {
   })
 });
 
-router.get('/:id', function (req, res) {
+router.get('/:id/:name', function (req, res) {
   //get a particular minicourse along all its lectures
   //Get All Tags
   let miniCourseId = parseInt(req.params.id);
