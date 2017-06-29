@@ -558,6 +558,7 @@ $(document).ready(function () {
                    `);
                       let tutorString = "<label>Tutor : ";
 
+
                       for (let i = 0; i < tutors.data.length; i++) {
                         tutorString += `<label><input type="radio" name="tutor" value="` + tutors.data[i].id + `"> ` + tutors.data[i].name + ` </label> `
                       }
@@ -594,97 +595,129 @@ $(document).ready(function () {
 
                       $form.append(tutorString + classString + subjectString + courseString + categoryString);
 
-                      $('#minicourse-name').val(miniCourse.name);
-                      $('#minicourse-no-of-lessons').val(miniCourse.noOfLessons);
-                      $('#minicourse-description').val(miniCourse.description);
-                      $('#minicourse-duration').val(miniCourse.duration);
-                      $('input[value="' + miniCourse.medium + '"]').prop('checked', true);
+                                            $('#minicourse-name').val(miniCourse.name);
+                                            $('#minicourse-no-of-lessons').val(miniCourse.noOfLessons);
+                                            $('#minicourse-description').val(miniCourse.description);
+                                            $('#minicourse-duration').val(miniCourse.duration);
+                                            $('input[value="' + miniCourse.medium + '"]').prop('checked', true);
+                                            $('input[value="' + miniCourse.level + '"]').prop('checked', true);
+                                            $('input[ name = "tutor" value="' + miniCourse.tutor.id + '"]').prop('checked', true);
+                                            $('input[ name = "class" value="' + miniCourse.tag.class.id + '"]').prop('checked', true);
+                                            $('input[ name = "subject" value="' + miniCourse.tag.subject.id + '"]').prop('checked', true);
+                                            $('input[ name = "course" value="' + miniCourse.tag.course.id + '"]').prop('checked', true);
+                                            categories = miniCourse.minicoursecategories;
+                                            for(category of categories){
+                                                $('input[ name = "category" value="'+category.category.id+'"]').prop('checked', true);
+                                            }
 
-                      $form.append(`<ul id="lessons-list" class="list-group" ></ul>`);
-                      const $lessons_list = $('#lessons-list');
-                      console.log(miniCourse.lessons);
-                      miniCourse.lessons.forEach(function (lesson) {
-                        $lessons_list.append(`
-                                              <li class="list-group-item" lessonId="` + lesson.id + `">
+                                            $form.append(`<ul id="lessons-list" class="list-group" ></ul>`);
+                                            const $lessons_list = $('#lessons-list');
+                                            miniCourse.lessons.forEach(function (lesson) {
+                                                $lessons_list.append(`
+                                              <li class="list-group-item"  lessonId="` + lesson.id + `">
                                               <span>` + lesson.name + `</span>
                                               <button class="btn btn-outline-info edit-lesson" style="margin-left: 20px">Edit</button>
                                               <button class="btn btn-outline-danger delete-lesson" style="margin-left: 20px">Delete</button>
                                               </li>
                                             `);
 
-                      });
-                      console.log("appending save button");
+                                            })
+                                            $form.append(`<button class="btn buttons" id="save">Save</button>`);
+                                            $save = $('#save');
+                                            $save.unbind('click');
+                                            // let counter = 0;
 
-                      $('.edit-lesson').click(function (e) {
-                        let lessonId = parseInt(e.target.parentElement.getAttribute('lessonId'));
-                        console.log(lessonId);
-                        console.log(miniCourse);
-                        var finalLesson={};
-                        miniCourse.lessons.forEach(function (lesson) {
-                          if (lesson.id === lessonId) {
-                            finalLesson = lesson
-                          }
+                                            $save.click(function () {
+                                                categoryIds = [];
+                                                $('input[name=category]:checked').each(function () {
+                                                    categoryIds.push($(this).val());
+                                                });
+                                                console.log(2);
+                                                tutorId = $('input[name="tutor"]:checked').val();
+                                                miniCourseData = {
+                                                    name: $('#minicourse-name').val(),
+                                                    noOfLessons: $('#minicourse-no-of-lessons').val(),
+                                                    description: $('#minicourse-description').val(),
+                                                    level: $('input[name="level"]:checked').val(),
+                                                    duration: $('#minicourse-duration').val(),
+                                                    medium: $('input[name="medium"]:checked').val(),
+                                                    classId: $('input[name="class"]:checked').val(),
+                                                    subjectId: $('input[name="subject"]:checked').val(),
+                                                    courseId: $('input[name="course"]:checked').val(),
+                                                    categoryIds: categoryIds
 
-                        });
+                                                };
 
-                        $form.text("");
-                        $msg.text("");
+                                                $.ajax({
+                                                    url: "/api/tutors/" + tutorId + "/" + miniCourseId + "/edit",
+                                                    data: miniCourseData,
+                                                    method: 'POST',
+                                                    headers: {
+                                                        "Authorization": "Bearer " + localStorage.getItem("token")
+                                                    }
+                                                }).done(function (miniCourseFinal) {
+                                                    // let lessonData = [];
+                                                    // console.log(miniCourseFinal);
+                                                    // miniCourseFinal = miniCourseFinal.data;
+                                                    // for (let i = 0; i < counter; i++) {
+                                                    //     lessonData.push({
+                                                    //         name: $('#lesson-' + i + '-name').val(),
+                                                    //         videoUrl: $('#lesson-' + i + '-videourl').val(),
+                                                    //         level: $('input[name="lessonlevel"]:checked').val(),
+                                                    //         duration: $('#lesson-' + i + '-duration').val(),
+                                                    //         description: $('#lesson-' + i + '-description').val(),
+                                                    //         minicourseId: miniCourseFinal.id
+                                                    //     })
+                                                    // }
+                                                    // if (lessonData.length !== 0) {
+                                                    //     console.log("/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson")
+                                                    //     $.ajax({
+                                                    //         url: "/api/tutors/" + tutorId + "/" + miniCourseFinal.id + "/addLesson",
+                                                    //         data: {lessons: lessonData},
+                                                    //         method: 'POST',
+                                                    //         headers: {
+                                                    //             "Authorization": "Bearer " + localStorage.getItem("token")
+                                                    //         }
+                                                    //     }).done(function (lessons) {
+                                                    //         $form.text('');
+                                                    //         console.log(lessons);
+                                                    //         if (lessons.success === 'true') {
+                                                    //             $form.text('');
+                                                    //             $msg.attr('class', 'text-success').text('Course and lessons Added');
+                                                    //         } else {
+                                                    //             $msg.attr('class', 'text-danger').text('Error, Try Again');
+                                                    //         }
+                                                    //     }).fail(function (object) {
+                                                    //         if (object.responseText === 'Unauthorized') {
+                                                    //             window.alert("Please Login First");
+                                                    //             window.location.replace('/');
+                                                    //         }
+                                                    //     })
+                                                    // }
+                                                    // else {
+                                                    //     $form.text('');
+                                                        if (miniCourseFinal.success === 'true') {
+                                                            $form.text('');
+                                                            $msg.attr('class', 'text-success').text('Course changes saved');
+                                                        } else {
+                                                            $msg.attr('class', 'text-danger').text('Error, Try Again');
+                                                        }
+                                                    // }
+                                                }).fail(function (object) {
+                                                    console.log(111111111);
+                                                    if (object.responseText === 'Unauthorized') {
+                                                        window.alert("Please Login First");
+                                                        window.location.replace('/admin');
+                                                    }
+                                                })
+                                            })
 
-                        $form.append(`
-                            <label>
-        Name of the Lesson: <input type="text" style=" width:600px" id="lesson-name"  required>
-    </label>
-    <br><br>
-    <label>
-        Video URL: <input type="text" style=" width:800px" id="lesson-videourl" required>
-    </label>
-    <br><br>
-    <label>
-        Description: <br><textarea cols="100" rows="4" id="lesson-description" required></textarea>
-    </label>
-    <br><br>
-    <label>
-        Duration of the minicourse: <input type="text" id="lesson-duration" required>
-    </label>
-    <br><br>
-    <label>
-        Level:
-        <label><input type="radio" name="lessonlevel" value="Beginner" required> Beginner</label>
-        <label><input type="radio" name="lessonlevel" value="Intermediate"> Intermediate</label>
-        <label><input type="radio" name="lessonlevel" value="Advance"> Advance</label>
-    </label>
-    <br><br>
-`);
 
-                        console.log(finalLesson);
-                        $('#lesson-name').val(finalLesson.name);
-                        $('#lesson-videourl').val(finalLesson.videoUrl);
-                        $('input[value="' + finalLesson.level + '"]').prop('checked',true);
-                        $('#lesson-duration').val(finalLesson.duration);
-                        $('#lesson-description').val(finalLesson.description);
-                        $form.append(`<button class="btn buttons" id="save">Save</button>`);
-                        $save = $('#save');
-                        $save.unbind('click');
-                        
-                        $save.click(function () {
-                          $.ajax({ url: "/api/lessons/" +finalLesson.id,
-                            data: {
-                              name: $('#lesson-name').val(),
-                              videoUrl: $('#lesson-videourl').val(),
-                              level: $('input[name="lessonlevel"]').val(),
-                              duration: $('#lesson-duration').val(),
-                              description: $('#lesson-description').val()
-                            },
-                            method: 'PUT',
-                            headers: {
-                              "Authorization": "Bearer " + localStorage.getItem("token")
-                            }}
-                            ).done(function (data) {
-                            $form.text('');
-                            console.log(data);
-                            if (data.success === 'true') {
-                              $form.text('');
-                              $msg.attr('class', 'text-success').text('Lesson Updated');
+                                        })
+                                    } else {
+                                        $msg.text("Error, Try Again");
+                                    }
+                                })
                             } else {
                               $msg.attr('class', 'text-danger').text('Error, Try Again');
                             }
