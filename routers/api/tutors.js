@@ -200,6 +200,8 @@ router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensure
 router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     const tutorId = parseInt(req.params.id);
     const miniCourseId = parseInt(req.params.miniCourseId);
+    console.log("***************************");
+    console.log(miniCourseId);
     // models.Lesson.create({
     //     name:req.body.name,
     //     videoUrl:req.body.videoUrl,
