@@ -363,7 +363,7 @@ $(document).ready(function () {
     </label>
     <br><br>
     <label>
-        Description: <br><textarea cols="100" rows="4" id="lesson-` + counter + `-description" required></textarea>
+       Description: <br><textarea cols="100" rows="4" id="lesson-` + counter + `-description" required></textarea>
     </label>
     <br><br>
     <label>
