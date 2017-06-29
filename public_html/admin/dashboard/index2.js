@@ -491,9 +491,12 @@ $(document).ready(function () {
             });
 
             $('#viewCoursesButton').click(function () {
+                console.log("heyy")
                 console.log("appeding")
                 $form.text("");
+                console.log("hey")
                 $msg.text("");
+                console.log("heloo")
                 $.get("/api/minicourses", function (minicourses) {
                     console.log("1")
                     $form.append(`<ul id="minicourses-list" class="list-group" ></ul>`);
@@ -510,19 +513,25 @@ $(document).ready(function () {
                         `)
                         $('.edit').click(function (e) {
                             let miniCourseId = e.target.parentElement.getAttribute('miniCourseId');
-
+                            console.log("*****");
+                            console.log(miniCourseId)
+console.log("1")
                             $form.text("");
+                            console.log("hey")
                             $msg.text("");
+                            console.log("hello")
                             $.get('/api/tutors', function (tutors) {
                                 if (tutors.success === 'true' && tutors.data.length > 0) {
+                                    console.log("2")
                                     $.get("/api/extra/filters", function (filters) {
                                         if (filters.isSuccess === 'true'
                                             && filters.classObject.length > 0
                                             && filters.subjectObject.length > 0 &&
                                             filters.courseObject.length > 0 &&
                                             filters.categoryObject.length > 0) {
+                                            console.log("3")
                                             $.get("/api/minicourses/" + miniCourseId, function (miniCourse) {
-
+console.log("4")
 
                                                 $form.append(`
                     <label>
@@ -554,6 +563,7 @@ $(document).ready(function () {
                     <label><input type="radio" name="medium" value="Hindi"> Hindi</label>
                     </label><br><br>
                    `);
+console.log("5")
                                                 let tutorString = "<label>Tutor : ";
 
 
@@ -590,9 +600,9 @@ $(document).ready(function () {
                                                 }
 
                                                 categoryString += `</label><br><br>`;
-
+console.log("6")
                                                 $form.append(tutorString + classString + subjectString + courseString + categoryString);
-
+console.log("7")
                                                 $('#minicourse-name').val(miniCourse.name);
                                                 $('#minicourse-no-of-lessons').val(miniCourse.noOfLessons);
                                                 $('#minicourse-description').val(miniCourse.description);
@@ -605,12 +615,15 @@ $(document).ready(function () {
                                                 $('input[ name = "course" value="' + miniCourse.tag.course.id + '"]').prop('checked', true);
                                                 categories = miniCourse.minicoursecategories;
                                                 for (category of categories) {
+                                                    console.log("8")
                                                     $('input[ name = "category" value="' + category.category.id + '"]').prop('checked', true);
                                                 }
 
-                                                console.log("heyyyyyyyyyyya")
+                                                console.log("9")
                                                 $form.append(`<ul id="lessons-list" class="list-group" ></ul>`);
+                                                console.log("10")
                                                 const $lessons_list = $('#lessons-list');
+                                                console.log(miniCourse.lessons)
                                                 miniCourse.lessons.forEach(function (lesson) {
                                                     $lessons_list.append(`
                                               <li class="list-group-item"  lessonId="` + lesson.id + `">
@@ -619,6 +632,7 @@ $(document).ready(function () {
                                               <button class="btn btn-outline-danger delete-lesson" style="margin-left: 20px">Delete</button>
                                               </li>
                                             `);
+                                                    console.log("11")
                                                     $('.delete-lesson').click(function (e) {
                                                         let lessonId = e.target.parentElement.getAttribute('lessonId');
                                                         $.ajax({
@@ -636,12 +650,13 @@ $(document).ready(function () {
                                                             }
                                                         })
                                                     });
+                                                    console.log("12")
                                                 });
                                                 $form.append(`<button class="btn buttons" id="save">Save</button>`);
                                                 $save = $('#save');
                                                 $save.unbind('click');
                                                 // let counter = 0;
-
+console.log("13")
                                                 $save.click(function () {
                                                     categoryIds = [];
                                                     $('input[name=category]:checked').each(function () {
@@ -726,7 +741,7 @@ $(document).ready(function () {
                                                         }
                                                     })
                                                 })
-
+console.log("14")
 
                                             })
                                         } else {
