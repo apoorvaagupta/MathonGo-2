@@ -18,6 +18,7 @@ const Student = db.define('student', {
   email: {type: Sequelize.STRING, unique: true},
   class: Sequelize.STRING,
   contact: Sequelize.STRING,
+  pincode: Sequelize.STRING
 });
 
 const Tutor = db.define('tutor', {
@@ -186,7 +187,7 @@ MiniCourseCategory.belongsTo(Category);
 Category.hasMany(MiniCourseCategory);
 MiniCourse.hasMany(MiniCourseCategory);
 
-db.sync({force: false}).then(() => {
+db.sync({}).then(() => {
   console.log('Database configured')
 });
 
