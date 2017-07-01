@@ -251,7 +251,7 @@ async function addLessons(bulkInsertArray) {
 
 
 //Write
-router.post('/:id/:miniCourseId/edit', function (req, res) {
+router.post('/:id/:minicourseId/edit', function (req, res) {
 
   const tutorId = parseInt(req.params.id);
   models.MiniCourse.update({
@@ -284,42 +284,48 @@ router.post('/:id/:miniCourseId/edit', function (req, res) {
             classId: classObject.id,
             subjectId: subjectObject.id,
             courseId: courseObject.id,
-
           }, {
-            where: {minicourseId: miniCourse.id}
+            where: {minicourseId: req.params.minicourseId}
           }).then(function (tagRow) {
-            let minicoursecategory = [];
-            for (let i = 0; i < req.body.categoryIds.length; i++) {
-              minicoursecategory.push({
-                categoryId: req.body.categoryIds[i],
-                minicourseId: miniCourse.id
-              })
-            }
-            models.MiniCourseCategory.bulkCreate(minicoursecategory).then(function (minicourseCategories) {
-              models.MiniCourse.findOne({
-                where: {id: miniCourse.id},
-                include: [
-                  {
-                    model: models.Tag,
-                    include: [models.Class, models.Subject, models.Course]
-                  },
-                  {
-                    model: models.MiniCourseCategory,
-                    include: [models.Category]
-                  }]
-              }).then(function (miniCourseFinal) {
-                res.send({success: "true", data: miniCourseFinal});
+            models.MiniCourseCategory.destroy({
+              where: {minicourseId: req.params.minicourseId}
+            }).then(function () {
+              let minicoursecategory = [];
+              for (let i = 0; i < req.body.categoryIds.length; i++) {
+                minicoursecategory.push({
+                  categoryId: req.body.categoryIds[i],
+                  minicourseId: req.params.minicourseId
+                })
+              }
+              models.MiniCourseCategory.bulkCreate(minicoursecategory).then(function (minicourseCategories) {
+                models.MiniCourse.findOne({
+                  where: {id: req.params.minicourseId},
+                  include: [
+                    {
+                      model: models.Tag,
+                      include: [models.Class, models.Subject, models.Course]
+                    },
+                    {
+                      model: models.MiniCourseCategory,
+                      include: [models.Category]
+                    }]
+                }).then(function (miniCourseFinal) {
+                  res.send({success: "true", data: miniCourseFinal});
+                }).catch(function (err) {
+                  console.log(err);
+                  res.send({success: "false", msg: "Could not find the MiniCourse right now"});
+                });
               }).catch(function (err) {
-                console.log(err);
-                res.send({success: "false", msg: "Could not find the MiniCourse right now"});
-              });
+                console.log(err)
+                res.send({success: "false", msg: "could not add categories right now"})
+              })
             }).catch(function (err) {
               console.log(err);
-              res.send({success: "false", msg: "Could not add the category tag right now"})
+              res.send({success: "false", msg: "Could not add the tags right now"});
             })
           }).catch(function (err) {
             console.log(err);
-            res.send({success: "false", msg: "Could not add the tags right now"});
+            res.send({success: "false", msg: "Could not add the course right now"});
           })
         }).catch(function (err) {
           console.log(err);
@@ -337,9 +343,7 @@ router.post('/:id/:miniCourseId/edit', function (req, res) {
     console.log(err);
     res.send({success: "false", msg: "Could not add the minicourse right now"});
 
-  })
-
-
+  });
 });
 
 module.exports = router;

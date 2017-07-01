@@ -13,6 +13,7 @@ $(document).ready(function () {
         let userEmail = $('#registerEmail').val();
         let userPassword = $('#registerPassword').val();
         let userContact = $('#registerContact').val();
+        let userPincode = $('#registerPincode').val();
         let userClass = $('input[name="class"]:checked').val();
         if (userName.length === 0 || userEmail.length === 0 || userPassword.length === 0 || userContact.length !== 10 || userClass == null) {
             $('#errorRegister').text("Please Enter Valid Details");
@@ -24,7 +25,8 @@ $(document).ready(function () {
             email: userEmail,
             password: userPassword,
             contact: userContact,
-            class: userClass
+            class: userClass,
+            pincode: userPincode
         }, function (student) {
             console.log(student);
             if (student.success === 'true') {
