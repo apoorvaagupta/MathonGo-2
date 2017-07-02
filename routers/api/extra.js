@@ -16,6 +16,7 @@ router.post('/addClass', passport.authenticate('bearer'), ensure.ensureAdmin(), 
     });
 });
 
+
 router.post('/addSubject',  passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
     models.Subject.create({
         subjectName: req.body.subjectName

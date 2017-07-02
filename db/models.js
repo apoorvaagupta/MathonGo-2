@@ -7,10 +7,10 @@ const Sequelize = require('sequelize');
       dialect: 'postgres'
   });
 
-//const db = new Sequelize('mathongo', 'muser', 'mpass', {
+// const db = new Sequelize('mathongo', 'muser', 'mpass', {
 //   host: 'localhost',
 //   dialect: 'postgres'
-//});
+// });
 
 const Student = db.define('student', {
   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
@@ -18,6 +18,7 @@ const Student = db.define('student', {
   email: {type: Sequelize.STRING, unique: true},
   class: Sequelize.STRING,
   contact: Sequelize.STRING,
+  pincode: Sequelize.STRING
 });
 
 const Tutor = db.define('tutor', {
@@ -186,7 +187,7 @@ MiniCourseCategory.belongsTo(Category);
 Category.hasMany(MiniCourseCategory);
 MiniCourse.hasMany(MiniCourseCategory);
 
-db.sync({force: false}).then(() => {
+db.sync({}).then(() => {
   console.log('Database configured')
 });
 
@@ -213,3 +214,4 @@ module.exports = {
     MiniCourseCategory
   }
 };
+

@@ -17,7 +17,8 @@ router.post('/student', function (req, res) {
                 name: req.body.name,
                 email: req.body.email,
                 contact: req.body.contact,
-                class: req.body.class
+                class: req.body.class,
+                pincode: req.body.pincode
             }
         }, {
             include: [models.Student]
