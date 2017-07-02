@@ -14,7 +14,7 @@ $(document).ready(function () {
         let userPassword = $('#registerPassword').val();
         let userContact = $('#registerContact').val();
         let userPincode = $('#registerPincode').val();
-        let userClass = $('input[name="class"]:checked').val();
+        let userClass = $('#class').val();
         if (userName.length === 0 || userEmail.length === 0 || userPassword.length === 0 || userContact.length !== 10 || userClass == null) {
             $('#errorRegister').text("Please Enter Valid Details");
             return;
