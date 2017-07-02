@@ -16,8 +16,18 @@ router.post('/addClass', passport.authenticate('bearer'), ensure.ensureAdmin(), 
     });
 });
 
+router.get('/allClasses', function (req, res) {
+    models.Class.findAll().then(function (classes) {
+        if (classes)
+            return res.send({success: 'true', data: classes})
+        else
+            return res.send({success: 'false', data: "no classes found"})
+    }).catch(function (err) {
+        return res.send({success: 'false', data: "Error"})
+    })
+})
 
-router.post('/addSubject',  passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
+router.post('/addSubject', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     models.Subject.create({
         subjectName: req.body.subjectName
     }).then(function (subject) {
@@ -28,7 +38,18 @@ router.post('/addSubject',  passport.authenticate('bearer'), ensure.ensureAdmin(
     });
 });
 
-router.post('/addCategory',  passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
+router.get('/allSubjects', function (req, res) {
+    models.Subject.findAll().then(function (subjects) {
+        if (subjects)
+            return res.send({success: 'true', data: subjects})
+        else
+            return res.send({success: 'false', data: "no subjects found"})
+    }).catch(function (err) {
+        return res.send({success: 'false', data: "Error"})
+    })
+})
+
+router.post('/addCategory', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     models.Category.create({
         categoryName: req.body.categoryName
     }).then(function (category) {
@@ -38,7 +59,19 @@ router.post('/addCategory',  passport.authenticate('bearer'), ensure.ensureAdmin
         res.send({isSuccess: 'false', message: "Could not add the category right now"})
     });
 });
-router.post('/addCourse',  passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
+
+router.get('/allCategories', function (req, res) {
+    models.Category.findAll().then(function (categories) {
+        if (categories)
+            return res.send({success: 'true', data: categories})
+        else
+            return res.send({success: 'false', data: "no categories found"})
+    }).catch(function (err) {
+        return res.send({success: 'false', data: "Error"})
+    })
+})
+
+router.post('/addCourse', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     models.Course.create({
         courseName: req.body.courseName
     }).then(function (course) {
@@ -48,6 +81,17 @@ router.post('/addCourse',  passport.authenticate('bearer'), ensure.ensureAdmin()
         res.send({isSuccess: 'false', message: "Could not add the course right now"})
     });
 });
+
+router.get('/allCourses', function (req, res) {
+    models.Course.findAll().then(function (course) {
+        if (course)
+            return res.send({success: 'true', data: course})
+        else
+            return res.send({success: 'false', data: "no courses found"})
+    }).catch(function (err) {
+        return res.send({success: 'false', data: "Error"})
+    })
+})
 
 router.get('/filters', function (req, res) {
     models.Class.findAll().then(function (classObject) {
