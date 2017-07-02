@@ -478,6 +478,8 @@ $(document).ready(function () {
                     $msg.text("Please add filters first");
                   }
                 });
+              }else{
+                $msg.attr('class', 'text-danger').text('Please Add A Tutor First');
               }
             });
           });
