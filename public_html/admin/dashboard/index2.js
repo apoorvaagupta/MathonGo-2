@@ -840,9 +840,6 @@ $(document).ready(function () {
                     $msg.text("Error, Try Again");
                   }
                 })
-              } else {
-                $msg.text("Error, Try again!");
-              }
             })
 
           });
