@@ -104,6 +104,22 @@ $(document).ready(function () {
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+
+            $.get('/api/extra/allClasses', function (classes) {
+                if(classes.success === 'true'){
+                    $msg.append(`<ul id="classes-list" class="list-group" ></ul>`);
+                    const $classes_list = $('#classes-list');
+                    let allClasses = classes.data
+                    allClasses.forEach(function (classObj) {
+                        $classes_list.append(`
+                          <li class="list-group-item">
+                          <span>` + classObj.className + `</span>
+                          </li>
+                        `)
+                    });
+                }
+            })
+
             $submit = $('#submit');
             $submit.unbind('click');
             $submit.click(function () {
@@ -147,6 +163,22 @@ $(document).ready(function () {
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+
+              $.get('/api/extra/allSubjects', function (subjects) {
+                  if(subjects.success === 'true'){
+                      $msg.append(`<ul id="subjects-list" class="list-group" ></ul>`);
+                      const $subjects_list = $('#subjects-list');
+                      let allsubjects = subjects.data
+                      allsubjects.forEach(function (subjectObj) {
+                          $subjects_list.append(`
+                          <li class="list-group-item">
+                          <span>` + subjectObj.subjectName + `</span>
+                          </li>
+                        `)
+                      });
+                  }
+              })
+
             $submit = $('#submit');
             $submit.unbind('click');
             $submit.click(function () {
@@ -190,6 +222,22 @@ $(document).ready(function () {
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+
+              $.get('/api/extra/allCourses', function (courses) {
+                  if(courses.success === 'true'){
+                      $msg.append(`<ul id="courses-list" class="list-group" ></ul>`);
+                      const $courses_list = $('#courses-list');
+                      let allcourses = courses.data
+                      allcourses.forEach(function (courseObj) {
+                          $courses_list.append(`
+                          <li class="list-group-item">
+                          <span>` + courseObj.courseName + `</span>
+                          </li>
+                        `)
+                      });
+                  }
+              })
+
             $submit = $('#submit');
             $submit.unbind('click');
             $submit.click(function () {
@@ -233,6 +281,22 @@ $(document).ready(function () {
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+
+              $.get('/api/extra/allCategories', function (categories) {
+                  if(categories.success === 'true'){
+                      $msg.append(`<ul id="categories-list" class="list-group" ></ul>`);
+                      const $categories_list = $('#categories-list');
+                      let allcategories = categories.data
+                      allcategories.forEach(function (categoryObj) {
+                          $categories_list.append(`
+                          <li class="list-group-item">
+                          <span>` + categoryObj.categoryName + `</span>
+                          </li>
+                        `)
+                      });
+                  }
+              })
+
             $submit = $('#submit');
             $submit.unbind('click');
             $submit.click(function () {

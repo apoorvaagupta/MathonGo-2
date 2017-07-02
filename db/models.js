@@ -6,7 +6,7 @@ const Sequelize = require('sequelize');
       port: 5432,
       dialect: 'postgres'
   });
-
+//
 // const db = new Sequelize('mathongo', 'muser', 'mpass', {
 //   host: 'localhost',
 //   dialect: 'postgres'
