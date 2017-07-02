@@ -20,7 +20,7 @@ $('document').ready(function () {
                 '<div class="row minicourse-chps"><span>' + enrollments[i].minicourse.tag.subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + enrollments[i].minicourse.tag.course.courseName + '</span></div>' +
                 '<div class="row minicourse-title"><span>' + enrollments[i].minicourse.name + '</span></div>' +
                 '<div class="row"><p class="minicourse-description">' + enrollments[i].minicourse.description + '</p></div>' +
-                '<div class="row align-items-center"><a href="/courses/' + enrollments[i].minicourse.id + '" class="enrol-style">VIEW</a></div>' +
+                '<div class="row align-items-center"><a href="/courses/' + enrollments[i].minicourse.id + "/" + enrollments[i].minicourse.name + '" class="enrol-style">VIEW</a></div>' +
                 '</div> </div> <div class="row minicourse-tags"> <div class="minicourse-tag">' +
                 '<div class="row tag-title">TEACHER </div> <div class="row tag-content"><span>' + enrollments[i].minicourse.tutor.name + '</span></div> </div>' +
                 '<div class="minicourse-tag"> <div class="row tag-title">DURATION</div>' +

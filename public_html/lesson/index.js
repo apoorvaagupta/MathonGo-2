@@ -109,7 +109,7 @@ $(document).ready(function () {
         } else {
             alert("Please enroll for the course first");
             window.location.replace('/courses/' + data.miniCourseId);
-
+//FIXME :
         }
     }).fail(function (object) {
         if (object.responseText === 'Unauthorized') {

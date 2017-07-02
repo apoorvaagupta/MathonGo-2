@@ -543,7 +543,7 @@ $(document).ready(function () {
                   }
                 });
               }else{
-                  $msg.text("Please add tutors first");
+                $msg.attr('class', 'text-danger').text('Please Add A Tutor First');
               }
             });
           });
