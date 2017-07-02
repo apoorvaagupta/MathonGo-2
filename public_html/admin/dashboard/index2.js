@@ -104,6 +104,14 @@ $(document).ready(function () {
             </label>
             <button class="btn buttons" id="submit">Submit</button>
         `);
+                $.get('/',function (classes) {
+                    let allClasses = ''
+                   for(var i = 0; i< classes._length; i++){
+
+                   }
+                });
+
+
                 $submit = $('#submit');
                 $submit.unbind('click');
                 $submit.click(function () {
