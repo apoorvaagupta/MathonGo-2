@@ -480,17 +480,15 @@ $(document).ready(function () {
                           "Authorization": "Bearer " + localStorage.getItem("token")
                         }
                       }).done(function (miniCourseFinal) {
+
                         let lessonData = [];
                         console.log(miniCourseFinal);
 if(miniCourseFinal.success === 'false' && miniCourseFinal.message === 'Admin Only'){
+console.log("hey there");
 window.alert("Only Admins are allowed");
 window.location.replace('/admin');
 }
-                        success = miniCourseFinal.success;
-                        if(success==='false' && message === 'Admin Only'){
-                            window.alert("Only Admins are allowed");
-                            window.location.replace('/admin');
-                        }
+                          success = miniCourseFinal.success;
                         miniCourseFinal = miniCourseFinal.data;
                         for (let i = 0; i < counter; i++) {
                           lessonData.push({
@@ -529,7 +527,6 @@ window.location.replace('/admin');
                         }
                         else {
                           $form.text('');
-                          console.log("*********");
                           if (success === 'true') {
                             $form.text('');
                             $msg.attr('class', 'text-success').text('Course Added');
