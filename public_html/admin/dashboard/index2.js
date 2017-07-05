@@ -483,6 +483,10 @@ $(document).ready(function () {
                         let lessonData = [];
                         console.log(miniCourseFinal);
                         success = miniCourseFinal.success;
+                        if(success==='false' && message === 'Admin Only'){
+                            window.alert("Only Admins are allowed");
+                            window.location.replace('/admin');
+                        }
                         miniCourseFinal = miniCourseFinal.data;
                         for (let i = 0; i < counter; i++) {
                           lessonData.push({

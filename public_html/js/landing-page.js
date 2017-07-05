@@ -58,10 +58,14 @@ $(document).ready(function () {
             email: $('#loginEmail').val(),
             password: $('#loginPassword').val()
         }, function (authToken) {
+            console.log(authToken);
             if (authToken.success === 'true') {
                 window.localStorage.token = authToken.token;
                 window.localStorage.name = authToken.name;
                 window.location.replace(authToken.url)
+            }else {
+                $('#error').text(authToken.message);
+                console.log("fail");
             }
         }).fail(function (err) {
             $('#error').text("Wrong Credentials");
