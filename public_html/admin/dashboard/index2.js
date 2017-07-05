@@ -482,6 +482,10 @@ $(document).ready(function () {
                       }).done(function (miniCourseFinal) {
                         let lessonData = [];
                         console.log(miniCourseFinal);
+if(miniCourseFinal.success === 'false' && miniCourseFinal.message === 'Admin Only'){
+window.alert("Only Admins are allowed");
+window.location.replace('/admin');
+}
                         success = miniCourseFinal.success;
                         if(success==='false' && message === 'Admin Only'){
                             window.alert("Only Admins are allowed");
@@ -526,7 +530,6 @@ $(document).ready(function () {
                         else {
                           $form.text('');
                           console.log("*********");
-                          console.log(miniCourseFinal.success);
                           if (success === 'true') {
                             $form.text('');
                             $msg.attr('class', 'text-success').text('Course Added');
