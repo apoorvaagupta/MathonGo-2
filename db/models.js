@@ -38,7 +38,7 @@ const Admin = db.define('admin', {
 
 const UserLocal = db.define('userlocal', {
   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-  email: {type: Sequelize.STRING, unique: true},
+  email: {type: Sequelize.STRING},
   password: Sequelize.STRING,
   role: Sequelize.STRING
 });
