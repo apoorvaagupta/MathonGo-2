@@ -42,7 +42,7 @@ body, html {
 
 .input:focus {
     border-bottom: 2px solid;
-    border-bottom-color: #00C2FA;
+    border-bottom-color: #1485E8;
 }
 
 .label-style{
@@ -75,7 +75,7 @@ input:-ms-input-placeholder {
     border: 0; !important;
 
     border-bottom: 2px solid;
-    border-bottom-color: #00C2FA;
+    border-bottom-color: #1485E8;
 }
 
 .a-style{
@@ -91,7 +91,7 @@ input:-ms-input-placeholder {
 
 .btn-style{
     border-radius: 0;
-    background-color: #00C2FA;
+    background-color: #1485E8;
     border: 0;
     font-weight: 400;
     font-size: 15px;
@@ -101,7 +101,7 @@ input:-ms-input-placeholder {
 .btn-style:hover{
 
     border-radius: 0;
-    background-color: #00C2FA;
+    background-color: #1485E8;
     border: 0;
     cursor: pointer;
     font-weight: 400;
