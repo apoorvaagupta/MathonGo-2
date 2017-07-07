@@ -12,10 +12,10 @@ router.post('/', (req, res) => {
         if (!user) {
             return res.send({
                 success: "false",
-                message: "invalid email"
+                message: "Incorrect Email"
             })
         }
-        console.log(user.get());
+        // console.log(user.get());
         passutils.compare2hash(req.body.password, user.password).then(function (match) {
             if (match) {
                 models.AuthToken.create({
@@ -23,6 +23,8 @@ router.post('/', (req, res) => {
                     role: user.role,
                     userlocalId: user.id
                 }).then(function (authToken) {
+                    console.log("***************")
+                    console.log(authToken)
                     if (user.student) {
                         return res.send({
                             success: 'true',
@@ -50,6 +52,7 @@ router.post('/', (req, res) => {
                     else {
                         return res.send({
                             success: 'false',
+                            message: 'Incorrect User'
                         })
                     }
 
@@ -59,15 +62,20 @@ router.post('/', (req, res) => {
                     res.send({success: 'false'})
                 })
             } else {
-                res.send({success: 'false'})
+                res.send({success: 'false',
+                message: 'Incorrect Password'});
             }
         }).catch(function (err) {
+            console.log("************")
+            console.log("pass error")
             console.log(err);
             res.send({success: 'false'});
         });
 
 
     }).catch(function (err) {
+        console.log("***********");
+        console.log("user error")
         console.log(err);
         res.send({success: 'false'});
     });

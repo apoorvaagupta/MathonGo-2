@@ -178,6 +178,30 @@ router.post('/withFilters', function (req, res) {
   }
 });
 
+router.post('/:id/addLesson', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req,res) {
+    let miniCourseId = parseInt(req.params.id);
+    models.Lesson.create({
+        name: req.body.name,
+        videoUrl: req.body.videoUrl,
+        level: req.body.level,
+        duration: req.body.duration,
+        description: req.body.description,
+        minicourseId: miniCourseId
+    }).then(function (lesson) {
+        if(lesson){
+          res.send({
+            success: "true"
+          })
+        }
+        else{
+          res.send({success: "false", msg: "Could not add the lesson right now"});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: "false", msg: "Could not add the lesson right now"});
+    })
+})
+
 router.post('/:id/enroll', passport.authenticate('bearer'), ensure.ensureStudent(), function (req, res) {
   //enrol in a minicourse
   let miniCourseId = parseInt(req.params.id);

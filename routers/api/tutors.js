@@ -148,7 +148,6 @@ router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensure
     medium: req.body.medium,
     tutorId: tutorId
   }).then(function (miniCourse) {
-    //Ask if allowed here
     models.Class.findOne({
       where: {
         id: req.body.classId
@@ -205,19 +204,19 @@ router.post('/:id/addMiniCourse', passport.authenticate('bearer'), ensure.ensure
           })
         }).catch(function (err) {
           console.log(err);
-          res.send({success: "false", msg: "Could not add the course right now"});
+          res.send({success: "false", msg: "Could not find the course right now"});
         })
       }).catch(function (err) {
         console.log(err);
-        res.send({success: "false", msg: "Could not add the subject right now"});
+        res.send({success: "false", msg: "Could not find the subject right now"});
       })
     }).catch(function (err) {
       console.log(err);
-      res.send({success: "false", msg: "Could not add the class right now"});
+      res.send({success: "false", msg: "Could not find the class right now"});
     })
   }).catch(function (err) {
     console.log(err);
-    res.send({success: "false", msg: "Could not add the minicourse right now"});
+    res.send({success: "false", msg: "Could not add the Course right now"});
 
   })
 
@@ -277,7 +276,7 @@ async function addLessons(bulkInsertArray) {
 
 
 //Write
-router.post('/:id/:minicourseId/edit', function (req, res) {
+router.post('/:id/:minicourseId/edit',  passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
 
   const tutorId = parseInt(req.params.id);
   models.MiniCourse.update({

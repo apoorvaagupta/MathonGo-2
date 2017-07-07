@@ -1,15 +1,15 @@
 const Sequelize = require('sequelize');
 
 
-  const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
-      host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
-      port: 5432,
-      dialect: 'postgres'
-  });
-//
+const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
+  host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
+  port: 5432,
+  dialect: 'postgres'
+});
+
+
 // const db = new Sequelize('mathongo', 'muser', 'mpass', {
 //   host: 'localhost',
-//   port:5432,
 //   dialect: 'postgres'
 // });
 
@@ -39,7 +39,7 @@ const Admin = db.define('admin', {
 
 const UserLocal = db.define('userlocal', {
   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-  email: {type: Sequelize.STRING, unique: true},
+  email: {type: Sequelize.STRING},
   password: Sequelize.STRING,
   role: Sequelize.STRING
 });
