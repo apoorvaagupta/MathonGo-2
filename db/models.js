@@ -9,6 +9,7 @@ const Sequelize = require('sequelize');
 //
 // const db = new Sequelize('mathongo', 'muser', 'mpass', {
 //   host: 'localhost',
+//   port:5432,
 //   dialect: 'postgres'
 // });
 
