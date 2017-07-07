@@ -255,7 +255,7 @@ $(document).ready(function () {
                 }).done(function (data) {
                   if (data.isSuccess === 'true') {
                     $form.text('');
-                    $msg.attr('class', 'text-success').text('Course Added');
+                    $msg.attr('class', 'text-success').text('Chapter Added');
                   } else {
                     $msg.attr('class', 'text-danger').text('Error, Try Again');
                   }
@@ -267,7 +267,7 @@ $(document).ready(function () {
                 })
               }
               else {
-                $msg.text("Please fill all fields");
+
               }
             })
           });
