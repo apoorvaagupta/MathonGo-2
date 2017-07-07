@@ -452,6 +452,7 @@ $(document).ready(function () {
                                         $submit = $('#submit');
                                         $submit.unbind('click');
                                         $submit.click(function () {
+
                                             categoryIds = [];
                                             $('input[name=category]:checked').each(function () {
                                                 categoryIds.push($(this).val());
@@ -471,6 +472,56 @@ $(document).ready(function () {
                                                 categoryIds: categoryIds
 
                                             };
+
+                                            if(miniCourseData.name === ''){
+                                                $msg.attr('class', 'text-danger').text("Please fill the name");
+                                                return;
+                                            }
+
+                                            if(miniCourseData.noOfLessons === ''){
+                                                $msg.attr('class', 'text-danger').text("Please fill the no of lessons");
+                                                return;
+                                            }
+                                            if(miniCourseData.description === ''){
+                                                $msg.attr('class', 'text-danger').text("Please fill the description");
+                                                return;
+                                            }
+                                            if(miniCourseData.duration === ''){
+                                                $msg.attr('class', 'text-danger').text("Please fill the duration");
+                                                return;
+                                            }
+                                            if(!miniCourseData.level){
+                                                $msg.attr('class', 'text-danger').text("Please select the level");
+                                                return;
+                                            }
+                                            if(!miniCourseData.medium){
+                                                $msg.attr('class', 'text-danger').text("Please select the medium");
+                                                return;
+                                            }
+
+                                            if(!tutorId){
+                                                $msg.attr('class', 'text-danger').text("Please select the tutor");
+                                                return;
+                                            }
+                                            if(!miniCourseData.classId){
+                                                $msg.attr('class', 'text-danger').text("Please select the class");
+                                                return;
+                                            }
+
+                                            if(!miniCourseData.subjectId){
+                                                $msg.attr('class', 'text-danger').text("Please select the subject");
+                                                return;
+                                            }
+                                            if(!miniCourseData.courseId){
+                                                $msg.attr('class', 'text-danger').text("Please select the chapter");
+                                                return;
+                                            }
+
+
+                                            if(miniCourseData.categoryIds.length === 0){
+                                                $msg.attr('class', 'text-danger').text("Please select the categories");
+                                                return;
+                                            }
 
                                             $.ajax({
                                                 url: "/api/tutors/" + tutorId + "/addMiniCourse",
@@ -579,6 +630,7 @@ $(document).ready(function () {
                           <a class="btn btn-outline-success view" style="margin-left: 50px" target = "_blank" href="/courses/` + minicourse.id + `/` + minicourse.name + `">View</a>
                           <button class="btn btn-outline-info edit" style="margin-left: 20px">Edit</button>
                           <button class="btn btn-outline-danger delete" style="margin-left: 20px">Delete</button>
+                          <button class="btn btn-outline-info add-lesson" style="margin-left: 20px">Add Lesson</button>
                           </li>
                         `)
                             });
@@ -747,7 +799,7 @@ $(document).ready(function () {
                                                                     data: {
                                                                         name: $('#lesson-name').val(),
                                                                         videoUrl: $('#lesson-videourl').val(),
-                                                                        level: $('input[name="lessonlevel"]').val(),
+                                                                        level: $('input[name="lessonlevel"]:checked').val(),
                                                                         duration: $('#lesson-duration').val(),
                                                                         description: $('#lesson-description').val()
                                                                     },
@@ -903,6 +955,70 @@ $(document).ready(function () {
                                         $msg.attr('class', 'text-danger').text(miniCourse);
                                     }
                                 })
+                            })
+                            $('.add-lesson').click(function (e) {
+                                let miniCourseId = e.target.parentElement.getAttribute('miniCourseId');
+                                console.log(miniCourseId)
+                                $form.text("");
+                                $msg.text("");
+
+                                $form.append(`
+                            <label>
+        Name of the Lesson: <input type="text" style=" width:600px" id="lesson-name"  required>
+    </label>
+    <br><br>
+    <label>
+        Video URL: <input type="text" style=" width:800px" id="lesson-videourl" required>
+    </label>
+    <br><br>
+    <label>
+       Description: <br><textarea cols="100" rows="4" id="lesson-description" required></textarea>
+    </label>
+    <br><br>
+    <label>
+        Duration of the minicourse: <input type="text" id="lesson-duration" required>
+    </label>
+    <br><br>
+    <label>
+        Level:
+        <label><input type="radio" name="lessonlevel" value="Beginner" required> Beginner</label>
+        <label><input type="radio" name="lessonlevel" value="Intermediate"> Intermediate</label>
+        <label><input type="radio" name="lessonlevel" value="Advance"> Advance</label>
+    </label>
+    <br><br>
+    
+        `);
+
+                                $form.append(`<button class="btn buttons" id="submit">Submit</button>`);
+                                $submit = $('#submit');
+                                $submit.unbind('click');
+
+                                $submit.click(function () {
+                                    $.ajax({
+                                            url: "/api/minicourses/" + miniCourseId + "/addLesson",
+                                            data: {
+                                                name: $('#lesson-name').val(),
+                                                videoUrl: $('#lesson-videourl').val(),
+                                                level: $('input[name="lessonlevel"]').val(),
+                                                duration: $('#lesson-duration').val(),
+                                                description: $('#lesson-description').val()
+                                            },
+                                            method: 'POST',
+                                            headers: {
+                                                "Authorization": "Bearer " + localStorage.getItem("token")
+                                            }
+                                        }
+                                    ).done(function (data) {
+                                        console.log(data);
+                                        if (data.success === 'true') {
+                                            $msg.attr('class', 'text-success').text('Lesson Added');
+                                        } else {
+                                            $msg.attr('class', 'text-danger').text(data.msg);
+                                        }
+                                    })
+                                })
+
+
                             })
                         });
                     })

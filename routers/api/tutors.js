@@ -250,7 +250,7 @@ async function addLessons(bulkInsertArray) {
 
 
 //Write
-router.post('/:id/:minicourseId/edit', function (req, res) {
+router.post('/:id/:minicourseId/edit',  passport.authenticate('bearer'), ensure.ensureAdmin(),function (req, res) {
 
   const tutorId = parseInt(req.params.id);
   models.MiniCourse.update({
