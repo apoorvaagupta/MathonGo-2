@@ -483,12 +483,18 @@ $(document).ready(function () {
 
                         let lessonData = [];
                         console.log(miniCourseFinal);
-if(miniCourseFinal.success === 'false' && miniCourseFinal.message === 'Admin Only'){
-console.log("hey there");
-window.alert("Only Admins are allowed");
-window.location.replace('/admin');
+                      if(miniCourseFinal.success === 'false' && miniCourseFinal.message === 'Admin Only'){
+                      console.log("hey there");
+                      window.alert("Only Admins are allowed");
+                      window.location.replace('/admin');
+                        if(miniCourseFinal.success === 'false'){
+                            $form.text('');
+                                $msg.attr('class', 'text-danger').text(miniCourseFinal.message);
+                        }
+
 }
                           success = miniCourseFinal.success;
+                      message = miniCourseFinal.message;
                         miniCourseFinal = miniCourseFinal.data;
                         for (let i = 0; i < counter; i++) {
                           lessonData.push({
