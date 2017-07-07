@@ -1,16 +1,16 @@
 const Sequelize = require('sequelize');
 
 
-  // const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
-  //     host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
-  //     port: 5432,
-  //     dialect: 'postgres'
-  // });
-
-const db = new Sequelize('mathongo', 'muser', 'mpass', {
-  host: 'localhost',
-  dialect: 'postgres'
-});
+  const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
+      host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
+      port: 5432,
+      dialect: 'postgres'
+  });
+//
+// const db = new Sequelize('mathongo', 'muser', 'mpass', {
+//   host: 'localhost',
+//   dialect: 'postgres'
+// });
 
 const Student = db.define('student', {
   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
