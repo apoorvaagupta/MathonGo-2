@@ -88,7 +88,7 @@ $(document).ready(function () {
                 })
               }
               else {
-                $msg.text("Please fill all the details");
+
               }
 
 
@@ -149,7 +149,7 @@ $(document).ready(function () {
                 })
               }
               else {
-                $msg.text("Please fill all fields");
+
               }
             })
           });
@@ -208,7 +208,7 @@ $(document).ready(function () {
                 })
               }
               else {
-                $msg.text("Please fill all fields");
+
               }
             })
           });
@@ -325,7 +325,7 @@ $(document).ready(function () {
                 })
               }
               else {
-                $msg.text("Please fill all fields");
+
               }
             })
           });
@@ -489,12 +489,12 @@ $(document).ready(function () {
                       window.location.replace('/admin');
                         if(miniCourseFinal.success === 'false'){
                             $form.text('');
-                                $msg.attr('class', 'text-danger').text(miniCourseFinal.message);
+                                $msg.attr('class', 'text-danger').text(miniCourseFinal.msg);
                         }
 
 }
                           success = miniCourseFinal.success;
-                      message = miniCourseFinal.message;
+                      message = miniCourseFinal.msg;
                         miniCourseFinal = miniCourseFinal.data;
                         for (let i = 0; i < counter; i++) {
                           lessonData.push({
