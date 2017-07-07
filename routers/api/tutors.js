@@ -250,18 +250,18 @@ router.post('/:id/:miniCourseId/addLesson', passport.authenticate('bearer'), ens
   })
 
 });
-//
-// async function addLessons(bulkInsertArray) {
-//   var finalLessons = [];
-//   for (let i = 0; i < bulkInsertArray.length; i++) {
-//
-//     await models.Lesson.create(bulkInsertArray[i]).then(function (lesson) {
-//       console.log(i)
-//       finalLessons.push(lesson);
-//     })
-//   }
-//   return finalLessons;
-// }
+
+async function addLessons(bulkInsertArray) {
+  var finalLessons = [];
+  for (let i = 0; i < bulkInsertArray.length; i++) {
+
+    await models.Lesson.create(bulkInsertArray[i]).then(function (lesson) {
+      console.log(i)
+      finalLessons.push(lesson);
+    })
+  }
+  return finalLessons;
+}
 
 
 //Write
