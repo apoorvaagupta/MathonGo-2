@@ -1,7 +1,7 @@
 /**
  * Created by apoorvaa_gupta on 13/6/17.
  */
-
+// a.toLowerCase().split(" ").join("-")
 
 $('document').ready(function () {
 
@@ -203,8 +203,9 @@ function addMiniCourses(minicourses) {
     const ul = $('#minicourses-list');
     ul.empty();
     for (let i = 0; i < minicourses.length; i++) {
+        let category = (minicourses[i].minicoursecategories[0].category.categoryName);
         let categories = minicourses[i].minicoursecategories.map((i) => i.category.categoryName).join(', ');
-        ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/cover.jpg" class="minicourse-img"></div>' +
+        ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/'+ category+ '/' + minicourses[i].tag.course.courseName.toLowerCase().split(" ").join("-") + '.png" class="minicourse-img"></div>' +
             '<div class="col-sm-8 minicourse-content">' +
             '<div class="row minicourse-chps"><span>' + minicourses[i].tag.subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + minicourses[i].tag.course.courseName + '</span></div>' +
             '<div class="row minicourse-title"><span>' + minicourses[i].name + '</span></div>' +

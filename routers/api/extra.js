@@ -25,6 +25,17 @@ router.get('/allClasses', function (req, res) {
     }).catch(function (err) {
         return res.send({success: 'false', data: "Error"})
     })
+});
+
+router.post('/deleteClass', function (req,res) {
+    models.Class.destroy({
+        where: {}
+    }).then(function () {
+
+    }).catch(function (err) {
+        console.log(err);
+        return res.send({success: 'false', data: "Error"})
+    })
 })
 
 router.post('/addSubject', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
