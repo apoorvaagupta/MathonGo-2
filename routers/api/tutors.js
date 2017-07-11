@@ -57,30 +57,56 @@ router.get('/:id', function (req, res) {
   models.Tutor.findOne({
     where: {id: req.params.id}
   }).then(function (student) {
-    res.send(student);
+    if (student) {
+      res.send(student);
+    } else {
+      res.send({success: false, data: 'Tutor Does Not Exists'})
+    }
   }).catch(function (err) {
     console.log(err);
     res.send('Unknown Student');
   })
 });
 
-router.post('/:id/edit', function (req, res) {
-  let tutorId = parseInt(req.params.id),
-    email = req.body.email,
-    name = req.body.name,
-    description = req.body.description;
+router.put('/:id', function (req, res) {
+  let tutorId = parseInt(req.params.id);
 
   models.Tutor.update({
-    email: email,
-    name: name,
-    description: description
+    name: req.body.name,
+    email: req.body.email,
+    contact: req.body.contact,
+    img: req.body.img,
+    description: req.body.description
   }, {
-    where: {id: studentId},
+    where: {id: tutorId},
     returning: true
   }).then(function (rows) {
-    res.send(rows[1][0].get());
+    if (rows[0] === 0) {
+      res.send({success: false, data: 'Tutor Does Not Exists'})
+    } else {
+      res.send({success: true, data: rows[1][0].get()});
+    }
   }).catch(function (error) {
-    console.error(error)
+    console.error(error);
+    res.send({success: false, data: 'Internal Server Error'})
+  });
+});
+
+router.delete('/:id', function (req, res) {
+  let tutorId = parseInt(req.params.id);
+
+  models.Tutor.destroy({
+    where: {id: tutorId},
+    returning: true
+  }).then(function (noOfTutorsDeleted) {
+    if (noOfTutorsDeleted === 0) {
+      res.send({success: false, data: 'Tutor Does Not Exists'})
+    } else {
+      res.send({success: true, data: 'Tutor Deleted'});
+    }
+  }).catch(function (error) {
+    console.error(error);
+    res.send({success: false, data: 'Internal Server Error'})
   });
 });
 
