@@ -27,15 +27,20 @@ router.get('/allClasses', function (req, res) {
     })
 });
 
-router.post('/deleteClass', function (req,res) {
+router.delete('/deleteClass/:id', function (req,res) {
     models.Class.destroy({
-        where: {}
-    }).then(function () {
-
-    }).catch(function (err) {
-        console.log(err);
-        return res.send({success: 'false', data: "Error"})
-    })
+        where: {id: req.params.id},
+        returning: true
+    }).then(function (noOfClassesDeleted) {
+        if (noOfClassesDeleted === 0) {
+            res.send({success: false, data: 'Class Does Not Exists'})
+        } else {
+            res.send({success: true, data: 'Class Deleted'});
+        }
+    }).catch(function (error) {
+        console.error(error);
+        res.send({success: false, data: 'Internal Server Error'})
+    });
 })
 
 router.post('/addSubject', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
@@ -60,6 +65,23 @@ router.get('/allSubjects', function (req, res) {
     })
 })
 
+
+router.delete('/deleteSubject/:id', function (req,res) {
+    models.Subject.destroy({
+        where: {id: req.params.id},
+        returning: true
+    }).then(function (noOfSubjectsDeleted) {
+        if (noOfSubjectsDeleted === 0) {
+            res.send({success: false, data: 'Subject Does Not Exists'})
+        } else {
+            res.send({success: true, data: 'Subject Deleted'});
+        }
+    }).catch(function (error) {
+        console.error(error);
+        res.send({success: false, data: 'Internal Server Error'})
+    });
+})
+
 router.post('/addCategory', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     models.Category.create({
         categoryName: req.body.categoryName
@@ -82,6 +104,23 @@ router.get('/allCategories', function (req, res) {
     })
 })
 
+
+router.delete('/deleteCategory/:id', function (req,res) {
+    models.Category.destroy({
+        where: {id: req.params.id},
+        returning: true
+    }).then(function (noOfCategoriesDeleted) {
+        if (noOfCategoriesDeleted === 0) {
+            res.send({success: false, data: 'Category Does Not Exists'})
+        } else {
+            res.send({success: true, data: 'Category Deleted'});
+        }
+    }).catch(function (error) {
+        console.error(error);
+        res.send({success: false, data: 'Internal Server Error'})
+    });
+})
+
 router.post('/addCourse', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
     models.Course.create({
         courseName: req.body.courseName
@@ -102,6 +141,23 @@ router.get('/allCourses', function (req, res) {
     }).catch(function (err) {
         return res.send({success: 'false', data: "Error"})
     })
+})
+
+
+router.delete('/deleteCourse/:id', function (req,res) {
+    model.Course.destroy({
+        where: {id: req.params.id},
+        returning: true
+    }).then(function (noOfCoursesDeleted) {
+        if (noOfCoursesDeleted === 0) {
+            res.send({success: false, data: 'Course Does Not Exists'})
+        } else {
+            res.send({success: true, data: 'Course Deleted'});
+        }
+    }).catch(function (error) {
+        console.error(error);
+        res.send({success: false, data: 'Internal Server Error'})
+    });
 })
 
 router.get('/filters', function (req, res) {

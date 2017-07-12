@@ -115,6 +115,9 @@ router.delete('/:id', function (req, res) {
               res.send({success: false, data: 'Internal Server Error'})
           });
       }
+  }).catch(function (err) {
+      console.log(err)
+      res.send({success: false, data:"Internal Server Error"})
   })
 });
 
