@@ -98,7 +98,7 @@ router.delete('/:id', function (req, res) {
   models.MiniCourse.findAll({
     where: {tutorId : tutorId}
   }).then(function (minicourses) {
-      if(minicourses.length === 0){
+      if(minicourses.length !== 0){
           res.send({success: false, data: 'Can not delete the tutor which has courses'})
       }else {
           models.Tutor.destroy({
