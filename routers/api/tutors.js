@@ -95,19 +95,27 @@ router.put('/:id', function (req, res) {
 router.delete('/:id', function (req, res) {
   let tutorId = parseInt(req.params.id);
 
-  models.Tutor.destroy({
-    where: {id: tutorId},
-    returning: true
-  }).then(function (noOfTutorsDeleted) {
-    if (noOfTutorsDeleted === 0) {
-      res.send({success: false, data: 'Tutor Does Not Exists'})
-    } else {
-      res.send({success: true, data: 'Tutor Deleted'});
-    }
-  }).catch(function (error) {
-    console.error(error);
-    res.send({success: false, data: 'Internal Server Error'})
-  });
+  models.MiniCourse.findAll({
+    where: {tutorId : tutorId}
+  }).then(function (minicourses) {
+      if(minicourses.length === 0){
+          res.send({success: false, data: 'Can not delete the tutor which has courses'})
+      }else {
+          models.Tutor.destroy({
+              where: {id: tutorId},
+              returning: true
+          }).then(function (noOfTutorsDeleted) {
+              if (noOfTutorsDeleted === 0) {
+                  res.send({success: false, data: 'Tutor Does Not Exists'})
+              } else {
+                  res.send({success: true, data: 'Tutor Deleted'});
+              }
+          }).catch(function (error) {
+              console.error(error);
+              res.send({success: false, data: 'Internal Server Error'})
+          });
+      }
+  })
 });
 
 router.get('/:id/myMiniCourses', function (req, res) {
