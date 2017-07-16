@@ -145,7 +145,7 @@ router.get('/allCourses', function (req, res) {
 
 
 router.delete('/deleteCourse/:id', function (req,res) {
-    model.Course.destroy({
+    models.Course.destroy({
         where: {id: req.params.id},
         returning: true
     }).then(function (noOfCoursesDeleted) {
