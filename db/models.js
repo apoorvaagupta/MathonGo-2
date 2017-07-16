@@ -1,12 +1,10 @@
 const Sequelize = require('sequelize');
 
-
 const db = new Sequelize('mathongo', 'muser', 'mathongopass', {
   host: 'mathongo.cdkn595tutfq.ap-south-1.rds.amazonaws.com',
   port: 5432,
   dialect: 'postgres'
 });
-
 
 // const db = new Sequelize('mathongo', 'muser', 'mpass', {
 //   host: 'localhost',
@@ -70,9 +68,10 @@ const MiniCourse = db.define('minicourse', {
   level: Sequelize.STRING,
   medium: Sequelize.STRING,
   duration: Sequelize.STRING,
+  rating: Sequelize.INTEGER,
+  noOfReviews: Sequelize.INTEGER,
   img: {type: Sequelize.STRING, defaultValue: ""}
 });
-
 
 const Lesson = db.define('lesson', {
   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
@@ -188,7 +187,7 @@ MiniCourseCategory.belongsTo(Category);
 Category.hasMany(MiniCourseCategory);
 MiniCourse.hasMany(MiniCourseCategory);
 
-db.sync({}).then(() => {
+db.sync({alter: true}).then(() => {
   console.log('Database configured')
 });
 

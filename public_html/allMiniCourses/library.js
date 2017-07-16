@@ -212,7 +212,9 @@ function addMiniCourses(minicourses) {
             '<div class="row"><p class="minicourse-description">' + minicourses[i].description + '</p></div>' +
             '<div class="row align-items-center"><a href="/courses/' + minicourses[i].id + '/'+minicourses[i].name+'" class="enrol-style">VIEW</a></div>' +
             '</div> </div> <div class="row minicourse-tags"> <div class="minicourse-tag">' +
-            '<div class="row tag-title">TEACHER </div> <div class="row tag-content"><span>' + minicourses[i].tutor.name + '</span></div> </div>' +
+            '<div class="row tag-title">TEACHER </div> <div class="row tag-content">' +
+            '<img src="./../images/user-image.jpg" style="border-radius: 50%; height: 30px">&nbsp;&nbsp;' +
+            '<div><span class="align-middle"> ' + minicourses[i].tutor.name + '</span></div></div> </div>' +
             '<div class="minicourse-tag"> <div class="row tag-title">DURATION</div>' +
             '<div class="row tag-content"><span>' + minicourses[i].duration + '</span></div> </div> <div class="minicourse-tag">' +
             '<div class="row tag-title">DIFFICULTY</div> <div class="row tag-content"><span>' + minicourses[i].level + '</span></div>' +
