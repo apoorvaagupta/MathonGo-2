@@ -82,7 +82,7 @@ router.post('/:lessonId/upvote', function (req, res) {
   //upvote this lesson
 });
 //TODO DELETE LESSON
-router.delete('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
+router.delete('/:id', ensure.ensureAdmin(), function (req, res) {
   let lessonId = parseInt(req.params.id);
   models.Lesson.destroy({
     where: {id: lessonId}
@@ -124,7 +124,7 @@ router.delete('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(), fun
   });
 });
 
-router.put('/:id', passport.authenticate('bearer'), ensure.ensureAdmin(), function (req, res) {
+router.put('/:id', ensure.ensureAdmin(), function (req, res) {
   let lessonId = parseInt(req.params.id);
   models.Lesson.update({
     name: req.body.name,
