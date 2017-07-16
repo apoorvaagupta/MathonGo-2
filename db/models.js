@@ -68,9 +68,9 @@ const MiniCourse = db.define('minicourse', {
   level: Sequelize.STRING,
   medium: Sequelize.STRING,
   duration: Sequelize.STRING,
-  rating: Sequelize.INTEGER,
-  noOfReviews: Sequelize.INTEGER,
-  img: {type: Sequelize.STRING, defaultValue: ""}
+  img: {type: Sequelize.STRING, defaultValue: ""},
+  noOfReviews: {type:Sequelize.INTEGER, defaultValue: 0},
+  ratings: {type: Sequelize.INTEGER, defaultValue: 0}
 });
 
 const Lesson = db.define('lesson', {
