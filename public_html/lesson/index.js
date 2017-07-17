@@ -90,12 +90,12 @@ $(document).ready(function () {
                 const lessons = $('#lessons');
                 for (let i = 0; i < miniCourse.lessons.length; i++) {
                     if (miniCourse.lessons[i].id !== lesson.id) {
-                        lessons.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='/lessons/` + miniCourse.lessons[i].id + `'">
-                    <h5 style="font-size: 14px;margin-bottom: 7px;font-weight: 500;color: #A4A5A9">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `<br></h5>
+                        lessons.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding:20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='/lessons/` + miniCourse.lessons[i].id + `'">
+                    <h5 style="font-size: 14px;margin-bottom: 0px;font-weight: 500;color: #A4A5A9">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `</h5>
                 </div>`)
                     } else {
                         lessons.append(`<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">
-                    <h5 style="font-size: 14px;margin-bottom: 7px;font-weight: 500;color: #1589EE">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `<br></h5>
+                    <h5 style="font-size: 14px;margin-bottom: 0px;font-weight: 500;color: #1589EE">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `</h5>
                 </div>`)
                     }
                 }
