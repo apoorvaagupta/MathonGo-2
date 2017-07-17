@@ -65,7 +65,7 @@ $(document).ready(function () {
       `
             <h4 style=";margin-bottom: 7px; color: #444; font-weight: 500;padding-top: 5px"><b>${Math.floor(+miniCourse.rating)}</b><br></h4>
             <div id="jRate-rating"></div>   
-            <p style="color: #999;font-weight: 500;border: none !important;padding: 5px;font-size: 12px">${(miniCourse.noOfRatings ? miniCourse.noOfRatings : 0)} Ratings</p>
+            <p style="color: #999;font-weight: 500;border: none !important;padding: 5px;font-size: 12px">${(miniCourse.noOfRatings!==null ? miniCourse.noOfRatings : 0)} Ratings</p>
             <div class="row">
                 <div class="col-sm-1" id="jRate-rating-vertical" style="float: left;"></div>
                 <div class="col-sm-10 pr-0">
