@@ -14,22 +14,26 @@ body, html {
     text-align: left;
 }
 
-.nav-tabs .nav-link{
-    text-align: left;
+.nav-tabs{
     border: 0; !important;
     /*border-bottom: 1px solid rgba(0,0,0,0.15) ;!important;*/
 }
 
-.nav-tabs .nav-link.active{
-    background-color: transparent;
-    border: 0;!important;
-}
-.nav-link:active{
-    background-color: transparent;
+.nav-link{
+    text-align: left;
 }
 
 .nav-tabs .nav-link.active{
-    border: 0; !important;
+    background-color: transparent;
+    border: none;
+}
+.nav-link:active{
+    background-color: transparent;
+    border: none;
+}
+
+.nav-tabs .nav-link.active{
+    border: none; !important;
 
     /*border-bottom: 2px solid;*/
     /*border-bottom-color: #1485E8;*/
@@ -38,7 +42,7 @@ body, html {
 .a-style{
     color: #999;
     font-weight: 500;
-    border: 0;!important;
+    border: none !important;
     padding: 0;
     justify-content: left;
 }

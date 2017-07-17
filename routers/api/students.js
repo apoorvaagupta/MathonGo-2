@@ -4,7 +4,12 @@ const password = require('./../../utils/password');
 const passport = require('./../../passport/passporthandler');
 
 router.get('/', function (req, res) {
-
+  models.Student.findAll().then(function (students) {
+    res.send(students);
+  }).catch(function (err) {
+    console.log(err);
+    res.send("Could not send all the students");
+  })
 });
 
 router.post('/add', function (req, res) {
