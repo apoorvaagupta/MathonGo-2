@@ -87,6 +87,63 @@ $(document).ready(function () {
                 });
 
 
+                $.ajax({
+                    url: '/api/lessons/' + lessonId + '/isUpvoted',
+                    method: 'GET',
+                    headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+                }).done(function (data) {
+                    const upvote = $('#upvote');
+                    const upvotelogo = $('#upvote-logo');
+                    console.log(data);
+                    if (data.success === 'true') {
+                        console.log("yay");
+                        upvotelogo.src = "/images/thumb-up.png";
+                        upvote.text("Upvoted")
+                        upvote.click(function () {
+                            // $('#msg').attr('class', 'text-success').text("Already Bookmarked");
+                        });
+                    } else if (data.success === 'false') {
+                        upvote.click(function () {
+
+                            $.ajax({
+                                url: "/api/lessons/" + lessonId + "/upvote",
+                                method: 'POST',
+                                headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
+                            }).done(function (bookmarked) {
+                                console.log("enrol fn");
+                                if (bookmarked.success === 'true') {
+                                    upvotelogo.attr("src" , "/images/thumb-up.png");
+                                    upvote.text("Upvoted")
+                                    upvote.unbind('click');
+                                    // $('#msg').text("");
+                                    upvote.click(function () {
+                                        // $('#msg').attr('class', 'text-success').text("Already Bookmarked");
+                                    });
+                                } else {
+                                    // $('#msg').attr('class', 'text-danger').text("Bookmark Again");
+                                }
+                            }).fail(function (object) {
+                                if (object.responseText === 'Unauthorized') {
+                                    window.alert("Please Login First");
+                                    window.location.replace('/');
+                                }
+                            })
+                        })
+                    } else if (data.success === 'false') {
+                        // $('#msg').attr('class', 'text-danger').text("Bookmark Again");
+
+                    }
+
+
+                }).fail(function (object) {
+                    const bookmark = $('#bookmark');
+                    bookmark.click(function () {
+                        window.alert("Please Login First");
+                        window.location.replace('/')
+                    });
+                });
+
+
                 const lessons = $('#lessons');
                 for (let i = 0; i < miniCourse.lessons.length; i++) {
                     if (miniCourse.lessons[i].id !== lesson.id) {
