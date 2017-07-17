@@ -4,7 +4,14 @@ const password = require('./../../utils/password');
 const passport = require('./../../passport/passporthandler');
 
 router.get('/', function (req, res) {
-
+    models.Student.findOne({
+        where: {id: req.params.id}
+    }).then(function (student) {
+        res.send(student);
+    }).catch(function (err) {
+        console.log(err);
+        res.send('Unknown Student');
+    })
 });
 
 router.post('/add', function (req, res) {
@@ -27,17 +34,6 @@ router.post('/add', function (req, res) {
         res.send("Could not create the user");
     })
 });
-//
-// router.get('/:id', function (req, res) {
-//     models.Student.findOne({
-//         where: {id: req.params.id}
-//     }).then(function (student) {
-//         res.send(student);
-//     }).catch(function (err) {
-//         console.log(err);
-//         res.send('Unknown Student');
-//     })
-// });
 
 router.post('/:id/edit', function (req, res) {
     // let studentId = parseInt(req.params.id);

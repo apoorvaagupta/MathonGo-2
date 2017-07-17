@@ -34,7 +34,7 @@ router.get('/:id', function (req, res) {
   })
 });
 
-router.post('/:id/bookmark', function (req, res) {
+router.post('/:id/bookmark',  passport.authenticate('bearer'),ensure.ensureStudent(),function (req, res) {
   let lessonId = parseInt(req.params.id);
   models.Bookmark.create({
     lessonId: lessonId,
@@ -52,7 +52,7 @@ router.post('/:id/bookmark', function (req, res) {
 });
 
 
-router.get('/:id/isBookmarked', function (req, res) {
+router.get('/:id/isBookmarked', passport.authenticate('bearer'), function (req, res) {
   let lessonId = parseInt(req.params.id);
   models.Bookmark.findOne({
     where: {
@@ -72,17 +72,67 @@ router.get('/:id/isBookmarked', function (req, res) {
 });
 
 
-router.post('/:lessonId/report', function (req, res) {
+router.post('/:lessonId/report',passport.authenticate('bearer'), ensure.ensureStudent(), function (req, res) {
   //report this lesson
-  //PHASE 2
+
+    let lessonId = parseInt(req.params.lessonId);
+    models.Report.create({
+        lessonId: lessonId,
+        studentId: req.user.user.id,
+        description: req.body.description
+    }).then(function (report) {
+        if (report) {
+            res.send({success: 'true'})
+        } else {
+            res.send({success: 'false', message: 'Could not report for this lesson'})
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'false', message: 'Could not find the lesson'})
+    });
 });
 
-router.post('/:lessonId/upvote', function (req, res) {
-  //PHASE 2
+router.post('/:lessonId/upvote', passport.authenticate('bearer'), ensure.ensureStudent(),function (req, res) {
   //upvote this lesson
+    let lessonId = parseInt(req.params.lessonId);
+    models.Upvote.create({
+        lessonId: lessonId,
+        studentId: req.user.user.id,
+    }).then(function (upvote) {
+        if (upvote) {
+            res.send({success: 'true'})
+        } else {
+            res.send({success: 'false', message: 'Could not upvote this lesson'})
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'false', message: 'Could not find the lesson'})
+    });
+
 });
+
+router.get('/:id/isUpvoted', passport.authenticate('bearer'), function (req, res) {
+    let lessonId = parseInt(req.params.id);
+    models.Upvote.findOne({
+        where: {
+            lessonId: lessonId,
+            studentId: req.user.user.id
+        }
+    }).then(function (upvote) {
+        if (upvote) {
+            res.send({success: 'true', message: 'upvoted'});
+        } else {
+            res.send({success: 'false' , message: 'not upvoted'});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'false', message: 'Error'})
+    })
+});
+
+
 //TODO DELETE LESSON
-router.delete('/:id', ensure.ensureAdmin(), function (req, res) {
+router.delete('/:id',  passport.authenticate('bearer'),ensure.ensureAdmin(), function (req, res) {
   let lessonId = parseInt(req.params.id);
   models.Lesson.destroy({
     where: {id: lessonId}
@@ -124,7 +174,7 @@ router.delete('/:id', ensure.ensureAdmin(), function (req, res) {
   });
 });
 
-router.put('/:id', ensure.ensureAdmin(), function (req, res) {
+router.put('/:id',  passport.authenticate('bearer'),ensure.ensureAdmin(), function (req, res) {
   let lessonId = parseInt(req.params.id);
   models.Lesson.update({
     name: req.body.name,
