@@ -10,6 +10,46 @@ body, html {
     word-wrap:break-word;
 }
 
+.nav-item{
+    text-align: left;
+}
+
+.nav-tabs .nav-link{
+    text-align: left;
+    border: 0; !important;
+    /*border-bottom: 1px solid rgba(0,0,0,0.15) ;!important;*/
+}
+
+.nav-tabs .nav-link.active{
+    background-color: transparent;
+    border: 0;!important;
+}
+.nav-link:active{
+    background-color: transparent;
+}
+
+.nav-tabs .nav-link.active{
+    border: 0; !important;
+
+    /*border-bottom: 2px solid;*/
+    /*border-bottom-color: #1485E8;*/
+}
+
+.a-style{
+    color: #999;
+    font-weight: 500;
+    border: 0;!important;
+    padding: 0;
+    justify-content: left;
+}
+
+.a-style:hover{
+
+    color: #999;
+    font-weight: 500;
+}
+
+
 .container-fluid{
     /*height: 100%;  !important;*/
     padding: 0;
