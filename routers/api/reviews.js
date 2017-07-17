@@ -4,7 +4,6 @@ const password = require('./../../utils/password');
 const passport = require('./../../passport/passporthandler');
 const ensure = require('./../../passport/passportutils');
 
-
 router.get('/:miniCourseId', function (req, res) {
   let miniCourseId = req.params.miniCourseId;
   models.Review.findAll({
@@ -26,7 +25,8 @@ router.post('/:miniCourseId', passport.authenticate('bearer'), ensure.ensureStud
   models.Review.create({
     rating: (parseInt(req.body.rating)),
     description: req.body.description,
-    minicourseId: miniCourseId
+    minicourseId: miniCourseId,
+    studentId: req.user.user.id
   }).then(function (review) {
     if (review) {
       res.send({success: true, review: review})
@@ -35,7 +35,7 @@ router.post('/:miniCourseId', passport.authenticate('bearer'), ensure.ensureStud
       }).then(function (minicourse) {
         let totalRating = minicourse.noOfRatings * minicourse.rating;
         minicourse.noOfRatings++;
-        let finalRating = (totalRating + req.body.rating) / minicourse.noOfRatings;
+        let finalRating = ((totalRating + (+req.body.rating)) / minicourse.noOfRatings);
         if (req.body.description) {
           minicourse.noOfReviews++;
         }

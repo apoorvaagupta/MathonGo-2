@@ -34,6 +34,14 @@ $(document).ready(function () {
     $('#miniCourseName').text(miniCourse.name);
     $('#miniCourseDescription').text(miniCourse.description);
     $('#teacherName').text(miniCourse.tutor.name);
+    $('#upper-rating').jRate({
+      rating: Math.floor(+miniCourse.rating),
+      startColor: 'yellow',
+      endColor: 'yellow',
+      height: 15,
+      readOnly: true
+    });
+    $('#noOfReviews').text(miniCourse.noOfReviews + ' Reviews');
     $('#subject').text(miniCourse.tag.subject.subjectName);
     $('#className').text(miniCourse.tag.class.className);
     $('#miniCourseDuration').text(miniCourse.duration);
@@ -46,6 +54,89 @@ $(document).ready(function () {
     }
     $('#nameOfTheTeacher').text(miniCourse.tutor.name);
     $('#teacherDescription').text(miniCourse.tutor.description);
+
+    const $lowerRating = $('#lower-rating');
+    var noOfEachRating = [0, 0, 0, 0, 0, 0];
+    for (let i = 0; i < miniCourse.reviews.length; i++) {
+      noOfEachRating[(+miniCourse.reviews[i].rating)]++;
+    }
+
+    $lowerRating.append(
+      `
+            <h4 style=";margin-bottom: 7px; color: #444; font-weight: 500;padding-top: 5px"><b>${Math.floor(+miniCourse.rating)}</b><br></h4>
+            <div id="jRate-rating"></div>   
+            <p style="color: #999;font-weight: 500;border: none !important;padding: 5px;font-size: 12px">${miniCourse.noOfRatings} Ratings</p>
+            <div class="row">
+                <div class="col-sm-1" id="jRate-rating-vertical" style="float: left;"></div>
+                <div class="col-sm-10 pr-0">
+                    <div class="row" style="height: 30px">
+                        <div class="progress col-sm-10 p-0" style="margin-top: 6px;height: 10px">
+                            <div class="progress-bar" style="width: ${(noOfEachRating[5] * 100) / miniCourse.noOfRatings}%;">
+                                
+                            </div>
+                        </div>
+                        <p class="col-sm-1 px-0 " style="color: #999;font-weight: 500;border: none !important;padding-top:3px;margin-left: 10px;font-size: 12px">${noOfEachRating[5]}</p>
+                    </div>
+                    <div class="row" style="height: 30px">
+                        <div class="progress col-sm-10 p-0" style="margin-top: 6px;height: 10px">
+                            <div class="progress-bar" style="width: ${(noOfEachRating[4] * 100) / miniCourse.noOfRatings}%;">
+                                
+                            </div>
+                        </div>
+                        <p class="col-sm-1 px-0 " style="color: #999;font-weight: 500;border: none !important;padding-top:3px;margin-left: 10px;font-size: 12px">${noOfEachRating[4]}</p>
+                    </div>
+                    <div class="row" style="height: 30px">
+                        <div class="progress col-sm-10 p-0" style="margin-top: 6px;height: 10px">
+                            <div class="progress-bar" style="width: ${(noOfEachRating[3] * 100) / miniCourse.noOfRatings}%;">
+                                
+                            </div>
+                        </div>
+                        <p class="col-sm-1 px-0 " style="color: #999;font-weight: 500;border: none !important;padding-top:3px;margin-left: 10px;font-size: 12px">${noOfEachRating[3]}</p>
+                    </div>
+                    <div class="row" style="height: 30px">
+                        <div class="progress col-sm-10 p-0" style="margin-top: 6px;height: 10px">
+                            <div class="progress-bar" style="width: ${(noOfEachRating[2] * 100) / miniCourse.noOfRatings}%;">
+                                
+                            </div>
+                        </div>
+                        <p class="col-sm-1 px-0 " style="color: #999;font-weight: 500;border: none !important;padding-top:3px;margin-left: 10px;font-size: 12px">${noOfEachRating[2]}</p>
+                    </div>
+                    <div class="row" style="height: 30px">
+                        <div class="progress col-sm-10 p-0" style="margin-top: 6px;height: 10px">
+                            <div class="progress-bar" style="width: ${(noOfEachRating[1] * 100) / miniCourse.noOfRatings}%;">
+                                
+                            </div>
+                        </div>
+                        <p class="col-sm-1 px-0 " style="color: #999;font-weight: 500;border: none !important;padding-top:3px;margin-left: 10px;font-size: 12px">${noOfEachRating[1]}</p>
+                    </div>
+                </div>
+                
+           </div>
+           <br>
+                <a id="rateAndReview" class="btn btn-success text-uppercase"
+                   style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight: 700;cursor: pointer;width: auto;border-radius: 100px">Rate And Review</a>
+           
+`
+    );
+
+    $('#jRate-rating').jRate({
+      rating: Math.floor(+miniCourse.rating),
+      startColor: 'yellow',
+      endColor: 'yellow',
+      height: 20,
+      readOnly: true,
+      shapeGap: '10px'
+    });
+
+    $('#jRate-rating-vertical').jRate({
+      rating: 5,
+      startColor: 'yellow',
+      endColor: 'yellow',
+      height: 20,
+      readOnly: true,
+      shapeGap: '10px',
+      horizontal: false
+    });
 
 
     $.ajax({
@@ -105,8 +196,12 @@ $(document).ready(function () {
 
 
     const lectures = $('#lectures');
+    const materials = $('#materials');
+    const reviews = $('#reviews');
+
     for (let i = 0; i < miniCourse.lessons.length; i++) {
-      lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="goToLesson(` + miniCourse.lessons[i].id + `)">
+      lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;"
+                            onclick="goToLesson(` + miniCourse.lessons[i].id + `)">
                         <div class="row" style="margin-bottom: 0px">
                             <div class="col-sm-1" style="padding-left: 0px">
                                 <img src="/images/icons/movie.png">
@@ -123,12 +218,41 @@ $(document).ready(function () {
                                 <img src="/images/icons/arrow-right-drop-circle-green.png">
                             </div>
                         </div>
-                    </div>
-            
-            
+                    </div>         
             `)
     }
-
+    let defaultName = 'Anonymous User'
+    for (let i = 0; i < miniCourse.reviews.length; i++) {
+      if (!miniCourse.reviews[i].description) {
+        continue;
+      }
+      reviews.append(`<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">
+                        <div class="row" style="margin-bottom: 0px">
+                            <div class="col-sm-1" style="padding-left: 0px">
+                                <img src="/images/user-image.jpg" style="border-radius: 50%; height: 50px">
+                            </div>
+                            <div class="col-sm-11">
+                                <h6 style=";margin-bottom: 7px; color: #444; font-weight: 500;padding-top: 5px"><b>${(miniCourse.reviews[i].student ? miniCourse.reviews[i].student.name : defaultName)}</b><br></h6>
+                                <div id="jRate-${miniCourse.reviews[i].id}">
+                                </div>
+                                
+                            </div>
+                            <div class="col-sm-12" style="margin-top: 15px">
+                                <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
+                                    ${miniCourse.reviews[i].description}
+                                </p>
+                            </div>
+                        </div>
+                    </div>         
+            `)
+      $(`#jRate-${miniCourse.reviews[i].id}`).jRate({
+        rating: +miniCourse.reviews[i].rating,
+        startColor: 'yellow',
+        endColor: 'yellow',
+        height: 15,
+        readOnly: true
+      });
+    }
   });
 
 

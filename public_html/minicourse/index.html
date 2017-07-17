@@ -12,20 +12,23 @@
     <script src="/js/tether.js"></script>
     <script src="/js/bootstrap.js"></script>
 
+    <!--For Star Rating-->
+    <script src="/js/jRate.js"></script>
+
     <script src="./index.js"></script>
     <script>
 
-        let logoutfn = function () {
+      let logoutfn = function () {
 
-            $.ajax({
-                url: '/logout',
-                headers: {"Authorization": "Bearer " + localStorage.token},
-                method: "GET"
-            }).done(function (user) {
-                localStorage.removeItem("token");
-                window.location.replace(user.url);
-            });
-        }
+        $.ajax({
+          url: '/logout',
+          headers: {"Authorization": "Bearer " + localStorage.token},
+          method: "GET"
+        }).done(function (user) {
+          localStorage.removeItem("token");
+          window.location.replace(user.url);
+        });
+      }
     </script>
 </head>
 <body>
@@ -103,6 +106,14 @@
                     <span id="teacherName"></span>
                 </div>
                 <div class="col text-center">
+                    <p><b>RATINGS</b></p>
+                    <div id="upper-rating"></div>
+                </div>
+                <div class="col text-center">
+                    <p><b>REVIEWS</b></p>
+                    <span id="noOfReviews"></span>
+                </div>
+                <div class="col text-center">
                     <p><b>SUBJECT</b></p>
                     <span id="subject"></span>
                 </div>
@@ -126,38 +137,50 @@
                     <p><b>RELEVANCE</b></p>
                     <span id="relevance"></span>
                 </div>
-                <div class="col text-center" style="padding-top: 20px">
-                    <p>|</p>
-                </div>
-                <div class="col-sm-2 text-center" style="padding-top: 13px">
-                    <a id="enroll" class="btn btn-success text-uppercase"
-                       style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight: 700;cursor: pointer;width: auto;border-radius: 100px">Enroll</a>
-                    <p id="msg" style="padding-top: 10px;margin-bottom: 6px;"></p>
-                </div>
             </div>
         </div>
     </div>
 
+    <!--<div class="col-sm-2 text-center" style="padding-top: 13px">-->
+        <!--<a id="enroll" class="btn btn-success text-uppercase"-->
+           <!--style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight: 700;cursor: pointer;width: auto;border-radius: 100px">Enroll</a>-->
+        <!--<p id="msg" style="padding-top: 10px;margin-bottom: 6px;"></p>-->
+    <!--</div>-->
+
     <div class="row" style="margin-top: 35px;">
         <div class="col-sm-8">
 
-            <ul class="nav nav-tabs nav-justified " role="tablist">
-                <li class="nav-item" style="width: inherit">
+            <ul class="nav nav-tabs" role="tablist" style="margin-bottom: 2px">
+                <li class="nav-item">
                     <a class="nav-link active nav-style a-style" data-toggle="tab"
-                       href="#lectures">lectures</a>
+                       href="#lecturesTab"><p><b>Lectures&nbsp;&nbsp;</b></p></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-style a-style" data-toggle="tab" href="#lectures">material</a>
+                    <a class="nav-link nav-style a-style" data-toggle="tab" href="#materialsTab"><p><b>Materials&nbsp;&nbsp;</b></p></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-style a-style" data-toggle="tab" href="#lectures">reviews</a>
+                    <a class="nav-link nav-style a-style" data-toggle="tab" href="#reviewsTab"><p><b>Reviews</b></p></a>
                 </li>
             </ul>
 
-                <div id="lectures" class="row"
-                     style="background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem; margin-bottom: 30px">
-
+            <div class="tab-content">
+                <div class="tab-pane fade show active" id="lecturesTab" role="tabpanel">
+                    <div id="lectures" class="row"
+                         style="background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem; margin-bottom: 30px">
+                    </div>
                 </div>
+                <div class="tab-pane fade show" id="materialsTab" role="tabpanel">
+                    <div id="materials" class="row"
+                         style="background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem; margin-bottom: 30px">
+                    </div>
+                </div>
+                <div class="tab-pane fade show" id="reviewsTab" role="tabpanel">
+                    <div id="reviews" class="row"
+                         style="background-color: white; box-shadow: #DDD 0 0px 8px 1px ; border-radius: .125rem; margin-bottom: 30px">
+                    </div>
+                </div>
+            </div>
+
 
             <!--<p><b>Materials</b></p>-->
             <!--<div class="row"-->
@@ -177,9 +200,9 @@
                 </div>
             </div>
 
-            <p><b>Reviews</b></p>
-            <div class="row"
-            style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem;margin-bottom: 35px">
+            <p><b>Ratings</b></p>
+            <div class="row text-center" style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem;margin-bottom: 35px">
+                <div class="col-sm-12 p-0" id="lower-rating"></div>
             </div>
 
             <!--<p><b>Doubts</b></p>-->
