@@ -4,8 +4,6 @@ const password = require('./../../utils/password');
 const passport = require('./../../passport/passporthandler');
 const ensure = require('./../../passport/passportutils');
 
-<<<<<<< HEAD
-=======
 
 router.get('/:miniCourseId', function (req, res) {
   let miniCourseId = req.params.miniCourseId;
@@ -65,4 +63,3 @@ router.post('/:miniCourseId', passport.authenticate('bearer'), ensure.ensureStud
 });
 
 module.exports = router;
->>>>>>> 542b67cf00fcd6d846ac49615a26ff4885e38e78
