@@ -382,4 +382,43 @@ router.post('/:id/:minicourseId/edit',  passport.authenticate('bearer'), ensure.
   });
 });
 
+router.post('/:id/follow', passport.authenticate('bearer'), ensure.ensureStudent(),function (req, res) {
+
+    let id = parseInt(req.params.id);
+    models.Follow.create({
+        tutorId: id,
+        studentId: req.user.user.id,
+    }).then(function (follow) {
+        if (follow) {
+            res.send({success: 'true'})
+        } else {
+            res.send({success: 'false', message: 'Could not follow this tutor'})
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'false', message: 'Error'})
+    });
+
+});
+
+router.get('/:id/isFollowed', passport.authenticate('bearer'), ensure.ensureStudent(), function (req, res) {
+    let id = parseInt(req.params.id);
+    models.Follow.findOne({
+        where: {
+          tutorId: id,
+            studentId: req.user.user.id
+        }
+    }).then(function (follow) {
+        if (follow) {
+            res.send({success: 'true', message: 'followed'});
+        } else {
+            res.send({success: 'false' , message: 'not followed'});
+        }
+    }).catch(function (err) {
+        console.log(err);
+        res.send({success: 'false', message: 'Error'})
+    })
+});
+
+
 module.exports = router;
