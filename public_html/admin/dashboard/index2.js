@@ -88,9 +88,7 @@ $(document).ready(function () {
                 })
               }
               else {
-
               }
-
 
             })
           });
@@ -99,7 +97,7 @@ $(document).ready(function () {
             $form.text("");
             $msg.text("");
             $.get("/api/tutors", function (tutors) {
-              tutors=tutors.data;
+              tutors = tutors.data;
               $form.append(`<ul id="tutors-list" class="list-group" ></ul>`);
               const $tutors_list = $('#tutors-list');
               tutors.forEach(function (tutor) {
@@ -221,10 +219,28 @@ $(document).ready(function () {
                 let allClasses = classes.data
                 allClasses.forEach(function (classObj) {
                   $classes_list.append(`
-                          <li class="list-group-item">
+                          <li class="list-group-item" classId="` + classObj.id + `">
                           <span>` + classObj.className + `</span>
+                          <button class="btn btn-outline-danger delete" style="margin-left: 20px">Delete</button>
                           </li>
                         `)
+                });
+                $('.delete').click(function (e) {
+                  let classId = e.target.parentElement.getAttribute('classId');
+                  $.ajax({
+                    url: "/api/extra/deleteClass/" + classId,
+                    method: 'DELETE',
+                    headers: {
+                      "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                  }).done(function (deletedClass) {
+                    if (deletedClass.success) {
+                      $form.text('');
+                      $msg.attr('class', 'text-success').text(deletedClass.data);
+                    } else {
+                      $msg.attr('class', 'text-danger').text(deletedClass.data);
+                    }
+                  })
                 });
               }
             })
@@ -280,11 +296,30 @@ $(document).ready(function () {
                 let allsubjects = subjects.data
                 allsubjects.forEach(function (subjectObj) {
                   $subjects_list.append(`
-                          <li class="list-group-item">
+                          <li class="list-group-item" subjectId="`+subjectObj.id+`">
                           <span>` + subjectObj.subjectName + `</span>
+                          <button class="btn btn-outline-danger delete" style="margin-left: 20px">Delete</button>
                           </li>
                         `)
                 });
+                $('.delete').click(function (e) {
+                  let subjectId = e.target.parentElement.getAttribute('subjectId');
+                  $.ajax({
+                    url: "/api/extra/deleteSubject/" + subjectId,
+                    method: 'DELETE',
+                    headers: {
+                      "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                  }).done(function (deletedSubject) {
+                    if (deletedSubject.success) {
+                      $form.text('');
+                      $msg.attr('class', 'text-success').text(deletedSubject.data);
+                    } else {
+                      $msg.attr('class', 'text-danger').text(deletedSubject.data);
+                    }
+                  })
+                });
+
               }
             })
 
@@ -339,11 +374,30 @@ $(document).ready(function () {
                 let allcourses = courses.data
                 allcourses.forEach(function (courseObj) {
                   $courses_list.append(`
-                          <li class="list-group-item">
+                          <li class="list-group-item" courseId="`+courseObj.id+`">
                           <span>` + courseObj.courseName + `</span>
+                          <button class="btn btn-outline-danger delete" style="margin-left: 20px">Delete</button>
                           </li>
                         `)
                 });
+                $('.delete').click(function (e) {
+                  let courseId = e.target.parentElement.getAttribute('courseId');
+                  $.ajax({
+                    url: "/api/extra/deleteCourse/" + courseId,
+                    method: 'DELETE',
+                    headers: {
+                      "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                  }).done(function (deletedCourse) {
+                    if (deletedCourse.success) {
+                      $form.text('');
+                      $msg.attr('class', 'text-success').text(deletedCourse.data);
+                    } else {
+                      $msg.attr('class', 'text-danger').text(deletedCourse.data);
+                    }
+                  })
+                });
+
               }
             })
 
@@ -398,11 +452,30 @@ $(document).ready(function () {
                 let allcategories = categories.data
                 allcategories.forEach(function (categoryObj) {
                   $categories_list.append(`
-                          <li class="list-group-item">
+                          <li class="list-group-item" categoryId="`+categoryObj.id+`">
                           <span>` + categoryObj.categoryName + `</span>
+                          <button class="btn btn-outline-danger delete" style="margin-left: 20px">Delete</button>
                           </li>
                         `)
                 });
+                $('.delete').click(function (e) {
+                  let categoryId = e.target.parentElement.getAttribute('categoryId');
+                  $.ajax({
+                    url: "/api/extra/deleteCategory/" + categoryId,
+                    method: 'DELETE',
+                    headers: {
+                      "Authorization": "Bearer " + localStorage.getItem("token")
+                    }
+                  }).done(function (deletedCategory) {
+                    if (deletedCategory.success) {
+                      $form.text('');
+                      $msg.attr('class', 'text-success').text(deletedCategory.data);
+                    } else {
+                      $msg.attr('class', 'text-danger').text(deletedCategory.data);
+                    }
+                  })
+                });
+
               }
             })
 

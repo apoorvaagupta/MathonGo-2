@@ -69,8 +69,9 @@ const MiniCourse = db.define('minicourse', {
   medium: Sequelize.STRING,
   duration: Sequelize.STRING,
   img: {type: Sequelize.STRING, defaultValue: ""},
-  noOfReviews: {type:Sequelize.INTEGER, defaultValue: 0},
-  ratings: {type: Sequelize.INTEGER, defaultValue: 0}
+  noOfReviews: {type: Sequelize.INTEGER, defaultValue: 0},
+  noOfRatings: {type: Sequelize.INTEGER, defaultValue: 0},
+  rating: {type: Sequelize.REAL, defaultValue: 0}
 });
 
 const Lesson = db.define('lesson', {
@@ -105,7 +106,7 @@ const Upvote = db.define('upvote', {
 
 const Review = db.define('review', {
   id: {type: Sequelize.INTEGER, primaryKey: true, autoIncrement: true},
-  rating: Sequelize.INTEGER,      //discuss
+  rating: Sequelize.DataTypes.REAL,      //discuss
   description: Sequelize.STRING
 });
 
@@ -187,7 +188,8 @@ MiniCourseCategory.belongsTo(Category);
 Category.hasMany(MiniCourseCategory);
 MiniCourse.hasMany(MiniCourseCategory);
 
-db.sync({alter:false}).then(() => {
+
+db.sync({alter: false}).then(() => {
   console.log('Database configured')
 });
 
