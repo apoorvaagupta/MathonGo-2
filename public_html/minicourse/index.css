@@ -389,6 +389,7 @@ html, body {
 
 .jumbotron {
     border-radius: 0;
+    padding: 20px ;
 }
 
 .label-style {
@@ -490,4 +491,12 @@ textarea::-moz-placeholder {  /* Firefox 19+ */
 textarea:-ms-input-placeholder {
     color: #B3B3B3 !important;
     font-weight: 500;
+}
+#enroll{
+    color: white;
+}
+
+#enroll:hover{
+    background-color: white;
+    color: #1589EE;
 }

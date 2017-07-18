@@ -208,7 +208,7 @@ $(document).ready(function () {
         enroll.text("Enrolled");
         isEnrolled = true;
         enroll.click(function () {
-          $('#msg').attr('class', 'text-success').text("Already Enrolled");
+          $('#msg').text("Already Enrolled");
         });
       } else if (enrollment.isEnrolled === 'false') {
         enroll.click(function () {
