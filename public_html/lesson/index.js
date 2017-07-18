@@ -155,6 +155,7 @@ $(document).ready(function () {
                     } else {
                         lessons.append(`<div class="col-sm-12" style="height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;">
                     <h5 style="font-size: 14px;margin-bottom: 0;font-weight: 500;color: #1589EE">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `<br></h5>
+
                 </div>`)
                     }
                 }
