@@ -264,11 +264,11 @@ $(document).ready(function () {
                                 <img src="/images/icons/movie.png">
                             </div>
                             <div class="col-sm-10">
-                                <h5 style=";margin-bottom: 7px; color: #444; font-weight: 500">` + (i + 1) + `. ` + miniCourse.lessons[i].name + `<br></h5>
+                                <h5 style=";margin-bottom: 7px; font-size: 18px;color: #444; font-weight: 500">` + miniCourse.lessons[i].name + `<br></h5>
                                 <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
-                                    <img src="/images/icons/timer.png">&nbsp;
-                                    <span style="margin-top: 5px; font-weight: 500">` + miniCourse.lessons[i].duration + `</span>&nbsp;&nbsp;
-                                    <img src="/images/thumb-up-gray.png">&nbsp;<span style="margin-top: 5px; font-weight: 500">` + miniCourse.lessons[i].upvotes + ` upvotes</span>
+                                    <img src="/images/icons/timer.png" style="height: 20px">&nbsp;
+                                    <span style="margin-top: 5px; font-weight: 500; font-size: 12px">` + miniCourse.lessons[i].duration + `</span>&nbsp;&nbsp;
+                                    <img src="/images/thumb-up-gray.png" style="height: 20px">&nbsp;<span style="margin-top: 5px; font-weight: 500; font-size: 12px">` + miniCourse.lessons[i].upvotes + ` upvotes</span>
                                 </p>
                             </div>
                             <div class="col-sm-1">
