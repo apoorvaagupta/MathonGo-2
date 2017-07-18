@@ -36,7 +36,7 @@ router.get('/:id', function (req, res) {
         include: [
             {
                 model: models.Lesson,
-                include: models.upvotes
+                include: models.Upvote
             },
             {
                 model: models.Tutor
@@ -55,15 +55,19 @@ router.get('/:id', function (req, res) {
             }
         ]
     }).then(function (miniCourse) {
+
         //Write for enrollment
         let finalMiniCourse = miniCourse.get();
         console.log("**********")
-        console.log(finalMiniCourse);
+        console.log(finalMiniCourse.lessons);
         console.log("**********")
-        // finalMiniCourse.lessons = finalMiniCourse.lessons.map((lesson) => {
-        //     lesson.upvotes = lesson.upvotes.length;
-        //     return lesson;
-        // })
+        finalMiniCourse.lessons = finalMiniCourse.lessons.map((lesson) => {
+            let finalLesson = lesson.get();
+            finalLesson.upvotes = finalLesson.upvotes.length;
+            return finalLesson;
+        })
+        console.log("AAAAAAAAAAAAAAAAAAAAAA")
+        console.log(finalMiniCourse.lessons)
         res.send(finalMiniCourse);
     }).catch(function (err) {
         console.log(err);

@@ -115,7 +115,10 @@ $(document).ready(function () {
                                 console.log("enrol fn");
                                 if (bookmarked.success === 'true') {
                                     upvotelogo.attr("src" , "/images/thumb-up.png");
-                                    upvotetext.text("Upvoted")
+                                    upvotetext.text("Upvoted");
+                                    let totalUpvotes = $('#totalUpvotes');
+                                    let upvotes = parseInt(totalUpvotes.text().split(" ")[0]);
+                                    totalUpvotes.text((upvotes+1) + " upvotes");
                                     upvote.unbind('click');
                                     // $('#msg').text("");
                                     upvote.click(function () {
