@@ -304,8 +304,8 @@ $(document).ready(function () {
             `);
       $(`#jRate-${miniCourse.reviews[i].id}`).jRate({
         rating: +miniCourse.reviews[i].rating,
-        startColor: 'yellow',
-        endColor: 'yellow',
+        startColor: '#FFD700',
+        endColor: '#FFD700',
         height: 15,
         readOnly: true
       });
