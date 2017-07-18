@@ -36,8 +36,8 @@ $(document).ready(function () {
     $('#teacherName').text(miniCourse.tutor.name);
     $('#upper-rating').jRate({
       rating: Math.floor(+miniCourse.rating),
-      startColor: 'yellow',
-      endColor: 'yellow',
+      startColor: '#FFD700',
+      endColor: '#FFD700',
       height: 15,
       readOnly: true
     });
@@ -127,8 +127,8 @@ $(document).ready(function () {
 
     $('#jRate-add-review').jRate({
       rating: 5,
-      startColor: 'yellow',
-      endColor: 'yellow',
+      startColor: '#FFD700',
+      endColor: '#FFD700',
       height: 30,
       precision: 1,
       shapeGap: '5px',
@@ -140,8 +140,8 @@ $(document).ready(function () {
 
     $('#jRate-rating').jRate({
       rating: Math.floor(+miniCourse.rating),
-      startColor: 'yellow',
-      endColor: 'yellow',
+      startColor: '#FFD700',
+      endColor: '#FFD700',
       height: 20,
       readOnly: true,
       shapeGap: '10px'
@@ -149,8 +149,8 @@ $(document).ready(function () {
 
     $('#jRate-rating-vertical').jRate({
       rating: 5,
-      startColor: 'yellow',
-      endColor: 'yellow',
+      startColor: '#FFD700',
+      endColor: '#FFD700',
       height: 20,
       readOnly: true,
       shapeGap: '10px',

@@ -13,6 +13,7 @@ $('document').ready(function () {
         method: 'GET',
         headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
     }).done(function (bookmarks) {
+
         const lectures = $('#lectures');
         for (let i = 0; i < bookmarks.length; i++) {
             lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;" onclick="window.location='/lessons/` + bookmarks[i].lesson.id + `'">
