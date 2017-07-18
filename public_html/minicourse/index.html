@@ -32,6 +32,58 @@
     </script>
 </head>
 <body>
+
+
+<div class="modal fade" id="reviewModal" tabindex="-1" role="dialog" aria-labelledby="Review Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" style="margin: 0 auto">Add Your Review</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row" style="padding:0px 15px">
+                    <div id="jRate-add-review"></div>
+                    <span style="padding-top: 5px;margin-left: 10px" id="review-type">Very Good</span>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <textarea id="review-description" rows="4" style="width: 100%;resize: none;padding: 5px" placeholder="Tell others about your experience with this course."></textarea>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <a id="submit-review" class="btn btn-success text-uppercase"
+                   style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight:
+                    700;cursor: pointer;width: auto;border-radius: 100px">Submit</a>
+
+                <!--<button type="button" class="btn btn-primary">Submit</button>-->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reviewSubmitModal" tabindex="-1" role="dialog" aria-labelledby="Review SSubmit Modal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left: auto">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="submit-review-msg">Thank You For Your Review.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
 <div class="container-fluid">
 
     <div class="row no-gutters align-content-center header-bar" id="header-bar">
@@ -142,9 +194,9 @@
     </div>
 
     <!--<div class="col-sm-2 text-center" style="padding-top: 13px">-->
-        <!--<a id="enroll" class="btn btn-success text-uppercase"-->
-           <!--style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight: 700;cursor: pointer;width: auto;border-radius: 100px">Enroll</a>-->
-        <!--<p id="msg" style="padding-top: 10px;margin-bottom: 6px;"></p>-->
+    <!--<a id="enroll" class="btn btn-success text-uppercase"-->
+    <!--style="background-color:#4bca81;padding: 10px 45px;color: white;font-size: 12px;font-weight: 700;cursor: pointer;width: auto;border-radius: 100px">Enroll</a>-->
+    <!--<p id="msg" style="padding-top: 10px;margin-bottom: 6px;"></p>-->
     <!--</div>-->
 
     <div class="row" style="margin-top: 35px;">
@@ -156,7 +208,8 @@
                        href="#lecturesTab"><p><b>Lectures&nbsp;&nbsp;&nbsp;&nbsp;</b></p></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link nav-style a-style" data-toggle="tab" href="#materialsTab"><p><b>Materials&nbsp;&nbsp;&nbsp;&nbsp;</b></p></a>
+                    <a class="nav-link nav-style a-style" data-toggle="tab" href="#materialsTab"><p><b>Materials&nbsp;&nbsp;&nbsp;&nbsp;</b>
+                    </p></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link nav-style a-style" data-toggle="tab" href="#reviewsTab"><p><b>Reviews</b></p></a>
@@ -201,7 +254,8 @@
             </div>
 
             <p><b>Ratings</b></p>
-            <div class="row text-center" style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem;margin-bottom: 35px">
+            <div class="row text-center"
+                 style="padding: 15px; background-color: white; height:auto; box-shadow: #DDD 0 0 8px 1px ; border-radius: .125rem;margin-bottom: 35px">
                 <div class="col-sm-12 p-0" id="lower-rating"></div>
             </div>
 
