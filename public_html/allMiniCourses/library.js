@@ -203,6 +203,7 @@ function addMiniCourses(minicourses) {
     const ul = $('#minicourses-list');
     ul.empty();
     for (let i = 0; i < minicourses.length; i++) {
+        let name = minicourses[i].name.split(" ").join("-");
         let category = (minicourses[i].minicoursecategories[0].category.categoryName);
         let categories = minicourses[i].minicoursecategories.map((i) => i.category.categoryName).join(', ');
         ul.append('<li> <div class="minicourses-list-li"> <div class="row minicourse-div"> <div class="col-sm-4" style="padding: 0"><img src="./../images/'+ category+ '/' + minicourses[i].tag.course.courseName.toLowerCase().split(" ").join("-") + '.png" class="minicourse-img"></div>' +
@@ -210,7 +211,7 @@ function addMiniCourses(minicourses) {
             '<div class="row minicourse-chps"><span>' + minicourses[i].tag.subject.subjectName + '</span>&nbsp;&nbsp; >&nbsp;&nbsp;<span>' + minicourses[i].tag.course.courseName + '</span></div>' +
             '<div class="row minicourse-title"><span>' + minicourses[i].name + '</span></div>' +
             '<div class="row"><p class="minicourse-description">' + minicourses[i].description + '</p></div>' +
-            '<div class="row align-items-center"><a href="/courses/' + minicourses[i].id + '/'+minicourses[i].name+'" class="enrol-style">VIEW</a></div>' +
+            '<div class="row align-items-center"><a href="/courses/' + minicourses[i].id + '/'+name+'" class="enrol-style">VIEW</a></div>' +
             '</div> </div> <div class="row minicourse-tags"> <div class="minicourse-tag">' +
             '<div class="row tag-title">TEACHER </div> <div class="row tag-content">' +
             '<img src="./../images/user-image.jpg" style="border-radius: 50%; height: 30px">&nbsp;&nbsp;' +
