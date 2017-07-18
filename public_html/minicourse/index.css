@@ -470,3 +470,24 @@ html, body {
 /*color: white;*/
 /*}*/
 
+
+
+textarea::-webkit-input-placeholder {
+    color: #B3B3B3 !important;
+    font-weight: 500;
+}
+
+textarea:-moz-placeholder { /* Firefox 18- */
+    color: #B3B3B3 !important;
+    font-weight: 500;
+}
+
+textarea::-moz-placeholder {  /* Firefox 19+ */
+    color: #B3B3B3 !important;
+    font-weight: 500;
+}
+
+textarea:-ms-input-placeholder {
+    color: #B3B3B3 !important;
+    font-weight: 500;
+}
