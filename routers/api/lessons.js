@@ -12,7 +12,11 @@ router.get('/:id', function (req, res) {
     where: {
       id: lessonId
     },
+      include: [models.Upvote]
   }).then(function (lesson) {
+      console.log("******************")
+      console.log(lesson)
+      console.log("*******************")
     models.Enrollment.findOne({
       where: {
         studentId: req.user.user.id,
@@ -20,7 +24,9 @@ router.get('/:id', function (req, res) {
       }
     }).then(function (enrollment) {
       if (enrollment) {
-        res.send({success: 'true', lesson: lesson.get()})
+          let finalLesson = lesson.get();
+          finalLesson.upvotes = finalLesson.upvotes.length;
+        res.send({success: 'true', lesson: finalLesson})
       } else {
         res.send({success: 'false', miniCourseId: lesson.minicourseId})
       }

@@ -211,7 +211,7 @@ $(document).ready(function () {
                                 <p style="font-size: 14px;font-weight: 400;margin-bottom: 0px;color: #A4A5A9">
                                     <img src="/images/icons/timer.png">&nbsp;
                                     <span style="margin-top: 5px; font-weight: 500">` + miniCourse.lessons[i].duration + `</span>&nbsp;&nbsp;
-                                    <img src="/images/icons/eye.png">&nbsp;<span style="margin-top: 5px; font-weight: 500"></span>
+                                    <img src="/images/thumb-up-gray.png">&nbsp;<span style="margin-top: 5px; font-weight: 500"></span>
                                 </p>
                             </div>
                             <div class="col-sm-1">
