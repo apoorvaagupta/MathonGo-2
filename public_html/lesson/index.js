@@ -6,34 +6,39 @@ $(document).ready(function () {
   $('#report').click(function () {
     $('#reportModal').modal('show');
 
+
     $('#submit-report').click(function () {
-      $.ajax({
-        url: `/api/lessons/${lessonId}/report`,
-        method: 'POST',
-        data: {
-          description: $('#report-description').val()
-        },
-        headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token")
-        }
-      }).done(function (data) {
-        if (data.success === 'true') {
-          $('#reportModal').modal('hide');
-          $('#submit-report-msg').attr('class', 'text-success');
-          $('#reportModal-description').val('');
-          $('#reportSubmitModal').modal('show');
+    let value  = $('#report-description').val();
+      if(value === ''){
+       $('#report-modal-body').append('<div class="row" style="margin-bottom: 0"><span class="text-danger" style="padding-left: 15px">Tell us about your issue so that we can fix it.</span></div>')
+      }else {
+          $.ajax({
+              url: `/api/lessons/${lessonId}/report`,
+              method: 'POST',
+              data: {
+                  description: value
+              },
+              headers: {
+                  "Authorization": "Bearer " + localStorage.getItem("token")
+              }
+          }).done(function (data) {
+              if (data.success === 'true') {
+                  $('#reportModal').modal('hide');
+                  $('#submit-report-msg').attr('class', 'text-success');
+                  $('#reportModal-description').val('');
+                  $('#reportSubmitModal').modal('show');
 
-        } else {
-          window.alert('Please Try Again')
-        }
+              } else {
+                  window.alert('Please Try Again')
+              }
 
-      }).fail(function (object) {
-        if (object.responseText === 'Unauthorized') {
-          window.alert('Please Login First');
-          window.location.replace('/');
-        }
-      });
-
+          }).fail(function (object) {
+              if (object.responseText === 'Unauthorized') {
+                  window.alert('Please Login First');
+                  window.location.replace('/');
+              }
+          });
+      }
     });
 
 

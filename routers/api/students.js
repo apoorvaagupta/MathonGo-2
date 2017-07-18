@@ -13,18 +13,6 @@ router.get('/', function (req, res) {
   })
 });
 
-router.get('/:id', function (req, res) {
-
-  models.Student.findOne({
-    where: {id: +req.params.id}
-  }).then(function (student) {
-    res.send(student);
-  }).catch(function (err) {
-    console.log(err);
-    res.send('Unknown Student');
-  })
-});
-
 router.post('/add', function (req, res) {
   if (req.body.firstname === "" || req.body.email === "" || req.body.password === "") {
     res.send("Insufficient Details");
@@ -103,15 +91,32 @@ router.get('/mycourses', function (req, res) {
 });
 
 router.get('/bookmarks', function (req, res) {
+  console.log("&&&&&&&&&&&")
+  console.log(req.user.user.id);
+  console.log("&&&&&&&&&&&&")
   models.Bookmark.findAll({
     where: {studentId: req.user.user.id},
     include: models.Lesson
   }).then(function (bookmarks) {
+    console.log("#######################")
+      console.log(bookmarks);
+    console.log("########################")
     res.send(bookmarks);
   }).catch(function (error) {
     console.log(error);
   })
 });
 
+router.get('/:id', function (req, res) {
+
+    models.Student.findOne({
+        where: {id: +req.params.id}
+    }).then(function (student) {
+        res.send(student);
+    }).catch(function (err) {
+        console.log(err);
+        res.send('Unknown Student');
+    })
+});
 
 module.exports = router;
