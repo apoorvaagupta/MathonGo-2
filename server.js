@@ -68,7 +68,7 @@ app.get('/courses/:id', function (req, res) {
 
 app.use('/courses/:id/:name', express.static(path.join(__dirname, 'public_html/minicourse')));
 app.use('/library', express.static(path.join(__dirname, 'public_html/allMiniCourses')));
-app.use('/lessons/:id', express.static(path.join(__dirname, 'public_html/lesson')));
+app.use('/lessons/:id/:name', express.static(path.join(__dirname, 'public_html/lesson')));
 app.use('/student/mycourses', express.static(path.join(__dirname, 'public_html/students/mycourses')));
 app.use('/student/mybookmarks', express.static(path.join(__dirname, 'public_html/students/mybookmarks')));
 app.use('/admin/dashboard', express.static(path.join(__dirname, 'public_html/admin/dashboard')));

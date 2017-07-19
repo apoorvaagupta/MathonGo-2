@@ -258,7 +258,7 @@ $(document).ready(function () {
 
     for (let i = 0; i < miniCourse.lessons.length; i++) {
       lectures.append(`<div class="col-sm-12" style="cursor: pointer;height: auto;padding: 20px;border-bottom: solid 2px #EEEEEE;"
-                            onclick="goToLesson(` + miniCourse.lessons[i].id + `)">
+                            onclick="goToLesson(` + miniCourse.lessons[i].id + `,'`+miniCourse.lessons[i].name+`')">
                         <div class="row" style="margin-bottom: 0px">
                             <div class="col-sm-1" style="padding-left: 0px">
                                 <img src="/images/icons/movie.png">
@@ -322,10 +322,14 @@ $(document).ready(function () {
 
 });
 
-function goToLesson(lessonId) {
+function goToLesson(lessonId, lessonName) {
+  console.log("reached")
   if (isEnrolled) {
-    window.location = '/lessons/' + lessonId;
+    console.log(lessonName);
+    let name =  lessonName.split(" ").join("-");
+    console.log(name)
+    window.location = '/lessons/' + lessonId + '/' + name;
   } else {
-    $('#msg').attr('class', 'text-danger').text("Please Enroll First");
+    $('#msg').text("Please Enroll First");
   }
 }
