@@ -57,7 +57,12 @@ $(document).ready(function () {
         method: 'GET',
         headers: {"Authorization": "Bearer " + localStorage.getItem("token")}
       }).done(function (miniCourse) {
-        $('#miniCourseName').text(miniCourse.name);
+          let name = miniCourse.name.split(" ").join("-");
+          let minicoursename = $('#miniCourseName')
+          minicoursename.text(miniCourse.name);
+        minicoursename.click(function () {
+          window.location.replace('/courses/' + miniCourse.id + '/' + name)
+        })
         $('#noOfLessons').text(miniCourse.noOfLessons + ' Lectures');
         $('#miniCourseDuration').text(miniCourse.duration);
         console.log(lesson.videoUrl);

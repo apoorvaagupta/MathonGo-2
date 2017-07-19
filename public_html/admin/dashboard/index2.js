@@ -806,10 +806,11 @@ $(document).ready(function () {
               $form.append(`<ul id="minicourses-list" class="list-group" ></ul>`);
               const $minicourses_list = $('#minicourses-list');
               minicourses.forEach(function (minicourse) {
+                let name = minicourse.name.split(" ").join("-");
                 $minicourses_list.append(`
                           <li class="list-group-item"  miniCourseId="` + minicourse.id + `">
                           <span>` + minicourse.name + `</span>
-                          <a class="btn btn-outline-success view" style="margin-left: 50px" target = "_blank" href="/courses/` + minicourse.id + `/` + minicourse.name + `">View</a>
+                          <a class="btn btn-outline-success view" style="margin-left: 50px" target = "_blank" href="/courses/` + minicourse.id + `/` + name + `">View</a>
                           <button class="btn btn-outline-info edit" style="margin-left: 20px">Edit</button>
                           <button class="btn btn-outline-danger delete" style="margin-left: 20px">Delete</button>
                           <button class="btn btn-outline-info add-lesson" style="margin-left: 20px">Add Lesson</button>
