@@ -48,10 +48,10 @@ $(document).ready(function () {
     $('#difficulty').text(miniCourse.level);
     $('#medium').text(miniCourse.medium);
     $('#relevance').text(miniCourse.minicoursecategories.map((i) => i.category.categoryName).join(', '));
+    if (miniCourse.tutor.img != null) {
 
-    if (miniCourse.tutor.image != null) {
-      $('#teacherImage').attr('src', miniCourse.tutor.img);
-      $('#teacher-img').attr('src', miniCourse.tutor.img);
+      $('#teacherImage').attr('src', "/images/"+miniCourse.tutor.img+".jpg");
+      $('#teacher-img').attr('src', "/images/"+miniCourse.tutor.img+".jpg");
     }
     $('#nameOfTheTeacher').text(miniCourse.tutor.name);
     $('#teacherDescription').text(miniCourse.tutor.description);

@@ -73,8 +73,8 @@ $(document).ready(function () {
         $('#totalUpvotes').text(lesson.upvotes + " upvotes");
         $('#lessonDescription').text(lesson.description);
 
-        if (miniCourse.tutor.image != null) {
-          $('#teacherImage').attr('src', miniCourse.tutor.img);
+        if (miniCourse.tutor.img != null) {
+          $('#teacherImage').attr('src', "/images/"+miniCourse.tutor.img+".jpg");
         }
         $('#nameOfTheTeacher').text(miniCourse.tutor.name);
         $('#teacherDescription').text(miniCourse.tutor.description);
