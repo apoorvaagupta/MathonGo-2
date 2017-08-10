@@ -25,8 +25,7 @@ $('document').ready(function () {
     }).fail(function (object) {
         if (object.responseText === 'Unauthorized') {
             $('#userDetails').remove();
-            $('#header-bar').append(`<div class=" col-sm-2 col-12 align-middle header-links-div"><a
-                class="align-middle header-links" href="/">Register / Login</a></div>`)
+            $('#header-bar').append(`<div class=" col-sm-2 col-12 align-middle header-links-div"><a class="align-middle header-links" href="/">Register / Login</a></div>`)
         }
     });
 
@@ -214,7 +213,7 @@ function addMiniCourses(minicourses) {
             '<div class="row align-items-center"><a href="/courses/' + minicourses[i].id + '/'+name+'" class="enrol-style">VIEW</a></div>' +
             '</div> </div> <div class="row minicourse-tags"> <div class="minicourse-tag">' +
             '<div class="row tag-title">TEACHER </div> <div class="row tag-content">' +
-            '<img src="./../images/user-image.jpg" style="border-radius: 50%; height: 30px">&nbsp;&nbsp;' +
+            '<img src="../images/'+minicourses[i].tutor.img+'.jpg" style="border-radius: 50%; height: 30px">&nbsp;&nbsp;' +
             '<span class="align-middle" style="margin-top: 5px"> ' + minicourses[i].tutor.name + '</span></div> </div>' +
             '<div class="minicourse-tag"> <div class="row tag-title">DURATION</div>' +
             '<div class="row tag-content"><span>' + minicourses[i].duration + '</span></div> </div> <div class="minicourse-tag">' +

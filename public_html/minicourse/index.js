@@ -51,6 +51,7 @@ $(document).ready(function () {
 
     if (miniCourse.tutor.image != null) {
       $('#teacherImage').attr('src', miniCourse.tutor.img);
+      $('#teacher-img').attr('src', miniCourse.tutor.img);
     }
     $('#nameOfTheTeacher').text(miniCourse.tutor.name);
     $('#teacherDescription').text(miniCourse.tutor.description);
